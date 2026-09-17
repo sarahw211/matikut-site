@@ -92,8 +92,8 @@ ul{margin:0;padding:0;list-style:none}
   margin:0;
   font-family:var(--font-display);
   font-weight:400;
-  font-size:calc(128 * var(--u));
-  line-height:.77;
+  font-size:calc(32 * var(--u));
+  line-height:1.05;
   text-align:right;
   color:var(--ink);
   z-index:3;
@@ -1124,9 +1124,9 @@ ul{margin:0;padding:0;list-style:none}
 .js .tw.tw-notrans > i{transition:none !important}
 
 /* ---- כניסת ההירו ---- */
-/* כותרת ההירו — גל מילים מרשים (כמו שאר כותרות האתר), רץ מיד עם טעינת הדף ולא בגלילה */
-.js .hero__title .tw > i{transition-delay:calc(var(--d,0ms) + .1s)}
-.js.loaded .hero__title .tw > i{transform:none}
+/* כותרת ההירו — כניסה פשוטה משקיפות (opacity), רצה מיד עם טעינת הדף ולא בגלילה */
+.js .hero__title{opacity:0;transform:translateY(calc(14 * var(--u)))}
+.js.loaded .hero__title{opacity:1;transform:none;transition:opacity 1.1s var(--ease-soft) .15s, transform 1.3s var(--ease-soft) .15s}
 .js .hero__lede{opacity:0;transform:translateY(calc(14 * var(--u)))}
 .js.loaded .hero__lede{opacity:1;transform:none;transition:opacity 1.1s var(--ease-soft) .55s, transform 1.3s var(--ease-soft) .55s}
 /* כפתורי הפעולה — קופצים פנימה אחד אחרי השני עם קצת "בּוֹאנס" קליל */
@@ -2483,9 +2483,7 @@ document.documentElement.classList.add('js');
 
   /* ---------- 2. פיצול כותרות למילים ---------- */
   var titleSel = '.section__title, .about__title, .book-row__title, .opener__title, .contact__title';
-  /* כותרת ההירו מפוצלת גם היא למילים, אך מופעלת מיד עם טעינת הדף (class .loaded)
-     ולא ע"י גלילה — לכן אינה נכללת ב-titleSel שנצפה ע"י twIO למטה */
-  document.querySelectorAll(titleSel + ', .hero__title').forEach(function(el){
+  document.querySelectorAll(titleSel).forEach(function(el){
     var i = 0;
     function walk(node){
       Array.prototype.slice.call(node.childNodes).forEach(function(n){
