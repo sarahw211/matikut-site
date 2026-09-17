@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>מתיקות — כלי הכנת תוכן (פנימי)</title>
+<style>
+  :root{
+    --brand:#C16802;
+    --ink:#393836;
+    --cream-0:#FEFDFC;
+    --cream-1:#FBF6EF;
+    --cream-2:#F3EADD;
+    --on-brand:#ECDFCD;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+    background:var(--cream-1);
+    color:var(--ink);
+    padding:32px 24px 120px;
+  }
+  h1{font-size:26px;margin:0 0 6px}
+  .sub{color:rgba(57,56,54,.65);margin:0 0 28px;font-size:15px;line-height:1.6}
+  .warn{
+    background:#FFF3E0;border:1px solid rgba(193,104,2,.35);border-radius:12px;
+    padding:14px 18px;font-size:14px;line-height:1.6;margin-bottom:28px;color:#7a4200;
+  }
+  .tabs{display:flex;gap:10px;margin-bottom:24px}
+  .tab-btn{
+    background:#fff;border:1px solid rgba(57,56,54,.15);border-radius:999px;
+    padding:10px 22px;font-size:15px;cursor:pointer;color:var(--ink);
+  }
+  .tab-btn.is-active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .panel{display:none;background:#fff;border-radius:20px;padding:28px;box-shadow:0 8px 30px rgba(57,56,54,.08)}
+  .panel.is-active{display:block}
+  .row{margin-bottom:20px}
+  label{display:block;font-size:14px;font-weight:600;margin-bottom:8px}
+  input[type="file"]{
+    display:block;width:100%;padding:12px;border:1.5px dashed rgba(193,104,2,.4);
+    border-radius:12px;background:var(--cream-2);cursor:pointer;font-size:14px;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;
+    border:0;border-radius:999px;padding:12px 26px;font-size:15px;cursor:pointer;
+    transition:opacity .2s;
+  }
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn.ghost{background:#fff;color:var(--ink);border:1.5px solid rgba(57,56,54,.25)}
+  .status{font-size:14px;color:rgba(57,56,54,.65);margin-top:10px;min-height:20px}
+  .pages-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;
+    margin-top:16px;
+  }
+  .page-thumb{
+    position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(57,56,54,.12);
+    background:var(--cream-2);
+  }
+  .page-thumb img{width:100%;display:block}
+  .page-thumb span{
+    position:absolute;bottom:4px;left:4px;background:rgba(57,56,54,.75);color:#fff;
+    font-size:11px;padding:2px 7px;border-radius:999px;
+  }
+  .chapters{margin-top:24px;border-top:1px solid rgba(57,56,54,.12);padding-top:20px}
+  .chapter-row{
+    display:grid;grid-template-columns:1fr 100px 100px;gap:10px;align-items:center;
+    margin-bottom:10px;
+  }
+  .chapter-row label{margin:0;font-weight:400;font-size:14px}
+  .chapter-row input{
+    width:100%;padding:8px 10px;border:1px solid rgba(57,56,54,.2);border-radius:8px;font-size:14px;
+  }
+  .lesson-row{
+    display:grid;grid-template-columns:1fr 1fr 140px auto;gap:10px;align-items:center;
+    background:var(--cream-2);border-radius:12px;padding:12px;margin-bottom:10px;
+  }
+  .lesson-row input{padding:8px 10px;border:1px solid rgba(57,56,54,.2);border-radius:8px;font-size:14px}
+  .lesson-row .fname{font-size:13px;color:rgba(57,56,54,.6);word-break:break-all}
+  .note{font-size:13px;color:rgba(57,56,54,.55);margin-top:6px}
+</style>
+</head>
+<body>
+
+<h1>כלי הכנת תוכן — פנימי</h1>
+<p class="sub">כלי עזר פרטי (לא מקושר מהתפריט הציבורי) שרץ כולו בדפדפן, בלי שרת. הוא הופך PDF לעמודי תמונה ומכין חבילת קבצים מוכנה לאתר, ומארגן קבצי שיעורים עם המידע שלהם.</p>
+<div class="warn">⚠️ העמוד הזה לא מוגן בסיסמה — הוא רק לא מקושר משום מקום גלוי. אל תשתפי את הקישור אליו.</div>
+
+<div class="tabs">
+  <button class="tab-btn is-active" data-tab="book">פרק לדוגמה מהספר</button>
+  <button class="tab-btn" data-tab="lessons">שיעורי תורה</button>
+</div>
+
+<!-- ============ טאב 1: פרק מתוך ספר ============ -->
+<div class="panel is-active" id="panel-book">
+  <div class="row">
+    <label>קובץ PDF של הפרק לדוגמה</label>
+    <input type="file" id="pdfInput" accept=".pdf,application/pdf">
+    <p class="note">המרה ל־JPG לכל עמוד — קורה כולו במחשב שלך, שום דבר לא נשלח החוצה.</p>
+  </div>
+  <button class="btn" id="renderBtn" disabled>המרת ה-PDF לעמודים</button>
+  <div class="status" id="bookStatus"></div>
+  <div class="pages-grid" id="pagesGrid"></div>
+
+  <div class="chapters" id="chaptersWrap" style="display:none">
+    <label style="font-size:16px;margin-bottom:14px">לאיזה פרק שייך כל טווח עמודים? (השאירי ריק פרק שאין לו טעימה)</label>
+    <div id="chaptersList"></div>
+    <button class="btn" id="exportBookBtn" style="margin-top:16px">יצירת חבילה להורדה (ZIP)</button>
+    <p class="note">אחרי ההורדה: חלצי את התיקייה <code>book-sample</code> לתוך <code>public/assets/</code> באתר, ותגידי לי שזה מוכן.</p>
+  </div>
+</div>
+
+<!-- ============ טאב 2: שיעורי תורה ============ -->
+<div class="panel" id="panel-lessons">
+  <div class="row">
+    <label>קובצי MP3 של השיעורים (אפשר לבחור כמה יחד)</label>
+    <input type="file" id="audioInput" accept=".mp3,audio/mp3,audio/mpeg" multiple>
+  </div>
+  <div id="lessonsList"></div>
+  <button class="btn" id="exportLessonsBtn" style="display:none;margin-top:10px">יצירת חבילה להורדה (ZIP)</button>
+  <div class="status" id="lessonsStatus"></div>
+  <p class="note">אחרי ההורדה: חלצי את התיקייה <code>audio</code> לתוך <code>public/assets/</code> באתר, ותגידי לי שזה מוכן.</p>
+</div>
+
+<script>
+/* ---------- טעינת ספריות חיצוניות עם גיבוי (אם CDN אחד חסום/נופל, מנסים מקור שני) ---------- */
+function loadScriptWithFallback(urls, cb){
+  var i = 0;
+  function tryNext(){
+    if(i >= urls.length){ cb(new Error('all sources failed for ' + urls[0])); return; }
+    var s = document.createElement('script');
+    s.src = urls[i++];
+    s.onload = function(){ cb(null); };
+    s.onerror = function(){ tryNext(); };
+    document.head.appendChild(s);
+  }
+  tryNext();
+}
+window.__PDF_LIB_READY = false;
+window.__ZIP_LIB_READY = false;
+loadScriptWithFallback([
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js',
+  'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.js'
+], function(err){
+  if(!err && window.pdfjsLib){
+    try{
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js';
+    }catch(e){}
+    window.__PDF_LIB_READY = true;
+  }
+  document.dispatchEvent(new CustomEvent('pdflib:done', {detail:{ok: window.__PDF_LIB_READY}}));
+});
+loadScriptWithFallback([
+  'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+  'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'
+], function(err){
+  window.__ZIP_LIB_READY = !err && !!window.JSZip;
+  document.dispatchEvent(new CustomEvent('ziplib:done', {detail:{ok: window.__ZIP_LIB_READY}}));
+});
+</script>
+<script>
+(function(){
+  /* ---------- ניווט בין טאבים ---------- */
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('is-active'); });
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('is-active');
+    });
+  });
+
+  /* ============ טאב 1: PDF -> עמודים ============ */
+  var pdfFile = null;
+  var renderedPages = []; /* {blob, num} */
+  var CHAPTER_DEFS = [
+    {key:'intro', label:'הקדמה ופתח דבר'},
+    {key:'halacha', label:'הלכה יומית בקצרה'},
+    {key:'example', label:'דוגמה מהיום־יום'},
+    {key:'qa', label:'שאלות ותשובות'},
+    {key:'summary', label:'סיכום לשולחן שבת'},
+    {key:'approvals', label:'הסכמות והמלצות רבנים'}
+  ];
+
+  document.getElementById('pdfInput').addEventListener('change', function(e){
+    pdfFile = e.target.files[0] || null;
+    document.getElementById('renderBtn').disabled = !pdfFile;
+  });
+
+  var bookStatusEl = document.getElementById('bookStatus');
+  if(window.__PDF_LIB_READY){
+    bookStatusEl.textContent = '';
+  } else {
+    bookStatusEl.textContent = 'טוענת ספרייה להמרת PDF...';
+    document.addEventListener('pdflib:done', function(e){
+      bookStatusEl.textContent = e.detail.ok ? '' : 'הספרייה להמרת PDF לא נטענה משני מקורות שונים (כנראה חסימת רשת). נסי מחשב/רשת אחרת, או רעננה (F5).';
+    });
+  }
+
+  document.getElementById('renderBtn').addEventListener('click', async function(){
+    if(!pdfFile) return;
+    var statusEl = document.getElementById('bookStatus');
+    var grid = document.getElementById('pagesGrid');
+    grid.innerHTML = '';
+    renderedPages = [];
+    if(!window.__PDF_LIB_READY || typeof pdfjsLib === 'undefined'){
+      statusEl.textContent = 'הספרייה להמרת PDF עדיין לא נטענה. חכי כמה שניות ונסי שוב, או רעננה את הדף (F5).';
+      return;
+    }
+    statusEl.textContent = 'טוען את הקובץ...';
+    try{
+      var buf = await pdfFile.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument({data: buf}).promise;
+      for(var i = 1; i <= pdf.numPages; i++){
+        statusEl.textContent = 'ממיר עמוד ' + i + ' מתוך ' + pdf.numPages + '...';
+        var page = await pdf.getPage(i);
+        var viewport = page.getViewport({scale: 2});
+        var canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        var ctx = canvas.getContext('2d');
+        await page.render({canvasContext: ctx, viewport: viewport}).promise;
+        var blob = await new Promise(function(resolve){ canvas.toBlob(resolve, 'image/jpeg', 0.88); });
+        renderedPages.push({num: i, blob: blob});
+        var thumb = document.createElement('div');
+        thumb.className = 'page-thumb';
+        var img = document.createElement('img');
+        img.src = canvas.toDataURL('image/jpeg', 0.5);
+        var tag = document.createElement('span');
+        tag.textContent = i;
+        thumb.appendChild(img);
+        thumb.appendChild(tag);
+        grid.appendChild(thumb);
+      }
+      statusEl.textContent = 'הומרו ' + pdf.numPages + ' עמודים בהצלחה.';
+      buildChaptersUI(pdf.numPages);
+    }catch(err){
+      statusEl.textContent = 'שגיאה בהמרה: ' + err.message;
+    }
+  });
+
+  function buildChaptersUI(totalPages){
+    var wrap = document.getElementById('chaptersWrap');
+    var list = document.getElementById('chaptersList');
+    list.innerHTML = '';
+    CHAPTER_DEFS.forEach(function(ch){
+      var row = document.createElement('div');
+      row.className = 'chapter-row';
+      row.innerHTML =
+        '<label>' + ch.label + '</label>' +
+        '<input type="number" min="1" max="' + totalPages + '" placeholder="מעמוד" data-key="' + ch.key + '" data-role="start">' +
+        '<input type="number" min="1" max="' + totalPages + '" placeholder="עד עמוד" data-key="' + ch.key + '" data-role="end">';
+      list.appendChild(row);
+    });
+    wrap.style.display = 'block';
+  }
+
+  document.getElementById('exportBookBtn').addEventListener('click', async function(){
+    if(!renderedPages.length) return;
+    var statusEl = document.getElementById('bookStatus');
+    if(!window.__ZIP_LIB_READY || typeof JSZip === 'undefined'){
+      statusEl.textContent = 'הספרייה לבניית ZIP לא נטענה. חכי כמה שניות ונסי שוב, או רעננה את הדף (F5).';
+      return;
+    }
+    statusEl.textContent = 'בונה חבילת ZIP...';
+    var chapters = CHAPTER_DEFS.map(function(ch){
+      var startInput = document.querySelector('input[data-key="' + ch.key + '"][data-role="start"]');
+      var endInput = document.querySelector('input[data-key="' + ch.key + '"][data-role="end"]');
+      var start = parseInt(startInput.value, 10);
+      var end = parseInt(endInput.value, 10);
+      return {key: ch.key, label: ch.label, start: start || null, end: end || null};
+    }).filter(function(c){ return c.start && c.end; });
+
+    var zip = new JSZip();
+    var folder = zip.folder('book-sample');
+    renderedPages.forEach(function(p){
+      var num = String(p.num).padStart(2, '0');
+      folder.file('page-' + num + '.jpg', p.blob);
+    });
+    var data = {totalPages: renderedPages.length, chapters: chapters};
+    folder.file('pages-data.json', JSON.stringify(data, null, 2));
+
+    var content = await zip.generateAsync({type: 'blob'});
+    downloadBlob(content, 'book-sample-package.zip');
+    statusEl.textContent = 'החבילה ירדה. חלצי את תיקיית book-sample לתוך public/assets/ באתר.';
+  });
+
+  /* ============ טאב 2: שיעורי תורה ============ */
+  var lessonFiles = [];
+
+  document.getElementById('audioInput').addEventListener('change', function(e){
+    lessonFiles = Array.prototype.slice.call(e.target.files);
+    var list = document.getElementById('lessonsList');
+    list.innerHTML = '';
+    lessonFiles.forEach(function(file, i){
+      var row = document.createElement('div');
+      row.className = 'lesson-row';
+      row.innerHTML =
+        '<input type="text" placeholder="שם השיעור" data-idx="' + i + '" data-role="title">' +
+        '<input type="date" data-idx="' + i + '" data-role="date">' +
+        '<span class="fname">' + file.name + '</span>' +
+        '<span></span>';
+      list.appendChild(row);
+    });
+    document.getElementById('exportLessonsBtn').style.display = lessonFiles.length ? 'inline-flex' : 'none';
+  });
+
+  function getAudioDuration(file){
+    return new Promise(function(resolve){
+      var url = URL.createObjectURL(file);
+      var audio = new Audio();
+      audio.preload = 'metadata';
+      audio.onloadedmetadata = function(){
+        var sec = Math.round(audio.duration);
+        var mm = Math.floor(sec / 60);
+        var ss = String(sec % 60).padStart(2, '0');
+        URL.revokeObjectURL(url);
+        resolve(mm + ':' + ss);
+      };
+      audio.onerror = function(){ URL.revokeObjectURL(url); resolve(''); };
+      audio.src = url;
+    });
+  }
+
+  document.getElementById('exportLessonsBtn').addEventListener('click', async function(){
+    var statusEl = document.getElementById('lessonsStatus');
+    if(!window.__ZIP_LIB_READY || typeof JSZip === 'undefined'){
+      statusEl.textContent = 'הספרייה לבניית ZIP לא נטענה. חכי כמה שניות ונסי שוב, או רעננה את הדף (F5).';
+      return;
+    }
+    statusEl.textContent = 'בונה חבילת ZIP...';
+    var zip = new JSZip();
+    var folder = zip.folder('audio');
+    var lessons = [];
+    for(var i = 0; i < lessonFiles.length; i++){
+      var file = lessonFiles[i];
+      var titleInput = document.querySelector('input[data-idx="' + i + '"][data-role="title"]');
+      var dateInput = document.querySelector('input[data-idx="' + i + '"][data-role="date"]');
+      var duration = await getAudioDuration(file);
+      folder.file(file.name, file);
+      lessons.push({
+        title: titleInput.value || file.name,
+        date: dateInput.value || '',
+        file: 'audio/' + file.name,
+        duration: duration
+      });
+    }
+    folder.file('lessons-data.json', JSON.stringify(lessons, null, 2));
+    var content = await zip.generateAsync({type: 'blob'});
+    downloadBlob(content, 'lessons-package.zip');
+    statusEl.textContent = 'החבילה ירדה. חלצי את תיקיית audio לתוך public/assets/ באתר.';
+  });
+
+  function downloadBlob(blob, filename){
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  }
+})();
+</script>
+</body>
+</html>

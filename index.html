@@ -1,0 +1,2670 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מתיקות — דף הבית</title>
+<style>
+/* ============ FONTS ============ */
+@font-face{
+  font-family:'Discovery_Fs';
+  src:url('./public/fonts/Discovery_Fs-Light.woff2') format('woff2');
+  font-weight:300; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Discovery_Fs';
+  src:url('./public/fonts/Discovery_Fs-Bold.woff2') format('woff2');
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Lia Shaharit';
+  src:url('./public/fonts/LiaShaharit-Regular.woff2') format('woff2');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+
+/* ============ TOKENS ============ */
+:root{
+  --brand:#C16802;         /* כתום מותג */
+  --ink:#393836;           /* טקסט כהה */
+  --cream:#EBDDCC;         /* קרם תחתון */
+  --cream-0:#FEFDFC;
+  --cream-1:#FBF6EF;
+  --cream-2:#F3EADD;
+  --on-brand:#ECDFCD;
+
+  /* 1 design-px של פיגמה (רוחב מקור 1920) */
+  /* נגזר מרוחב הקונטיינר (cqw) ולא מ-vw, כדי שהרקע והתוכן יימדדו מאותו בסיס */
+  --u: 0.05208333cqw;
+
+  --font-body:'Discovery_Fs', 'Assistant', system-ui, sans-serif;
+  --font-display:'Lia Shaharit', 'Frank Ruhl Libre', 'David Libre', 'Narkisim', serif;
+
+  --rabbi-opacity:.62;     /* עוצמת תמונת החפץ חיים ברקע ההירו */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+/* שחרית היא במשקל אחד בלבד — ברירת המחדל הבולד של h1-h6 יוצרת faux-bold */
+h1,h2,h3,h4,h5,h6{font-weight:400}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+.about{scroll-margin-top:calc(120 * var(--u))}
+body{
+  container-type:inline-size;   /* בסיס המדידה של --u — בלי פס הגלילה */
+  background:#fff;
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block}
+a{color:inherit;text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  width:100%;                    /* = 1920 * u בדיוק, כלומר 100vw */
+  height:calc(1130 * var(--u));  /* 58.85vw — יחס הגובה־רוחב המקורי מהפיגמה */
+  isolation:isolate;
+  overflow:hidden;
+}
+
+/* תמונת החפץ חיים */
+.hero__figure{
+  position:absolute;
+  left:calc(643 * var(--u));
+  top:calc(165 * var(--u));
+  width:calc(621 * var(--u));
+  height:calc(774.5 * var(--u));
+  object-fit:contain;
+  opacity:var(--rabbi-opacity);
+  z-index:1;
+  pointer-events:none;
+}
+
+/* כותרת ראשית */
+.hero__title{
+  position:absolute;
+  right:calc(128 * var(--u));            /* 1920 - 1792.3 */
+  top:calc(206 * var(--u));
+  width:calc(546.34 * var(--u));
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:calc(128 * var(--u));
+  line-height:.77;
+  text-align:right;
+  color:var(--ink);
+  z-index:3;
+}
+.hero__title .accent{color:var(--brand)}
+
+/* פסקת פתיחה */
+.hero__lede{
+  position:absolute;
+  left:calc(131.59 * var(--u));
+  top:calc(215 * var(--u));
+  width:calc(556.92 * var(--u));
+  margin:0;
+  font-size:calc(24 * var(--u));
+  line-height:1.15;
+  text-align:right;
+  color:var(--ink);
+  z-index:3;
+}
+.hero__lede p{margin:0}
+.hero__lede p + p{margin-top:calc(24 * var(--u))}
+
+/* כפתורים */
+.hero__cta{
+  position:absolute;
+  left:calc(129 * var(--u));
+  top:calc(511 * var(--u));
+  display:flex;
+  flex-direction:row-reverse; /* "לשיעורי תורה" ראשון ב-DOM => מוצג בצד שמאל */
+  gap:calc(20 * var(--u));
+  align-items:flex-end;
+  z-index:3;
+}
+.btn{
+  display:inline-flex;
+  direction:rtl;              /* מקובע — לא יורש LTR ממקטעים */
+  flex-direction:row-reverse; /* החץ ראשון ב-DOM => תמיד בצד שמאל של הכפתור */
+  align-items:stretch;
+  height:calc(48 * var(--u)); /* גובה קבוע מהפיגמה => עיגול אמיתי + שוליים מדויקים */
+  gap:0;
+  font-family:var(--font-body);
+  font-weight:300;
+  cursor:pointer;
+  background:none;
+  border:0;
+  padding:0;
+}
+.btn__circle{
+  height:100%;
+  aspect-ratio:1/1; /* עם גובה קבוע, זה מבטיח עיגול מדויק */
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+.btn__circle svg{width:calc(9.5 * var(--u));height:calc(8.9 * var(--u))}
+.btn__label{
+  display:inline-flex;
+  height:100%;
+  align-items:center;
+  justify-content:center;
+  padding:0 calc(24 * var(--u)); /* בלי ריפוד אנכי — הגובה הקבוע כבר קובע את זה */
+  border-radius:2000px;
+  font-size:calc(24 * var(--u));
+  line-height:1;
+  white-space:nowrap;
+}
+.btn--ghost .btn__circle{border:1px solid var(--ink)}
+.btn--ghost .btn__label{border:1px solid var(--ink);color:var(--ink)}
+.btn--ghost svg path{stroke:var(--ink)}
+.btn--solid .btn__circle{background:var(--brand)}
+.btn--solid .btn__label{background:var(--brand);color:var(--on-brand)}
+.btn--solid svg path{stroke:var(--on-brand)}
+
+/* מדף הספרים */
+.hero__books{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+}
+.book{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.book__inner{
+  position:relative;
+  overflow:hidden;
+  border-radius:calc(6*var(--u));
+  filter:drop-shadow(0 calc(6*var(--u)) calc(18*var(--u)) rgba(57,56,54,.18));
+}
+.book__inner img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+
+/* ערימת מרקם הרקע — מדויק מפיגמה: תמונה פעמיים (overlay+luminosity) על מלבן מעוגל
+   שמכסה רק את החלק המלבני העליון, ואז גרדיאנט משקוף→אטום שמאחד לגוון קרם אחיד */
+/* קונטיינר הרקע — SVG יחיד, כל השכבות ממלאות את צורת ה-Union */
+.hero__panel--m{display:none}
+.hero__panel{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* תג עגול תחתון */
+.hero__badge{
+  position:absolute;
+  left:calc(842 * var(--u));
+  top:calc(856 * var(--u));
+  width:calc(236 * var(--u));
+  height:calc(236 * var(--u));
+  z-index:4;
+}
+.hero__badge svg{width:100%;height:100%;overflow:visible}
+.badge__arc{
+  font-family:var(--font-body);
+  font-weight:300;
+  direction:rtl;          /* בלי זה המרכאות נודדות לקצה ומזיזות את מרכז הטקסט */
+  font-size:21px;
+  fill:var(--ink);
+  letter-spacing:.2px;
+}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:absolute;
+  inset-inline:0;
+  top:0;
+  height:calc(112.19 * var(--u));
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:calc(40 * var(--u)) calc(48 * var(--u));
+  direction:ltr;
+}
+/* flex + space-between על פני 225px — כמו במקור בפיגמה (לא מיקומים קבועים) */
+.header__icons{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:calc(225 * var(--u));
+  height:calc(24 * var(--u));
+  flex:none;
+}
+.hi-cart{display:flex;align-items:center;gap:calc(6 * var(--u));flex:none}
+.hi-cart img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
+.hi-cart .badge{position:relative;width:calc(24 * var(--u));height:calc(24 * var(--u));flex:none}
+.hi-cart .badge .circle{position:absolute;inset:0;border-radius:50%;background:var(--brand)}
+.hi-cart .badge .count{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--on-brand);
+  font-family:'Poppins','Assistant',system-ui,sans-serif;
+  font-weight:300;
+  font-size:calc(14 * var(--u));
+}
+.hi-heart img{width:calc(22 * var(--u));height:calc(18 * var(--u))}
+.hi-user img,.hi-search img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
+
+.header__nav{
+  display:flex;
+  align-items:center;
+  gap:calc(32 * var(--u));
+  direction:rtl; /* "דף הבית" ראשון ב-DOM => מוצג ראשון מימין */
+}
+.header__nav a{
+  font-size:calc(20 * var(--u));
+  line-height:1;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.header__nav a.is-active{font-weight:700}
+
+.header__burger{display:none}
+.header__logo{
+  width:calc(100.805 * var(--u));
+  height:calc(34.157 * var(--u));
+  flex:none;
+}
+
+/* ============ מקטע: רשימת הספרים ============ */
+.books-section{
+  direction:ltr;
+  width:calc(1667 * var(--u));
+  margin:0 auto;
+  padding-top:calc(50 * var(--u));
+}
+.book-row{
+  display:flex;
+  align-items:center;
+  gap:calc(108 * var(--u));
+  height:calc(508.614 * var(--u));
+  margin-bottom:calc(80 * var(--u));
+  position:relative;
+}
+.book-row__content{
+  flex:1 0 0;
+  min-width:0;
+  height:calc(406 * var(--u));
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  padding-bottom:calc(64 * var(--u));
+  border-bottom:1px solid var(--ink);
+}
+.book-row__aside{
+  width:calc(343 * var(--u));
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;     /* בהקשר ה-ltr של הסקשן הזה = הצמדה לצד שמאל */
+  align-self:flex-start;      /* מעלה את כל הבלוק (לב+מחיר+כפתורים) לראש השורה, לא לתחתית */
+  gap:calc(24 * var(--u));
+  flex:none;
+}
+.book-row__like{
+  width:calc(46 * var(--u));
+  height:calc(46 * var(--u));
+  background:#F4F0E8;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+.book-row__like img{width:calc(19 * var(--u));height:calc(15.5 * var(--u))}
+.book-row__buy{
+  display:flex;
+  flex-direction:column;
+  gap:calc(20 * var(--u));
+  align-items:flex-start;
+}
+.book-row__price{
+  font-family:var(--font-display);
+  font-size:calc(48 * var(--u));
+  line-height:.92;
+  color:var(--ink);
+  margin:0;
+  direction:rtl;      /* המספר קודם, ואחריו ש"ח */
+}
+.book-row__text{
+  width:calc(692 * var(--u));
+  flex:none;
+  display:flex;
+  flex-direction:column;
+  gap:calc(48 * var(--u));
+  align-items:flex-end;
+  text-align:right;
+  direction:rtl;
+}
+.book-row__text--narrow{width:calc(598 * var(--u))}
+.book-row__text--short{width:calc(500 * var(--u))}
+.book-row__title{
+  font-family:var(--font-display);
+  font-size:calc(128 * var(--u));
+  line-height:.73;
+  color:var(--ink);
+  margin:0;
+  width:100%;
+}
+.book-row__title .accent{color:var(--brand);display:block}
+.book-row__desc{
+  font-size:calc(24 * var(--u));
+  line-height:1.15;
+  color:var(--ink);
+  margin:0;
+  width:100%;
+}
+.book-row__cover{
+  width:calc(387.836 * var(--u));
+  height:calc(508.614 * var(--u));
+  object-fit:cover;
+  flex:none;
+}
+/* שורה 5 — הרקע הוא הקונטיינר של כל התוכן; רק הספר יוצא החוצה */
+.book-row--framed{
+  position:relative;
+  height:auto;
+  margin-bottom:0;
+  align-items:center;
+  padding:calc(40 * var(--u)) calc(70.5 * var(--u));
+  border-radius:calc(32 * var(--u));
+  background:#ECDFCD;
+}
+.book-row--framed .book-row__text{width:calc(660 * var(--u))}
+.book-row--framed .book-row__title{font-size:calc(96 * var(--u))}
+.book-row--framed .book-row__cover{width:calc(300 * var(--u));height:calc(394 * var(--u))}
+.book-row--framed .book-row__bg{
+  position:absolute;
+  inset:0;
+  border-radius:calc(32 * var(--u));
+  overflow:hidden;
+  z-index:0;
+}
+.book-row--framed .book-row__bg img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  mix-blend-mode:multiply;
+  mix-blend-mode:plus-darker;
+  opacity:.52;
+}
+.book-row--framed .book-row__bg .fade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(236,223,205,.15) 0%, #ECDFCD 100%);
+}
+.book-row--framed .book-row__content{
+  position:relative;
+  z-index:1;
+  height:auto;
+  align-items:center;
+  padding-bottom:0;
+  border-bottom:0;
+}
+.book-row--framed .book-row__cover{
+  position:relative;
+  z-index:1;
+  margin-top:calc(-72 * var(--u));
+  margin-bottom:calc(-24 * var(--u));
+}
+
+/* ============ מקטע כללי + עלונים ============ */
+.section{
+  width:calc(1667 * var(--u));
+  margin:0 auto;
+}
+.section__head{
+  direction:ltr;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  padding-bottom:calc(20 * var(--u));
+  width:calc(1663 * var(--u));
+}
+.section__title{
+  font-family:var(--font-display);
+  font-size:calc(128 * var(--u));
+  line-height:.73;
+  color:var(--ink);
+  margin:0;
+  text-align:right;
+  direction:rtl;
+  white-space:nowrap;
+}
+.section__title .accent{color:var(--brand)}
+
+.leaflets{margin-top:calc(120 * var(--u));display:flex;flex-direction:column;gap:calc(20 * var(--u))}
+.tabs{
+  position:relative;    /* עוגן ל-.tabs__pill — בלעדיו הוא היה תופס את האב הממוקם הבא, איפשהו רחוק בעמוד */
+  direction:rtl;
+  background:var(--ink);
+  display:flex;
+  gap:calc(4 * var(--u));
+  height:calc(80 * var(--u));
+  align-items:center;
+  padding:calc(4 * var(--u));
+  border-radius:calc(12 * var(--u));
+  width:100%;
+}
+.tabs button{
+  flex:1 0 0;
+  min-width:0;
+  height:100%;
+  border:0;
+  background:none;
+  border-radius:calc(8 * var(--u));
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:calc(24 * var(--u));
+  color:var(--on-brand);
+  cursor:pointer;
+}
+.tabs button.is-active{background:var(--on-brand);color:var(--ink)}
+
+.cards{
+  direction:rtl;
+  display:flex;
+  gap:calc(15 * var(--u));
+  height:calc(440 * var(--u));
+  align-items:center;
+  width:100%;
+}
+.card{
+  flex:1 0 0;
+  min-width:0;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:calc(16 * var(--u));
+  align-items:center;
+}
+.card__body{
+  background:var(--on-brand);
+  flex:1 0 0;
+  min-height:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:calc(32 * var(--u));
+  align-items:center;
+  padding:calc(12 * var(--u)) calc(12 * var(--u)) calc(32 * var(--u));
+  border-radius:calc(12 * var(--u));
+}
+.card__thumb{
+  flex:1 0 0;
+  min-height:0;
+  width:100%;
+  border-radius:calc(8 * var(--u));
+  background:#fff;
+  overflow:hidden;
+}
+.card__thumb img{width:100%;height:100%;object-fit:contain}
+.card__name{
+  font-weight:700;
+  font-size:calc(20 * var(--u));
+  color:var(--ink);
+  text-align:center;
+  margin:0;
+}
+.card__dl{
+  border:1px solid var(--ink);
+  display:flex;
+  gap:calc(10 * var(--u));
+  height:calc(61 * var(--u));
+  align-items:center;
+  justify-content:center;
+  padding:0 calc(30 * var(--u));
+  border-radius:calc(12 * var(--u));
+  width:100%;
+  background:none;
+  cursor:pointer;
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:calc(20 * var(--u));
+  color:var(--ink);
+}
+.card__dl svg{width:calc(24 * var(--u));height:calc(24 * var(--u));flex:none}
+
+.carousel-nav{
+  direction:ltr;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
+.carousel-nav button{
+  width:calc(49 * var(--u));
+  height:calc(49 * var(--u));
+  border-radius:50%;
+  border:1px solid var(--ink);
+  background:none;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.carousel-nav svg{width:calc(12 * var(--u));height:calc(11 * var(--u))}
+.carousel-nav svg path{stroke:var(--ink)}
+.carousel-nav .next svg{transform:rotate(180deg)}
+.section__cta{display:none}   /* מוצג רק במובייל, מתחת לקרוסלה */
+
+/* ============ מקטע: אודות ============ */
+.about{
+  width:calc(1331.75 * var(--u));
+  margin:calc(190 * var(--u)) auto 0;
+  display:flex;
+  flex-direction:column;
+  gap:calc(75 * var(--u));
+  align-items:center;
+  text-align:center;
+}
+.about__title{
+  font-family:var(--font-display);
+  font-size:calc(128 * var(--u));
+  line-height:.73;
+  color:var(--ink);
+  margin:0;
+  width:100%;
+}
+.about__title .accent{color:var(--brand)}
+.about__body{
+  font-size:calc(48 * var(--u));
+  line-height:1.18;
+  color:rgba(57,56,54,.22);
+  margin:0;
+  width:100%;
+}
+.about__body .lead{color:var(--ink)}
+.about__body .wd{display:inline-block}
+.about__body .l{
+  --t:0;
+  display:inline-block;
+  color:rgba(57,56,54,calc(.22 + .78 * var(--t)));
+  transform:translateY(calc((1 - var(--t)) * 26 * var(--u)))
+            scale(calc(.92 + .08 * var(--t)));
+  filter:blur(calc((1 - var(--t)) * 5 * var(--u)));
+  will-change:transform,filter;
+}
+@media (prefers-reduced-motion:reduce){
+  .about__body .l{--t:1 !important;transform:none;filter:none}
+}
+.about__stats{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:calc(1317 * var(--u));
+}
+.about__stat{
+  display:flex;
+  flex-direction:column;
+  gap:calc(24 * var(--u));
+  align-items:center;
+  width:calc(133 * var(--u));
+}
+.about__stat dt{
+  font-family:var(--font-display);
+  font-size:calc(128 * var(--u));
+  line-height:.73;
+  color:var(--brand);
+  margin:0;
+}
+.about__stat dd{
+  font-size:calc(24 * var(--u));
+  line-height:1.1;
+  color:var(--ink);
+  margin:0;
+  white-space:nowrap;
+}
+
+/* ============ מקטע: שיעורי תורה ============ */
+.lessons{margin-top:calc(190 * var(--u));display:flex;flex-direction:column;gap:calc(20 * var(--u))}
+.lesson-cards{
+  direction:rtl;
+  display:flex;
+  gap:calc(15 * var(--u));
+  align-items:stretch;
+  width:100%;
+}
+.lesson{
+  flex:1 0 0;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:calc(12 * var(--u));
+}
+.lesson__head{
+  background:var(--on-brand);
+  display:flex;
+  flex-direction:column;
+  gap:calc(32 * var(--u));
+  align-items:center;
+  padding:calc(12 * var(--u)) calc(12 * var(--u)) calc(32 * var(--u));
+  border-radius:calc(12 * var(--u));
+  position:relative;
+}
+.lesson__video{
+  width:100%;
+  aspect-ratio:297.5/164.389;
+  background:#fff;
+  border-radius:calc(8 * var(--u));
+  display:grid;
+  place-items:center;
+  position:relative;
+}
+.lesson__video .lesson__like{
+  position:absolute;
+  top:calc(14 * var(--u));
+  left:calc(14 * var(--u));
+  width:calc(22 * var(--u));
+  height:calc(18 * var(--u));
+}
+.lesson__video img{width:calc(40 * var(--u));height:calc(28 * var(--u))}
+.lesson__name{
+  font-weight:700;
+  font-size:calc(20 * var(--u));
+  line-height:1.3;
+  color:var(--ink);
+  margin:0;
+  text-align:center;
+  /* גובה קבוע לשתי שורות — כדי שהמלבן הבז' יהיה אחיד בגובה
+     גם כשכותרת אחת קצרה מהשנייה */
+  min-height:calc(2.6em);
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+.lesson__player{
+  direction:ltr;
+  background:rgba(193,104,2,.06);
+  display:flex;
+  gap:calc(13 * var(--u));
+  align-items:center;
+  padding:calc(12 * var(--u));
+  border-radius:calc(12 * var(--u));
+  overflow:hidden;
+}
+.lesson__play{width:calc(43.6 * var(--u));height:calc(43.4 * var(--u));flex:none}
+.lesson__time{font-size:calc(20 * var(--u));color:var(--ink);white-space:nowrap}
+.lesson__wave{
+  flex:1 0 0;
+  min-width:0;
+  height:calc(46 * var(--u));
+  display:flex;
+  align-items:center;
+  gap:calc(2 * var(--u));
+  overflow:hidden;
+}
+.lesson__wave i{
+  flex:1 0 0;
+  border-radius:99px;
+  background:rgba(193,104,2,.18);
+}
+.lesson__wave i.played{background:var(--brand)}
+.lesson__dl{
+  border:1px solid var(--ink);
+  display:flex;
+  gap:calc(10 * var(--u));
+  align-items:center;
+  justify-content:center;
+  padding:calc(19 * var(--u)) calc(30 * var(--u));
+  border-radius:calc(12 * var(--u));
+  background:none;
+  cursor:pointer;
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:calc(20 * var(--u));
+  color:var(--ink);
+}
+.lesson__dl svg{width:calc(24 * var(--u));height:calc(24 * var(--u));flex:none}
+
+/* ============ מקטע: פותחן הבקבוקים ============ */
+.opener{
+  position:relative;
+  width:calc(1667 * var(--u));
+  height:calc(726.85 * var(--u));
+  margin:calc(190 * var(--u)) auto 0;
+}
+.opener__bg{
+  position:absolute;
+  inset-inline:0;
+  top:calc(39.5 * var(--u));
+  height:calc(425.18 * var(--u));
+  border-radius:calc(32 * var(--u));
+  overflow:hidden;
+  isolation:isolate;
+  background:#fff;
+  z-index:0;
+}
+.opener__bg .tex{
+  position:absolute;inset:0;
+  mix-blend-mode:luminosity;
+  opacity:.52;
+}
+.opener__bg .tex img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.opener__bg .tex .wash{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,#FFFFFF 0%,rgba(255,255,255,0) 100%);
+}
+.opener__bg .tint{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(193,104,2,0) 0%,#C16802 100%);
+}
+.opener__title{
+  position:relative;
+  z-index:0;
+  font-family:var(--font-display);
+  font-size:calc(128 * var(--u));
+  line-height:.73;
+  color:var(--ink);
+  margin:0;
+  text-align:center;
+}
+.opener__title .accent{color:var(--brand)}
+.opener__row{
+  position:absolute;
+  z-index:2;
+  direction:ltr;
+  left:calc(108.62 * var(--u));
+  top:calc(209 * var(--u));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:calc(1473.56 * var(--u));
+}
+.opener__buy{
+  display:flex;
+  flex-direction:column;
+  gap:calc(24 * var(--u));
+  align-items:flex-start;
+  width:calc(381 * var(--u));
+}
+.opener__price{
+  font-family:var(--font-display);
+  font-size:calc(48 * var(--u));
+  line-height:.92;
+  color:var(--ink);
+  margin:0;
+  direction:rtl;      /* המספר קודם, ואחריו ש"ח */
+}
+.opener__text{
+  direction:rtl;
+  width:calc(520.47 * var(--u));
+  font-size:calc(24 * var(--u));
+  line-height:1.15;
+  color:var(--ink);
+  text-align:right;
+}
+.opener__text p{margin:0}
+.opener__text p + p{margin-top:calc(24 * var(--u))}
+.opener__photo{
+  position:absolute;
+  z-index:1;                 /* גבוה מהכותרת (0), נמוך מהטופס הלבן (3) שחותך אותו */
+  left:calc(577.65 * var(--u));
+  top:calc(88 * var(--u));
+  width:calc(534.27 * var(--u));
+  height:calc(653.71 * var(--u));
+  object-fit:contain;
+  pointer-events:none;
+  /* שימי לב: אם משנים כאן rotate/scale — חובה לעדכן גם את השדה base
+     ב-collectParallax() למטה, אחרת הפרלקסה תדרוס את הערכים בגלילה */
+  transform:rotate(0deg) scale(1.02);
+  transform-origin:50% 30%;
+}
+.btn--dark .btn__circle{background:var(--ink)}
+.btn--dark .btn__label{background:var(--ink);color:var(--on-brand)}
+.btn--dark svg path{stroke:var(--on-brand)}
+
+/* ============ מקטע: צרו איתנו קשר ============ */
+.contact{
+  position:relative;
+  z-index:3;
+  width:calc(1691 * var(--u));
+  height:calc(312 * var(--u));
+  margin:calc(-207.61 * var(--u)) auto 0;   /* עולה על תחתית הבקבוק וחותך אותו */
+  background:#FAF8F4;
+  border-radius:calc(32 * var(--u));
+}
+.contact__inner{position:relative;z-index:1;width:100%;height:100%}
+.contact__title{
+  position:absolute;
+  inset-inline:0;
+  top:calc(74 * var(--u));
+  font-family:var(--font-display);
+  font-size:calc(56 * var(--u));
+  line-height:1;
+  color:var(--ink);
+  margin:0;
+  text-align:center;
+}
+.contact__title .accent{color:var(--brand)}
+.contact__form{
+  position:absolute;
+  left:calc(281.5 * var(--u));
+  top:calc(162 * var(--u));
+  direction:ltr;
+  display:flex;
+  align-items:stretch;
+  height:calc(76 * var(--u));
+  width:calc(1128 * var(--u));
+}
+.contact__form > *{flex:1 0 0;min-width:0}
+.contact__send{
+  background:var(--brand);
+  display:flex;
+  gap:calc(13 * var(--u));
+  align-items:center;
+  justify-content:center;
+  padding:0 calc(27 * var(--u));
+  border:0;
+  border-radius:calc(100 * var(--u)) 0 0 calc(100 * var(--u));
+  color:var(--on-brand);
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:calc(20 * var(--u));
+  cursor:pointer;
+}
+.contact__send svg{width:calc(24 * var(--u));height:calc(24 * var(--u));flex:none}
+.contact__field{
+  direction:rtl;
+  border:.5px solid var(--ink);
+  border-inline-start:0;
+  background:rgba(255,255,255,.55);
+  padding:0 calc(24 * var(--u)) 0 calc(16 * var(--u));
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:calc(20 * var(--u));
+  color:var(--ink);
+  text-align:right;
+  outline:none;
+}
+.contact__field::placeholder{color:var(--ink);opacity:1}
+.contact__field:last-child{
+  border-radius:0 calc(100 * var(--u)) calc(100 * var(--u)) 0;
+  border-inline-start:.5px solid var(--ink);
+}
+.contact__field:focus{background:#fff}
+
+/* ============ פוטר ============ */
+.footer{
+  position:relative;
+  width:calc(1880 * var(--u));
+  height:calc(842.45 * var(--u));
+  margin:calc(-139.32 * var(--u)) auto calc(20 * var(--u));
+  border-radius:calc(32 * var(--u));
+  overflow:hidden;
+  background:#ECDFCD;
+}
+/* מבנה מדויק לפי בדיקה בפיגמה: קונטיינר אחד (.footer) שצבע הבסיס שלו הוא
+   ECDFCD (המלבן הבז' המוכר), ומעליו רק תמונת טקסטורה אחת בשקיפות 33%
+   ושיטת שילוב luminosity — בלי שכבת גרדיאנט נוספת מעל */
+.footer__bg{position:absolute;inset:0;z-index:0;display:block}
+/* תמונה משוטחת אחת (ייצוא ידני), בלי blend mode ובלי שינוי שקיפות */
+.footer__bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.footer__figure{
+  position:absolute;
+  z-index:4;
+  left:calc(651.34 * var(--u));
+  top:calc(115.39 * var(--u));
+  width:calc(577.32 * var(--u));
+  height:calc(727.05 * var(--u));
+  object-fit:contain;
+  opacity:.9;
+  -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
+  pointer-events:none;
+}
+.footer__content{
+  position:absolute;
+  z-index:2;
+  direction:ltr;
+  left:calc(96.9 * var(--u));
+  top:calc(284.32 * var(--u));
+  width:calc(1693 * var(--u));
+  display:flex;
+  justify-content:space-between;
+}
+.footer__brand{width:calc(346 * var(--u));direction:rtl;text-align:left}
+.footer__brand img{width:calc(320.34 * var(--u));height:calc(108.55 * var(--u))}
+.footer__brand h3{
+  margin:calc(73 * var(--u)) 0 0;
+  font-size:calc(20.5 * var(--u));
+  font-weight:700;
+  color:var(--ink);
+  text-align:left;
+}
+.footer__brand p{
+  margin:calc(33 * var(--u)) 0 0;
+  font-size:calc(20.5 * var(--u));
+  line-height:1.5;
+  color:var(--ink);
+  direction:ltr;
+  text-align:left;
+}
+.footer__cols{display:flex;gap:calc(76 * var(--u));direction:rtl}
+.footer__col{display:flex;flex-direction:column}
+.footer__col h3,
+.footer__col li{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  margin:0;
+  text-align:right;
+}
+.footer__col h3{font-weight:700;color:var(--ink)}  /* אלו בגופן הגוף — בולד מכוון */
+.footer__col a{color:var(--ink);white-space:nowrap}
+
+.footer__col--nav h3,
+.footer__col--nav li{height:calc(44 * var(--u))}
+.footer__col--nav h3,
+.footer__col--nav a{font-size:calc(17.5 * var(--u))}
+
+.footer__col--legal h3,
+.footer__col--legal li{height:calc(48 * var(--u))}
+.footer__col--legal h3,
+.footer__col--legal a{font-size:calc(20.5 * var(--u))}
+
+.footer__rules{position:absolute;z-index:2;top:calc(701.06 * var(--u));inset-inline:0}
+.footer__rules span{
+  position:absolute;
+  height:1px;
+  background:rgba(57,56,54,.35);
+  width:calc(526.35 * var(--u));
+}
+.footer__rules span:first-child{left:calc(98.65 * var(--u))}
+.footer__rules span:last-child{left:calc(1265.05 * var(--u))}
+
+/* עוגן ל-.footer__legal, שעכשיו אח של .footer (מחוץ לפאנל הכהה/מרוקם שלו) ולא בתוכו */
+.footer-shell{position:relative}
+.footer__legal{
+  position:absolute;
+  z-index:2;
+  direction:ltr;
+  left:calc(98.9 * var(--u));
+  /* עוגן לפי bottom (לא top) ביחס לתחתית .footer-shell — כך המיקום נשאר יציב
+     בלי קשר לשוליים השליליים של .contact שקדם עכשיו ל-.footer בתוך ה-shell */
+  bottom:calc(79.13 * var(--u));
+  width:calc(1692.5 * var(--u));
+  display:flex;
+  justify-content:space-between;
+  font-size:calc(24 * var(--u));
+  color:var(--ink);
+}
+.footer__legal span{direction:rtl;text-align:right}
+
+/* ============================================================
+   שכבת תנועה — כניסה, חשיפה בגלילה, ריחוף, אינטראקציות
+   כל האנימציות מתבטלות אוטומטית ב-prefers-reduced-motion
+   ============================================================ */
+:root{
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-soft:cubic-bezier(.22,.61,.36,1);
+}
+
+/* פס התקדמות גלילה */
+.progress{
+  position:fixed;
+  top:0; inset-inline:0;
+  height:3px;
+  z-index:100;
+  background:transparent;
+  pointer-events:none;
+}
+.progress i{
+  display:block;
+  height:100%;
+  width:var(--p,0%);
+  background:linear-gradient(90deg,var(--brand),#E0913A);
+  transition:width .12s linear;
+}
+
+/* ---- חשיפה בגלילה ---- */
+.js [data-reveal]{
+  opacity:0;
+  transform:translateY(calc(20 * var(--u)));
+  transition:opacity 1s var(--ease-soft), transform 1.1s var(--ease-soft);
+  transition-delay:var(--d,0ms);
+}
+.js [data-reveal].in{opacity:1;transform:none}
+
+.js [data-reveal="right"]{transform:translateX(calc(28 * var(--u)))}
+.js [data-reveal="left"]{transform:translateX(calc(-28 * var(--u)))}
+.js [data-reveal="zoom"]{transform:scale(.97);opacity:0}
+.js [data-reveal].in{transform:none}
+
+/* מילים בכותרות — עולות אחת אחרי השנייה */
+/* המסכה מרווחת מעל ומתחת כדי לא לחתוך אותיות סופיות וניקוד,
+   והשוליים השליליים מבטלים את ההרחבה כך שהפריסה לא זזה */
+.js .tw{
+  display:inline-block;
+  vertical-align:top;
+  /* clip + clip-margin: חותך את המילה בלי לנפח את שורת הטקסט
+     (padding+margin שלילי ניפחו את גובה השורה ויצרו רווחים ענקיים סביב הכותרות) */
+  overflow:clip;
+  overflow-clip-margin:.6em;
+}
+.js .tw > i{
+  display:inline-block;
+  font-style:normal;
+  transform:translateY(105%);
+  transition:transform 1s var(--ease-out);
+  transition-delay:var(--d,0ms);
+}
+.js .in .tw > i,
+.js .tw.in > i{transform:none}
+
+/* ---- כניסת ההירו ---- */
+.js .hero__title,
+.js .hero__lede,
+.js .hero__cta{opacity:0;transform:translateY(calc(14 * var(--u)))}
+.js.loaded .hero__title{opacity:1;transform:none;transition:opacity 1.1s var(--ease-soft) .15s, transform 1.3s var(--ease-soft) .15s}
+.js.loaded .hero__lede{opacity:1;transform:none;transition:opacity 1.1s var(--ease-soft) .45s, transform 1.3s var(--ease-soft) .45s}
+.js.loaded .hero__cta{opacity:1;transform:none;transition:opacity 1.1s var(--ease-soft) .62s, transform 1.3s var(--ease-soft) .62s}
+
+/* הספרים נפרשׂים מהמרכז */
+.js .hb{opacity:0;transform:translateY(34px) scale(.96)}
+.js.loaded .hb{
+  opacity:1;transform:none;
+  transition:opacity 1s var(--ease-soft), transform 1.3s var(--ease-soft);
+  transition-delay:var(--d,0ms);
+}
+.js .hero-figure-in{opacity:0}
+.js.loaded .hero-figure-in{opacity:.62;transition:opacity 1.6s var(--ease-soft) .2s}
+
+/* התג — נכנס בעדינות */
+.js .hero__badge{opacity:0;transform:scale(.92)}
+.js.loaded .hero__badge{
+  opacity:1;transform:none;
+  transition:opacity 1s var(--ease-soft) .9s, transform 1.2s var(--ease-soft) .9s;
+}
+/* הטקסט המעוגל מסתובב לאט ללא הפסקה */
+.badge__arc{
+  transform-box:view-box;
+  transform-origin:118px 118px;
+  animation:badgeSpin 70s linear infinite;
+}
+@keyframes badgeSpin{to{transform:rotate(360deg)}}
+.hero__badge:hover .badge__arc{animation-play-state:paused}
+
+/* כפתור החץ בתג — ריחוף עדין + הזמנה לגלול */
+.badge__cta{cursor:pointer;animation:bob 3.2s ease-in-out infinite;transform-box:view-box;transform-origin:118px 189px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(2.5px)}}
+.badge__cta circle{transition:r .3s var(--ease-out)}
+.hero__badge:hover .badge__cta circle{r:23.5}
+
+/* ---- הדר נדבק ---- */
+.site-header{transition:background .45s var(--ease-soft), box-shadow .45s var(--ease-soft), height .45s var(--ease-soft), padding .45s var(--ease-soft)}
+body.stuck .site-header{
+  position:fixed;
+  top:0;
+  height:calc(84 * var(--u));
+  padding-top:0;
+  padding-bottom:0;
+  background:rgba(250,248,244,.82);
+  backdrop-filter:saturate(140%) blur(16px);
+  -webkit-backdrop-filter:saturate(140%) blur(16px);
+  box-shadow:0 1px 0 rgba(57,56,54,.09), 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(57,56,54,.06);
+}
+
+/* ---- ניווט: קו נמשך מימין ---- */
+.header__nav a{position:relative;transition:color .3s var(--ease-soft)}
+.header__nav a::after{
+  content:"";
+  position:absolute;
+  inset-inline-end:0;
+  bottom:calc(-8 * var(--u));
+  height:1.5px;
+  width:0;
+  background:var(--brand);
+  transition:width .4s var(--ease-out);
+}
+.header__nav a:hover{color:var(--brand)}
+.header__nav a:hover::after,
+.header__nav a.is-active::after{width:100%}
+
+/* ---- כפתורים ---- */
+.btn{transition:transform .35s var(--ease-out)}
+.btn__label,.btn__circle{transition:background .35s var(--ease-soft), color .35s var(--ease-soft), border-color .35s var(--ease-soft), transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn__circle svg{transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn:hover .btn__circle{transform:translateX(calc(-7 * var(--u)))}
+.btn:hover .btn__circle svg{transform:translateX(calc(-2 * var(--u)))}
+.btn:active{transform:scale(.97)}
+
+/* ---- לחיצה: החץ מסתובב והופך לרגע ל-וי, כאישור פעולה ---- */
+.btn__arrow,.btn__check{transform-box:fill-box;transform-origin:center;transition:opacity .35s var(--ease-out), transform .45s var(--ease-out)}
+.btn__check{opacity:0;transform:scale(.4) rotate(-45deg)}
+.btn.is-sent .btn__arrow{opacity:0;transform:rotate(225deg) scale(.5)}
+.btn.is-sent .btn__check{opacity:1;transform:scale(1) rotate(0)}
+.btn.is-sent .btn__circle{transform:translateX(calc(-7 * var(--u))) scale(1.08)}
+/* מילוי נוזלי שעולה מלמטה בקשת */
+.btn__label{position:relative;overflow:hidden;isolation:isolate}
+.btn__label::before{content:"";position:absolute;left:-25%;right:-25%;top:100%;height:320%;border-radius:45%;z-index:-1;transition:transform .62s var(--ease-out)}
+.btn:hover .btn__label::before{transform:translateY(-104%)}
+/* כתום: בריחוף הרקע מתנקז מטה בקשת ונשארת מסגרת כהה בלבד */
+.btn--solid .btn__label{background:transparent;box-shadow:inset 0 0 0 1px transparent;transition:color .35s var(--ease-soft), box-shadow .45s var(--ease-soft)}
+.btn--solid .btn__label::before{background:var(--brand);top:auto;bottom:0;height:200%;border-radius:45% 45% 0 0;transform:translateY(0)}
+.btn--solid:hover .btn__label{color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.btn--solid:hover .btn__label::before{transform:translateY(100%)}
+.btn--solid .btn__circle{box-shadow:inset 0 0 0 1px transparent;transition:background .45s var(--ease-soft), box-shadow .45s var(--ease-soft), transform .6s cubic-bezier(.34,1.56,.64,1)}
+.btn--solid:hover .btn__circle{background:transparent;box-shadow:inset 0 0 0 1px var(--ink)}
+.btn--solid:hover svg path{stroke:var(--ink)}
+.btn--dark .btn__label::before{background:#252423}
+.btn--dark:hover .btn__circle{background:#252423}
+.btn--ghost .btn__label::before{background:var(--ink)}
+.btn--ghost:hover .btn__label{color:var(--on-brand)}
+.btn--ghost:hover .btn__circle{background:var(--ink)}
+.btn--ghost:hover svg path{stroke:var(--on-brand)}
+
+/* ---- לב מועדפים ---- */
+.book-row__like,.lesson__like{cursor:pointer;transition:transform .35s var(--ease-out), background .35s var(--ease-soft)}
+.book-row__like:hover{transform:scale(1.08);background:#EDE5D6}
+.book-row__like img,.lesson__like{transition:filter .35s var(--ease-soft), transform .35s var(--ease-out)}
+.is-fav img,.lesson__like.is-fav{
+  filter:invert(43%) sepia(88%) saturate(1600%) hue-rotate(6deg) brightness(88%);
+}
+.pop{animation:pop .5s var(--ease-out)}
+@keyframes pop{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+
+/* ---- כריכות ספרים: הרמה והטיה ---- */
+.book-row__cover{
+  transition:transform .7s var(--ease-out), filter .7s var(--ease-out);
+  will-change:transform;
+}
+.book-row:hover .book-row__cover{
+  transform:translateY(calc(-6 * var(--u))) scale(1.012);
+  filter:drop-shadow(0 calc(16 * var(--u)) calc(30 * var(--u)) rgba(57,56,54,.16));
+}
+
+/* ---- כרטיסים ---- */
+.card,.lesson{transition:transform .6s var(--ease-soft)}
+.card:hover,.lesson:hover{transform:translateY(calc(-5 * var(--u)))}
+.card__body,.lesson__head{transition:box-shadow .6s var(--ease-soft)}
+.card:hover .card__body,.lesson:hover .lesson__head{box-shadow:0 calc(14 * var(--u)) calc(28 * var(--u)) rgba(57,56,54,.1)}
+.card__thumb{overflow:hidden}
+.card__thumb img{transition:transform 1s var(--ease-soft)}
+.card:hover .card__thumb img{transform:scale(1.03)}
+.card__dl,.lesson__dl{transition:background .35s var(--ease-soft), color .35s var(--ease-soft), transform .35s var(--ease-out)}
+.card__dl:hover,.lesson__dl:hover{background:var(--ink);color:var(--on-brand)}
+.card__dl:hover svg,.lesson__dl:hover svg{stroke:var(--on-brand)}
+.card__dl svg,.lesson__dl svg{transition:stroke .35s var(--ease-soft), transform .35s var(--ease-out)}
+.card__dl:hover svg,.lesson__dl:hover svg{transform:translateY(2px)}
+
+/* ---- טאבים עם גלולה נעה ---- */
+.tabs{position:relative}
+.tabs__pill{
+  position:absolute;
+  left:0;                    /* חובה: ה-JS מזיז ב-translateX לפי offsetLeft, שנמדד מהקצה השמאלי */
+  top:calc(4 * var(--u));
+  height:calc(72 * var(--u));
+  background:var(--on-brand);
+  border-radius:calc(8 * var(--u));
+  transition:transform .55s var(--ease-out), width .55s var(--ease-out);
+  z-index:0;
+}
+.tabs button{position:relative;z-index:1;background:none !important;transition:color .35s var(--ease-soft)}
+.tabs button.is-active{color:var(--ink)}
+
+/* ---- נגן אודיו ---- */
+.lesson__play{cursor:pointer;transition:transform .35s var(--ease-out)}
+.lesson__play:hover{transform:scale(1.1)}
+.lesson__wave i{transition:background .25s linear, transform .25s var(--ease-out)}
+.lesson__player.is-playing .lesson__wave i.played{animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.55)}}
+
+/* ---- חצי קרוסלה ---- */
+.carousel-nav button{transition:background .35s var(--ease-soft), border-color .35s var(--ease-soft), transform .35s var(--ease-out)}
+.carousel-nav button:hover{background:var(--ink);transform:scale(1.07)}
+.carousel-nav button:hover svg path{stroke:var(--on-brand)}
+.carousel-nav button svg path{transition:stroke .35s var(--ease-soft)}
+.carousel-nav button:disabled{opacity:.3;pointer-events:none}
+.cards,.lesson-cards{scroll-behavior:smooth}
+
+/* ---- שדות טופס ---- */
+.contact__field,.contact__send{transition:box-shadow .35s var(--ease-soft), color .35s var(--ease-soft), transform .35s var(--ease-out)}
+.contact__field:focus{box-shadow:inset 0 0 0 1.5px var(--brand)}
+/* אותו אפקט מילוי נוזלי כמו בכפתורי .btn--solid: בריחוף הרקע מתנקז מטה ונשארת מסגרת כהה */
+.contact__send{position:relative;overflow:hidden;isolation:isolate;background:transparent;box-shadow:inset 0 0 0 1px transparent}
+.contact__send::before{content:"";position:absolute;left:-25%;right:-25%;bottom:0;height:320%;border-radius:45% 45% 0 0;background:var(--brand);z-index:-1;transform:translateY(0);transition:transform .62s var(--ease-out)}
+.contact__send:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.contact__send:hover::before{transform:translateY(100%)}
+.contact__send svg{transition:transform .45s var(--ease-out), stroke .35s var(--ease-soft)}
+.contact__send:hover svg{transform:translate(-2px,-2px)}
+.contact__send:hover svg path{stroke:var(--ink)}
+
+/* ---- קישורי פוטר ---- */
+.footer__col a{position:relative;transition:color .3s var(--ease-soft), padding .35s var(--ease-out)}
+.footer__col a:hover{color:var(--brand);padding-inline-end:calc(8 * var(--u))}
+
+/* ---- תפריט מובייל — לפי פריים 181:3014 בפיגמה ---- */
+.menu{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  background:var(--ink);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:calc(66.65 * var(--u));
+  padding-bottom:calc(40 * var(--u));
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .5s var(--ease-soft), visibility .5s;
+}
+.menu.open{opacity:1;visibility:visible}
+.menu__logo{width:calc(169.95 * var(--u));height:calc(57.58 * var(--u));flex:none}
+/* הלוגו מוטבע inline (לא <img>) כדי שנוכל להבהיר רק את האותיות הכהות על
+   רקע התפריט הכהה, בלי לפגוע בנקודות הכתומות של המותג */
+.menu__logo path{fill:var(--on-brand)}
+.menu__close{
+  position:absolute;
+  top:0;
+  inset-inline-end:0;
+  width:calc(60 * var(--u));height:calc(60 * var(--u));
+  display:grid;place-items:center;
+  border:0;background:none;cursor:pointer;color:var(--on-brand);
+}
+.menu__close svg{width:calc(24 * var(--u));height:calc(24 * var(--u))}
+.menu__links{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+}
+.menu__links a{
+  height:calc(61.17 * var(--u));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:calc(24 * var(--u));
+  color:var(--on-brand);
+  opacity:0;
+  transform:translateY(calc(18 * var(--u)));
+  transition:opacity .6s var(--ease-out), transform .7s var(--ease-out), color .3s;
+}
+.menu.open .menu__links a{opacity:1;transform:none}
+.menu__links a:hover,
+.menu__links a.is-active{color:var(--brand)}
+.menu__icons{
+  flex:none;
+  margin-top:auto;
+  width:calc(304 * var(--u));
+  height:calc(56 * var(--u));
+  background:var(--on-brand);
+  border-radius:calc(28 * var(--u));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 calc(24 * var(--u));
+}
+.menu__icons > img,
+.menu__icons .hi-cart img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
+.menu__icons .hi-cart{position:relative;display:flex;align-items:center;gap:calc(6 * var(--u))}
+.menu__icons .hi-cart .badge{position:relative;width:calc(24 * var(--u));height:calc(24 * var(--u));flex:none}
+.menu__icons .hi-cart .badge .circle{position:absolute;inset:0;border-radius:50%;background:var(--brand)}
+.menu__icons .hi-cart .badge .count{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:var(--on-brand);font-family:'Poppins','Assistant',system-ui,sans-serif;font-weight:300;
+  font-size:calc(14 * var(--u));
+}
+
+/* ---- כיבוד העדפת תנועה מופחתת ---- */
+@media (prefers-reduced-motion:reduce){
+  .js [data-reveal],
+  .js .hero__title,.js .hero__lede,.js .hero__cta,
+  .js .hb,.js .hero__badge{opacity:1 !important;transform:none !important}
+  .js .hero-figure-in{opacity:.62 !important}
+  .js .tw > i{transform:none !important}
+  .badge__arc,.badge__cta{animation:none !important}
+  *{transition-duration:.01ms !important}
+}
+
+/* ============ MOBILE — פריים 440 מפיגמה (176:3558) ============ */
+@media (max-width:760px){
+  :root{ --u: 0.22727273cqw; }
+  .hero__panel--m{display:block}
+  .hero__panel:not(.hero__panel--m){display:none}   /* 1 design-px של פריים המובייל */
+
+  /* ---- הדר: עגלה משמאל, לוגו במרכז, המבורגר מימין ---- */
+  .site-header{
+    position:absolute;
+    height:calc(128 * var(--u));
+    padding:0 calc(37.5 * var(--u));
+    align-items:center;
+  }
+  .header__nav{display:none}
+  /* סדר הפריים: עגלה משמאל, לוגו במרכז, תפריט מימין */
+  .header__icons{width:calc(48 * var(--u));height:calc(24 * var(--u));justify-content:flex-start;order:1}
+  .header__logo{order:2}
+  .header__burger{order:3}
+  .hi-heart,.hi-user,.hi-search{display:none}
+  .header__logo{width:calc(100.8 * var(--u));height:calc(34.16 * var(--u))}
+  .header__burger{
+    display:grid;
+    place-items:center end;            /* אותו רוחב כמו קבוצת העגלה => הלוגו יוצא ממורכז */
+    width:calc(48 * var(--u));
+    height:calc(28 * var(--u));
+    border:0;background:none;padding:0;cursor:pointer;
+    color:var(--ink);
+  }
+  .header__burger svg{
+    width:calc(23 * var(--u));
+    height:calc(16 * var(--u));
+    display:block;
+  }
+
+  /* ---- הירו ---- */
+  .hero{height:calc(1040 * var(--u))}
+  .hero__title{
+    right:calc(49 * var(--u));
+    top:calc(137.6 * var(--u));
+    width:calc(331 * var(--u));
+    font-size:calc(64 * var(--u));
+  }
+  .hero__lede{
+    left:calc(67 * var(--u));
+    top:calc(294.6 * var(--u));
+    width:calc(324 * var(--u));
+    font-size:calc(16 * var(--u));
+    line-height:1.35;
+  }
+  .hero__lede p + p{margin-top:calc(14 * var(--u))}
+  .hero__cta{
+    left:calc(49 * var(--u));
+    top:calc(468.6 * var(--u));
+    gap:calc(20 * var(--u));
+  }
+  .hero__badge{
+    left:calc(164 * var(--u));
+    top:calc(883 * var(--u));
+    width:calc(113 * var(--u));
+    height:calc(113 * var(--u));
+  }
+  .badge__arc{font-size:10px}
+
+  /* ---- כפתורים ---- */
+  .btn{height:calc(36 * var(--u))}
+  .btn__label{font-size:calc(16 * var(--u));padding:0 calc(16 * var(--u))}
+  .btn__circle svg{width:calc(7 * var(--u));height:calc(6.6 * var(--u))}
+
+  /* ---- שורות הספרים: הכל בעמודה, ממורכז ---- */
+  .books-section{width:calc(400 * var(--u));padding-top:calc(69 * var(--u))}
+  /* סדר הפריים: כריכה, לב, כותרת, תיאור, מחיר, כפתורים, קו מפריד */
+  .book-row{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0;                      /* בדסקטופ ה-gap הוא 108u אופקי — בעמודה הוא הפך לרווח אנכי ענק */
+    height:auto;
+    margin-bottom:calc(96 * var(--u));
+    text-align:center;
+  }
+  .book-row__cover{
+    order:1;
+    width:calc(264.28 * var(--u));
+    height:calc(346.58 * var(--u));
+    margin:0 auto;
+  }
+  .book-row__content{
+    order:2;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    height:auto;
+    padding-bottom:calc(48 * var(--u));
+    border-bottom:1px solid var(--ink);
+  }
+  .book-row__text{order:1}
+  .book-row__aside{
+    order:2;
+    width:100%;
+    height:auto;
+    display:block;
+  }
+  /* הלב חופף את תחתית הכריכה, ממורכז — y=300.58 מהפריים.
+     המרכוז ב-left ולא ב-transform, כדי שאנימציית הלחיצה לא תזיז אותו הצידה */
+  .book-row__like{
+    position:absolute;
+    top:calc(300.58 * var(--u));
+    left:calc(50% - 23 * var(--u));
+    transform:none;
+    margin:0;
+    z-index:2;
+  }
+  .book-row__text,
+  .book-row--framed .book-row__text{
+    width:100%;
+    align-items:center;
+    text-align:center;
+    gap:calc(20 * var(--u));
+    margin-top:calc(24 * var(--u));
+  }
+  .book-row__title,
+  .book-row--framed .book-row__title{font-size:calc(64 * var(--u))}
+  .book-row__title .accent{display:inline;margin-inline-end:.22em}
+  .book-row__desc{font-size:calc(16 * var(--u));line-height:1.35}
+  .book-row__price{
+    font-size:calc(48 * var(--u));
+    margin-top:calc(28 * var(--u));
+  }
+  /* מחיר בשורה מלאה מעל, ושני הכפתורים זה לצד זה מתחתיו — 233 + 5 + 162 = 400 */
+  .book-row__buy{
+    display:flex;
+    flex-direction:row-reverse;        /* PDF משמאל, רכישה מימין — כמו בפריים */
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    row-gap:calc(24 * var(--u));
+    column-gap:calc(5 * var(--u));
+    margin-top:calc(24 * var(--u));
+  }
+  .book-row__price{width:100%;order:-1;text-align:center;margin-top:0}
+  .book-row__buy .btn--solid{flex:none;width:calc(162 * var(--u))}
+  .book-row__buy .btn--ghost{flex:none;width:calc(233 * var(--u))}
+  .book-row__buy .btn__label{flex:1 0 0;min-width:0;justify-content:center}
+  .book-row--framed{
+    padding:calc(40 * var(--u)) calc(29 * var(--u));
+    margin-bottom:0;
+  }
+  .book-row--framed .book-row__content{border-bottom:0;padding-bottom:0}
+  .book-row--framed .book-row__cover{margin-top:calc(-72 * var(--u))}
+  /* בכרטיס הממוסגר (חוברת חשבון נפש) ל-.book-row__content יש position:relative
+     משלו (לצורך ה-z-index מעל הרקע), ולכן הוא — לא .book-row — ההורה הממוקם
+     שממנו .book-row__like (top:300.58u) נמדד. כאן זה גורם ללב לנחות הרבה יותר
+     נמוך (מעל אזור הכפתורים) במקום על תחתית הכריכה. מתקנים ספציפית לגרסה הזו:
+     top החדש = (מרווח עליון 40 + margin-top שלילי של הכריכה 72-) + 300.58 מהכריכה,
+     פחות הגובה של .book-row__content עד לתחילתו (314.58) = 46- */
+  .book-row--framed .book-row__like{top:calc(-46 * var(--u))}
+
+  /* ---- מקטעים כלליים ---- */
+  .section{width:calc(400 * var(--u))}
+  .section__head{
+    display:block;
+    width:100%;
+    text-align:center;
+    padding-bottom:0;
+  }
+  .section__title{font-size:calc(64 * var(--u));white-space:normal;text-align:center}
+  .section__head .btn{display:none}
+
+  /* ---- עלונים ---- */
+  .leaflets{margin-top:calc(120 * var(--u))}
+  .tabs{height:calc(56 * var(--u));border-radius:calc(8 * var(--u));margin-top:0}
+  .tabs button{font-size:calc(14 * var(--u))}
+  /* קרוסלה אמיתית: שני כרטיסים במסך, השאר בגלילה */
+  .cards{
+    height:auto;
+    gap:calc(15 * var(--u));
+    overflow-x:auto;
+    scrollbar-width:none;
+    scroll-snap-type:x mandatory;
+  }
+  .cards::-webkit-scrollbar{display:none}
+  .card{
+    height:calc(331 * var(--u));
+    flex:0 0 calc(192.5 * var(--u));
+    scroll-snap-align:start;
+  }
+  .card__body{padding:calc(12 * var(--u)) calc(12 * var(--u)) calc(20 * var(--u))}
+  .card__name{font-size:calc(16 * var(--u))}
+  .card__dl{height:calc(48 * var(--u));font-size:calc(14 * var(--u));padding:0 calc(14 * var(--u))}
+  .card__dl svg{width:calc(20 * var(--u));height:calc(20 * var(--u))}
+  .carousel-nav{margin-top:0}
+  .carousel-nav button{width:calc(49 * var(--u));height:calc(49 * var(--u))}
+  .section__cta{display:flex;justify-content:center;margin-top:0}
+
+  /* ---- אודות ---- */
+  .about{width:calc(400 * var(--u));margin-top:calc(193 * var(--u));gap:0}
+  .about__title{font-size:calc(64 * var(--u))}
+  .about__body{
+    font-size:calc(28 * var(--u));
+    line-height:1.45;
+    margin-top:calc(40 * var(--u));
+  }
+  .about__stats{
+    margin-top:calc(32 * var(--u));
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    row-gap:calc(20 * var(--u));
+    column-gap:calc(48 * var(--u));
+  }
+  .about__stat{width:100%;gap:calc(8 * var(--u))}
+  .about__stat dt{font-size:calc(64 * var(--u))}
+  .about__stat dd{font-size:calc(16 * var(--u))}
+
+  /* ---- שיעורי תורה ---- */
+  .lessons{margin-top:calc(203 * var(--u));gap:calc(20 * var(--u))}
+  .lesson-cards{
+    gap:calc(15 * var(--u));
+    margin-top:0;
+    overflow-x:auto;
+    scrollbar-width:none;
+    scroll-snap-type:x mandatory;
+  }
+  .lesson-cards::-webkit-scrollbar{display:none}
+  .lesson{flex:0 0 calc(192.5 * var(--u));scroll-snap-align:start}
+  .lesson__name{font-size:calc(16 * var(--u))}
+  .lesson__time{font-size:calc(14 * var(--u))}
+  .lesson__play{width:calc(30 * var(--u));height:calc(30 * var(--u))}
+  .lesson__wave{height:calc(30 * var(--u))}
+  .lesson__dl{padding:calc(14 * var(--u)) calc(14 * var(--u));font-size:calc(14 * var(--u))}
+  .lesson__dl svg{width:calc(20 * var(--u));height:calc(20 * var(--u))}
+
+  /* ---- פותחן ---- */
+  /* עיקרון מבני: .opener הוא הקונטיינר של כל האזור הזה (כולל הרקע הכתום .opener__bg
+     וגם התוכן .opener__row) — לכן חייב overflow:hidden עליו, כדי שאם משהו בתוכן
+     (כמו כפתור ארוך) בכל זאת רחב מדי, הוא ייחתך בתוך האזור ולא יגלוש לכל העמוד
+     ויגרום לגלילה אופקית. בדקתי ש-.opener__photo נוגע בדיוק בקצה התחתון/הימני
+     של .opener במובייל ולא נחתך על ידי זה */
+  .opener{
+    width:calc(400 * var(--u));
+    height:calc(977.95 * var(--u));
+    margin-top:calc(203 * var(--u));
+    overflow:hidden;
+  }
+  .opener__bg{top:calc(44 * var(--u));height:calc(714 * var(--u))}
+  .opener__title{font-size:calc(64 * var(--u));padding:0 calc(40 * var(--u))}
+  /* בפריים: תיאור קודם, ואז מחיר וכפתור מתחתיו — הכול ממורכז.
+     חשוב: .opener__row מתויג ע"י tag('.opener__row') לאנימציית חשיפה בגלילה
+     ([data-reveal], ראו למעלה), וזו קובעת transform:translateY(...) משלה עם
+     ספציפיות גבוהה יותר מכלל class בודד — כך שאם ממרכזים כאן עם
+     transform:translateX(-50%), האנימציה דורסת אותו לגמרי ברגע שהאלמנט
+     נחשף/נכנס למסך, וכל השורה קופצת ימינה ונחתכת ע"י overflow:hidden של
+     .opener. פותרים בלי transform בכלל: left:0;right:0;margin:auto —
+     ממרכז קופסה ברוחב קבוע בלי לגעת ב-transform */
+  .opener__row{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    left:0;
+    right:0;
+    margin:0 auto;
+    top:calc(176 * var(--u));
+    width:calc(360 * var(--u));
+    text-align:center;
+  }
+  .opener__text{order:1;width:100%;font-size:calc(16 * var(--u));line-height:1.35;text-align:center}
+  .opener__buy{order:2;width:100%;align-items:center;margin-top:calc(24 * var(--u))}
+  .opener__price{font-size:calc(48 * var(--u))}
+  /* הכפתור "לפרטים נוספים ורכישת הפותחן" ארוך מדי בשורה אחת ברוחב 16u/16u הכללי —
+     בגלישה נדבק לרוחב הכולל (400u) בלי שום גבול, מה שגורם לגלילה אופקית של כל העמוד.
+     מקטינים כאן את הגופן/הריפוד ספציפית לכפתור הזה כדי שיישאר בשורה אחת בתוך רוחב השורה */
+  .opener__buy .btn__label{font-size:calc(14 * var(--u));padding:0 calc(12 * var(--u))}
+  .opener__photo{
+    left:calc(12.78 * var(--u));
+    top:calc(512.42 * var(--u));
+    width:calc(380.47 * var(--u));
+    height:calc(465.53 * var(--u));
+  }
+
+  /* ---- צרו קשר: שדות מוערמים ---- */
+  .contact{
+    width:calc(341 * var(--u));
+    height:calc(432 * var(--u));
+    margin-top:calc(-114.19 * var(--u));
+  }
+  .contact__title{top:calc(40 * var(--u));font-size:calc(64 * var(--u))}
+  .contact__form{
+    left:calc(40 * var(--u));
+    top:calc(120 * var(--u));
+    width:calc(261 * var(--u));
+    height:auto;
+    flex-direction:column;
+    gap:calc(12 * var(--u));
+  }
+  .contact__form > *{flex:none;height:calc(64 * var(--u))}
+  /* סדר השדות בפריים: שם, אימייל, טלפון, ואז שליחה */
+  .contact__field[name="name"]{order:1}
+  .contact__field[name="email"]{order:2}
+  .contact__field[name="phone"]{order:3}
+  .contact__field{
+    border:.5px solid var(--ink);
+    border-radius:calc(100 * var(--u));
+    text-align:center;
+    padding:0 calc(20 * var(--u));
+    font-size:calc(16 * var(--u));
+  }
+  .contact__field:last-child{border-radius:calc(100 * var(--u))}
+  .contact__send{
+    order:4;
+    border-radius:calc(100 * var(--u));
+    font-size:calc(16 * var(--u));
+  }
+
+  /* ---- פוטר ---- */
+  .footer{
+    width:calc(400 * var(--u));
+    height:calc(1274.51 * var(--u));   /* מאומת מול הפיגמה (DevTools): 400×1274.51 */
+    margin:calc(-229 * var(--u)) auto calc(20 * var(--u));
+  }
+  .footer__bg{display:block}   /* במובייל התמונה חוזרת בדיוק כפי שהייתה */
+  .footer__content{
+    left:calc(30 * var(--u));
+    top:calc(294 * var(--u));
+    width:calc(340 * var(--u));
+    display:block;
+    text-align:center;
+  }
+  .footer__brand{width:100%;text-align:center}
+  .footer__brand img{width:calc(225.77 * var(--u));height:calc(76.5 * var(--u));margin:0 auto}
+  .footer__brand h3{margin-top:calc(35 * var(--u));text-align:center;font-size:calc(16.7 * var(--u))}
+  .footer__brand p{
+    margin-top:calc(33 * var(--u));
+    text-align:center;
+    direction:ltr;
+    font-size:calc(16.7 * var(--u));
+  }
+  .footer__cols{
+    margin-top:calc(56 * var(--u));
+    justify-content:space-between;
+    gap:0;
+  }
+  .footer__col--nav h3,.footer__col--nav li,
+  .footer__col--legal h3,.footer__col--legal li{height:calc(42 * var(--u))}
+  .footer__col--nav h3,.footer__col--nav a,
+  .footer__col--legal h3,.footer__col--legal a{font-size:calc(16.7 * var(--u))}
+  .footer__figure{
+    left:calc(59.92 * var(--u));
+    top:calc(880 * var(--u));
+    width:calc(313.16 * var(--u));
+    height:calc(394.38 * var(--u));
+  }
+  .footer__rules{display:none}
+  /* מחוץ לפאנל הכהה של הפוטר לגמרי — זורם רגיל מתחתיו על רקע העמוד */
+  .footer__legal{
+    position:static;
+    margin:calc(28 * var(--u)) auto calc(40 * var(--u));
+    width:calc(331 * var(--u));
+    display:block;
+    text-align:center;
+    font-size:calc(16.7 * var(--u));
+  }
+  .footer__legal span{display:block;text-align:center}
+  .footer__legal span + span{margin-top:calc(20 * var(--u))}
+
+  /* עמודת "משפטי" מיושרת לשמאל, לא ממורכזת */
+  .footer__col--legal h3,
+  .footer__col--legal li{justify-content:flex-start;text-align:left;direction:ltr}
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><i></i></div>
+
+<nav class="menu" id="menu" aria-hidden="true">
+  <button class="menu__close" type="button" aria-label="סגירה">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <svg class="menu__logo" role="img" aria-label="מתיקות" viewBox="0 0 1659 563" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="1520.21" cy="422.564" r="32.3569" fill="#C16802"/>
+    <circle cx="1151.83" cy="431.846" r="32.3569" fill="#C16802"/>
+    <circle cx="388.01" cy="228.32" r="32.3569" fill="#C16802"/>
+    <circle cx="1520.21" cy="496.56" r="32.3569" fill="#C16802"/>
+    <path d="M1432.85 384.19C1437.43 358.979 1442.59 339.784 1448.32 326.605C1454.05 312.853 1460.35 303.112 1467.23 297.382C1474.67 291.652 1483.84 286.495 1494.73 281.912L1530.83 268.16C1552.6 260.711 1567.21 254.694 1574.66 250.111C1582.68 245.527 1588.13 239.224 1590.99 231.202C1593.86 222.607 1595.29 208.282 1595.29 188.227C1595.29 124.053 1572.94 91.965 1528.25 91.965C1508.77 91.965 1489.86 97.9814 1471.52 110.014C1453.19 122.047 1438.29 137.231 1426.83 155.567C1415.37 173.33 1409.35 190.806 1408.78 207.996L1405.34 292.225C1404.77 305.977 1401.91 318.296 1396.75 329.183C1392.16 339.497 1387.01 348.092 1381.28 354.968C1375.55 361.271 1365.81 371.585 1352.05 385.909L1355.49 194.244C1356.07 170.751 1354.06 152.989 1349.48 140.956C1345.47 128.923 1339.45 117.177 1331.43 105.717C1326.84 99.4139 1323.12 93.3975 1320.25 87.6676C1317.96 81.9377 1316.82 74.7753 1316.82 66.1804C1316.82 58.1586 1319.39 49.8502 1324.55 41.2553C1329.71 32.0875 1338.59 21.2007 1351.2 8.59485V16.3302C1351.2 25.4981 1353.49 32.374 1358.07 36.9579L1374.4 49.8502C1383 55.0071 1389.59 60.4505 1394.17 66.1804C1399.33 71.9103 1403.05 81.0782 1405.34 93.684C1408.21 106.29 1409.07 123.766 1407.92 146.113C1423.97 104.857 1444.31 75.6348 1468.95 58.4451C1493.58 41.2553 1518.22 32.6605 1542.86 32.6605C1620.21 32.6605 1658.89 71.9103 1658.89 150.41L1657.17 178.773C1656.6 185.649 1650.58 199.974 1639.12 221.747C1627.66 242.948 1615.34 263.289 1602.17 282.771C1589.56 302.253 1580.39 313.713 1574.66 317.15C1553.46 328.61 1528.25 338.924 1499.03 348.092C1480.12 354.968 1466.08 360.698 1456.91 365.282C1448.32 369.293 1440.3 375.596 1432.85 384.19Z" fill="#393836"/>
+    <path d="M1024.93 0C1026.08 30.3685 1044.7 45.5528 1080.8 45.5528H1187.38C1211.44 45.5528 1230.35 48.4177 1244.1 54.1476C1258.43 59.8775 1269.6 72.1968 1277.62 91.1056C1285.64 110.014 1289.66 138.664 1289.66 177.054C1289.66 197.682 1288.8 238.078 1287.08 298.242C1286.5 312.567 1283.07 324.313 1276.76 333.481C1270.46 342.076 1261.29 351.53 1249.26 361.844L1235.51 374.736L1236.37 240.656L1237.23 191.665C1237.23 163.016 1234.36 142.961 1228.63 131.501C1223.47 119.469 1211.73 113.452 1193.39 113.452H1073.92C1080.8 127.204 1086.82 143.821 1091.97 163.302C1097.13 182.211 1099.71 201.693 1099.71 221.747C1099.71 258.992 1090.54 289.933 1072.21 314.572C1056.16 335.2 1034.1 350.67 1006.02 360.984C982.532 369.579 963.623 379.32 949.299 390.207C952.737 366.714 957.32 348.951 963.05 336.919C968.207 324.886 975.083 315.718 983.678 309.415C988.262 305.977 993.705 302.539 1000.01 299.101C1006.31 295.663 1012.33 292.512 1018.06 289.647C1039.83 278.187 1050.72 258.705 1050.72 231.202C1050.72 212.866 1046.42 192.811 1037.83 171.038C1029.23 148.691 1017.48 122.907 1002.59 93.684C998.003 86.8081 995.711 78.4997 995.711 68.7589C995.711 50.4232 1005.45 27.5036 1024.93 0Z" fill="#393836"/>
+    <path d="M943.865 151.269C934.697 166.74 922.092 181.638 906.048 195.963C912.924 182.211 916.362 169.605 916.362 158.145C916.362 136.945 902.61 121.187 875.106 110.874C855.625 103.425 845.884 90.8188 845.884 73.0561C845.884 53.0014 858.49 31.8007 883.701 9.4541C882.555 12.3191 881.982 16.33 881.982 21.4869C881.982 27.7898 884.274 32.9467 888.858 36.9577C894.015 40.9686 902.61 45.266 914.643 49.85C943.292 61.3098 957.617 79.932 957.617 105.717C957.617 120.041 953.033 135.226 943.865 151.269Z" fill="#393836"/>
+    <path d="M539.309 471.858C539.309 491.34 539.023 506.81 538.45 518.27C537.877 529.73 535.871 544.341 532.434 562.104C557.072 545.487 573.689 529.157 582.284 513.113C590.879 497.07 595.176 476.442 595.176 451.23V238.078C595.176 209.428 602.338 183.071 616.663 159.005C563.375 176.195 536.731 212.866 536.731 269.019L539.309 471.858ZM730.115 42.9742C758.765 42.4012 779.106 46.1257 791.139 54.1476C803.172 61.5964 809.475 75.6347 810.048 96.2624L811.767 175.335C811.767 192.525 805.75 211.147 793.717 231.202L757.619 290.506C748.451 305.404 739.57 315.718 730.975 321.448C722.953 327.178 710.634 333.194 694.017 339.497C669.951 347.519 646.172 358.406 622.68 372.157C630.129 347.519 636.145 329.47 640.729 318.01C645.886 305.977 653.621 295.09 663.935 285.349C674.249 275.036 688.574 266.727 706.909 260.424C727.537 252.975 741.289 246.386 748.165 240.656C755.614 234.926 759.338 225.758 759.338 213.153V167.6C759.338 149.264 757.619 135.799 754.181 127.204C750.743 118.036 741.575 113.166 726.678 112.593L577.986 113.452C557.932 113.452 543.034 109.728 533.293 102.279C524.125 94.8299 519.541 84.8026 519.541 72.1968C519.541 61.8829 522.406 50.7096 528.136 38.6768C534.439 26.071 542.747 14.0382 553.061 2.57837C552.488 20.9141 557.645 32.6604 568.532 37.8173C579.419 42.9742 595.176 45.2662 615.804 44.6932L730.115 42.9742Z" fill="#393836"/>
+    <path d="M369.276 69.6182C369.276 62.7423 373.001 53.8609 380.45 42.9741C387.898 31.5143 397.066 20.3409 407.953 9.4541V17.1895C407.953 26.3573 410.245 33.2332 414.829 37.8172C419.986 42.9741 427.148 47.558 436.316 51.569C447.203 57.2989 455.798 63.3153 462.101 69.6182C468.404 75.9211 473.847 87.0944 478.431 103.138C483.015 118.609 485.307 141.242 485.307 171.038V280.192C485.307 302.539 480.723 321.161 471.555 336.059C462.96 350.384 450.354 365.282 433.738 380.752V194.244C433.738 173.616 431.732 157.572 427.721 146.112C423.71 134.08 418.84 125.485 413.11 120.328C407.953 114.598 401.077 109.155 392.482 103.998C384.461 99.9867 378.444 95.6893 374.433 91.1053C370.995 86.5214 369.276 79.359 369.276 69.6182Z" fill="#393836"/>
+    <path d="M75.6348 0C76.7808 30.3685 95.403 45.5528 131.501 45.5528H238.078C262.143 45.5528 281.052 48.4177 294.804 54.1476C309.129 59.8775 320.302 72.1968 328.324 91.1056C336.346 110.014 340.357 138.664 340.357 177.054C340.357 197.682 339.497 238.078 337.778 298.242C337.205 312.567 333.767 324.313 327.464 333.481C321.161 342.076 311.994 351.53 299.961 361.844L286.209 374.736L287.068 240.656L287.928 191.665C287.928 163.016 285.063 142.961 279.333 131.501C274.176 119.469 262.43 113.452 244.094 113.452H124.626C131.501 127.204 137.518 143.821 142.675 163.302C147.832 182.211 150.41 201.693 150.41 221.747C150.41 258.992 141.242 289.933 122.907 314.572C106.863 335.2 84.8027 350.67 56.7261 360.984C33.2335 369.579 14.3248 379.32 0 390.207C3.43794 366.714 8.02187 348.951 13.7518 336.919C18.9087 324.886 25.7846 315.718 34.3795 309.415C38.9634 305.977 44.4068 302.539 50.7097 299.101C57.0126 295.663 63.029 292.512 68.7589 289.647C90.5326 278.187 101.419 258.705 101.419 231.202C101.419 212.866 97.122 192.811 88.5271 171.038C79.9322 148.691 68.1859 122.907 53.2882 93.684C48.7042 86.8081 46.4123 78.4997 46.4123 68.7589C46.4123 50.4232 56.1531 27.5036 75.6348 0Z" fill="#393836"/>
+  </svg>
+  <div class="menu__links">
+    <a href="index.html" class="is-active">דף הבית</a>
+    <a href="#about">אודות</a>
+    <a href="shop.html">החנות</a>
+    <a href="opener.html">פותחן בקבוקים לשבת</a>
+    <a href="leaflets.html">עלונים להורדה</a>
+    <a href="lessons.html">שיעורי תורה</a>
+    <a href="contact.html">צרו קשר</a>
+  </div>
+  <div class="menu__icons">
+    <div class="hi-cart">
+      <img src="./public/assets/icon-cart.svg" alt="סל קניות">
+      <span class="badge"><span class="circle"></span><span class="count">0</span></span>
+    </div>
+    <img src="./public/assets/icon-heart.svg" alt="מועדפים">
+    <img src="./public/assets/icon-user.svg" alt="אזור אישי">
+    <img src="./public/assets/icon-search.svg" alt="חיפוש">
+  </div>
+</nav>
+
+<!-- כותרת עליונה — מחוץ ל-hero בכוונה: ל-.hero יש isolation:isolate,
+     שכולא בתוכו כל z-index פנימי (כולל של ההדר הנדבק) בהקשר-הערמה שלו.
+     כתוצאה מכך, סקשנים שאחרי ה-hero ב-DOM (עם isolation/auto רגיל)
+     היו מצוירים מעליו ברגע שהוא הפך ל-fixed בגלילה. -->
+<header class="site-header">
+  <div class="header__icons">
+    <div class="hi-cart">
+      <img src="./public/assets/icon-cart.svg" alt="סל קניות">
+      <span class="badge"><span class="circle"></span><span class="count">0</span></span>
+    </div>
+    <div class="hi-heart"><img src="./public/assets/icon-heart.svg" alt="מועדפים"></div>
+    <div class="hi-user"><img src="./public/assets/icon-user.svg" alt="אזור אישי"></div>
+    <div class="hi-search"><img src="./public/assets/icon-search.svg" alt="חיפוש"></div>
+  </div>
+
+  <nav class="header__nav">
+    <a href="index.html" class="is-active">דף הבית</a>
+    <a href="#about">אודות</a>
+    <a href="shop.html">החנות</a>
+    <a href="opener.html">פותחן בקבוקים לשבת</a>
+    <a href="leaflets.html">עלונים להורדה</a>
+    <a href="lessons.html">שיעורי תורה</a>
+    <a href="contact.html">צרו קשר</a>
+  </nav>
+
+  <button class="header__burger" type="button" aria-label="תפריט">
+    <svg viewBox="0 0 23 16" fill="none" aria-hidden="true">
+      <path d="M22.167 0.583333C22.167 0.261333 21.9057 0 21.5837 0H0.58366C0.26166 0 0.000326276 0.261333 0.000326276 0.583333C0.000326276 0.905333 0.26166 1.16667 0.58366 1.16667H21.5837C21.9057 1.16667 22.167 0.905333 22.167 0.583333ZM0.58366 7H21.5837C21.9057 7 22.167 7.26133 22.167 7.58333C22.167 7.90533 21.9057 8.16667 21.5837 8.16667H0.58366C0.26166 8.16667 0.000326276 7.90533 0.000326276 7.58333C0.000326276 7.26133 0.26166 7 0.58366 7ZM11.0837 14H21.5837C21.9057 14 22.167 14.2613 22.167 14.5833C22.167 14.9053 21.9057 15.1667 21.5837 15.1667H11.0837C10.7617 15.1667 10.5003 14.9053 10.5003 14.5833C10.5003 14.2613 10.7617 14 11.0837 14Z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <a href="index.html" class="header__logo"><img src="./public/assets/logo.svg" alt="מתיקות" style="width:100%;height:100%"></a>
+</header>
+
+<section class="hero">
+
+  <!-- קונטיינר הרקע — דסקטופ -->
+  <svg class="hero__panel" viewBox="0 0 1920 1130" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <clipPath id="heroClip">
+        <path transform="translate(19.997,18.8125)" d="M1848.01 0C1865.68 0 1880.01 14.3269 1880.01 32V923C1880.01 940.673 1865.68 955 1848.01 955H1151.8C1149.65 955.247 1124.12 958.481 1104.26 975.157C1097.16 981.122 1091.26 989.822 1086.7 998.225C1068.45 1062.04 1009.68 1108.75 940.003 1108.75C870.915 1108.75 812.552 1062.83 793.775 999.843C789.11 990.953 782.914 981.506 775.353 975.157C755.488 958.48 729.959 955.246 727.811 955H32C14.3269 955 0.0000661533 940.673 0 923V32C0 14.3269 14.3269 0 32 0H1848.01Z"/>
+      </clipPath>
+      <linearGradient id="heroFade" x1="0" y1="18.8125" x2="0" y2="1127.5625" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#ECDFCD" stop-opacity="0"/>
+        <stop offset="1" stop-color="#ECDFCD" stop-opacity="1"/>
+      </linearGradient>
+      <filter id="bookShadow" x="-25%" y="-25%" width="150%" height="150%">
+        <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#393836" flood-opacity="0.18"/>
+      </filter>
+    </defs>
+    <g clip-path="url(#heroClip)">
+      <rect x="19.997" y="18.8125" width="1880.01" height="1108.75" fill="#ECDFCD"/>
+      <image href="./public/assets/hero-bg-2.png" x="19.997" y="18.8125" width="1880.01" height="1108.75"
+             preserveAspectRatio="xMidYMid slice" style="mix-blend-mode:overlay;opacity:.63"/>
+      <image href="./public/assets/hero-bg.jpg" x="19.997" y="18.8125" width="1880.01" height="1108.75"
+             preserveAspectRatio="xMidYMid slice" style="mix-blend-mode:luminosity;opacity:.52"/>
+      <rect x="19.997" y="18.8125" width="1880.01" height="1108.75" fill="url(#heroFade)"/>
+      <image class="hero-figure-in" href="./public/assets/chafetz-chaim.png" x="643" y="165" width="621" height="774.5"
+             preserveAspectRatio="xMidYMid meet" opacity="0.62"/>
+      <g filter="url(#bookShadow)">
+        <g class="hb" style="--d:1080ms"><g transform="translate(546.09,897.89) rotate(-21.12)">
+          <image href="./public/assets/book-matikut.png" x="-118" y="-154.75" width="236" height="309.5" preserveAspectRatio="xMidYMax meet"/>
+        </g></g>
+        <g class="hb" style="--d:960ms"><g transform="translate(739.835,843.9) rotate(-5.48)">
+          <image href="./public/assets/book-matikut.png" x="-124.42" y="-163.165" width="248.84" height="326.33" preserveAspectRatio="xMidYMax meet"/>
+        </g></g>
+        <g class="hb" style="--d:820ms"><g transform="translate(960.005,813.225)">
+          <image href="./public/assets/book-matikut.png" x="-133.395" y="-174.935" width="266.79" height="349.87" preserveAspectRatio="xMidYMax meet"/>
+        </g></g>
+        <g class="hb" style="--d:960ms"><g transform="translate(1157.945,852.655) rotate(6.2)">
+          <image href="./public/assets/book-noar.png" x="-124.42" y="-163.165" width="248.84" height="326.33" preserveAspectRatio="xMidYMax meet"/>
+        </g></g>
+        <g class="hb" style="--d:1080ms"><g transform="translate(1357.315,902.12) rotate(17.13)">
+          <image href="./public/assets/book-matikut.png" x="-118" y="-154.75" width="236" height="309.5" preserveAspectRatio="xMidYMax meet"/>
+        </g></g>
+      </g>
+    </g>
+  </svg>
+
+  <!-- קונטיינר הרקע — מובייל (פריים 440) -->
+  <svg class="hero__panel hero__panel--m" viewBox="0 0 440 1040" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <clipPath id="heroClipM"><path d="M 52,20 H 388 A 32,32 0 0 1 420,52 V 904 A 32,32 0 0 1 388,936 H 335.0 A 38.28,38.28 0 0 0 298.63,962.35 A 82.6,82.6 0 0 1 141.65,962.35 A 38.28,38.28 0 0 0 105.28,936 H 52 A 32,32 0 0 1 20,904 V 52 A 32,32 0 0 1 52,20 Z"/></clipPath>
+      <linearGradient id="heroFadeM" x1="0" y1="20" x2="0" y2="1019.2" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#ECDFCD" stop-opacity="0"/>
+        <stop offset="1" stop-color="#ECDFCD" stop-opacity="1"/>
+      </linearGradient>
+      <filter id="bookShadowM" x="-25%" y="-25%" width="150%" height="150%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#393836" flood-opacity="0.18"/>
+      </filter>
+    </defs>
+    <g clip-path="url(#heroClipM)">
+      <rect x="20" y="20" width="400" height="999.2" fill="#ECDFCD"/>
+      <image href="./public/assets/hero-bg-2.png" x="20" y="20" width="400" height="999.2"
+             preserveAspectRatio="xMidYMid slice" style="mix-blend-mode:overlay;opacity:.63"/>
+      <image href="./public/assets/hero-bg.jpg" x="20" y="20" width="400" height="999.2"
+             preserveAspectRatio="xMidYMid slice" style="mix-blend-mode:luminosity;opacity:.52"/>
+      <rect x="20" y="20" width="400" height="999.2" fill="url(#heroFadeM)"/>
+      <image class="hero-figure-in" href="./public/assets/chafetz-chaim.png" x="78" y="573" width="285" height="369"
+             preserveAspectRatio="xMidYMid meet" opacity="0.62"/>
+      <g filter="url(#bookShadowM)" transform="translate(220,940) scale(0.9) translate(-220,-940)">
+        <g class="hb" style="--d:1080ms"><g transform="translate(57.2,941.9) rotate(-21.12)"><image href="./public/assets/book-matikut.png" x="-47.8" y="-62.7" width="95.6" height="125.4" preserveAspectRatio="xMidYMax meet"/></g></g>
+        <g class="hb" style="--d:960ms"><g transform="translate(135.7,895.2) rotate(-5.48)"><image href="./public/assets/book-matikut.png" x="-50.4" y="-66.1" width="100.8" height="132.2" preserveAspectRatio="xMidYMax meet"/></g></g>
+        <g class="hb" style="--d:820ms"><g transform="translate(225.07,873)"><image href="./public/assets/book-matikut.png" x="-54" y="-71" width="108" height="142" preserveAspectRatio="xMidYMax meet"/></g></g>
+        <g class="hb" style="--d:960ms"><g transform="translate(319.4,889.1) rotate(6.2)"><image href="./public/assets/book-noar.png" x="-50.4" y="-66.1" width="100.8" height="132.2" preserveAspectRatio="xMidYMax meet"/></g></g>
+        <g class="hb" style="--d:1080ms"><g transform="translate(422.9,909.2) rotate(17.13)"><image href="./public/assets/book-matikut.png" x="-47.8" y="-62.7" width="95.6" height="125.4" preserveAspectRatio="xMidYMax meet"/></g></g>
+      </g>
+    </g>
+  </svg>
+
+  <h1 class="hero__title"><span class="accent">מתיקות</span> של תורה, שמירת הלשון וחיזוק יומיומי</h1>
+
+  <div class="hero__lede">
+    <p>באתר מתיקות תמצאו במקום אחד ספרי חפץ חיים, חוברות חשבון נפש, שיעורי תורה מוקלטים ועלונים להורדה בחינם, לחיזוק בעבודת המידות, שמירת הלשון וקירוב הלב לעבודת ה’.</p>
+    <p>כאן אפשר להתחבר לתוכן תורני מרגש ונגיש, לרכוש את הספרים והחוברות, ולהכניס עוד אור ומתיקות לבית, לשולחן השבת וליום־יום.</p>
+  </div>
+
+  <div class="hero__cta">
+    <button class="btn btn--ghost" type="button">
+      <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="btn__label">לשיעורי תורה</span>
+    </button>
+    <button class="btn btn--solid" type="button">
+      <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="btn__label">לרכישת הספרים</span>
+    </button>
+  </div>
+
+  <div class="hero__badge">
+    <svg viewBox="0 0 236 236">
+      <defs>
+        <path id="badgeArc" d="M 40.95,146.05 A 82,82 0 1 1 195.05,146.05"/>
+      </defs>
+      <circle cx="118" cy="118" r="123.94" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+      <circle cx="118" cy="118" r="117.94" fill="#DACEC1"/>
+      <text class="badge__arc">
+        <textPath href="#badgeArc" startOffset="50%" text-anchor="middle" side="left">”נצור לשונך מרע ושפתך מדבר מרמה“</textPath>
+      </text>
+      <image href="./public/assets/logo.svg" x="73" y="102.7" width="90" height="30.53"/>
+      <g class="badge__cta" role="button" tabindex="0" aria-label="גלול למטה">
+      <circle cx="118" cy="189.34" r="21.32" fill="#C16802"/>
+      <g transform="translate(118,189.34) rotate(-90)">
+        <path d="M2.28 -4.43C2.28 -3.96 1.81 -3.26 1.35 -2.67C0.74 -1.91 0.02 -1.25 -0.8 -0.75C-1.42 -0.37 -2.18 -0.005 -2.78 -0.005M-2.78 -0.005C-2.18 -0.005 -1.42 0.36 -0.8 0.74C0.02 1.25 0.74 1.91 1.35 2.67C1.81 3.26 2.28 3.96 2.28 4.43M-2.78 -0.005L5.44 -0.005"
+              stroke="#ECDFCD" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ רשימת הספרים ============ -->
+<section class="books-section">
+
+  <article class="book-row">
+    <div class="book-row__content">
+      <div class="book-row__aside">
+        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <div class="book-row__buy">
+          <p class="book-row__price">65 ש”ח</p>
+          <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
+          <button class="btn btn--ghost" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לרכישת הספר בקובץ PDF</span></button>
+        </div>
+      </div>
+      <div class="book-row__text">
+        <h2 class="book-row__title"><span class="accent">מתיקות</span>החפץ חיים</h2>
+        <p class="book-row__desc">מתיקות - הזהירות מלשון הרע, הוא ספר מעשי וברור ללימוד הלכות לשון הרע, המבוסס על פסקי ה"חפץ חיים" ופסקי גדולי זמננו, בליווי דוגמאות מעשיות מחיי היום־יום. הספר מחולק לקטעים קצרים ונגישים, המתאימים ללימוד סביב שולחן שבת או בארוחה משפחתית, ומעניק לכל המשפחה דרך נעימה וחווייתית לעשות שינוי אמיתי ולחוש את מתיקות שמירת הלשון.</p>
+      </div>
+    </div>
+    <img class="book-row__cover" src="./public/assets/book-matikut.png" alt="ספר מתיקות">
+  </article>
+
+  <article class="book-row">
+    <img class="book-row__cover" src="./public/assets/book-noar.png" alt="מתיקות לבני נוער">
+    <div class="book-row__content">
+      <div class="book-row__aside">
+        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <div class="book-row__buy">
+          <p class="book-row__price">65 ש”ח</p>
+          <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
+          <button class="btn btn--ghost" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לרכישת הספר בקובץ PDF</span></button>
+        </div>
+      </div>
+      <div class="book-row__text book-row__text--narrow">
+        <h2 class="book-row__title"><span class="accent">מתיקות</span>לבני נוער</h2>
+        <p class="book-row__desc">מתיקות לנוער הוא ספרו רב המכר של הרב ישראל שמש שליט"א במהדורה מיוחדת, מנוקדת ומשולבת באיורי קומיקס מרהיבים. הספר מגיש את הלכות שמירת הלשון בשפה חיה, משובבת ונגישה, בליווי סיפורים, המחשות ועשרות ציורים מאירי עיניים, כדי להטמיע בלב הנוער את הזהירות מלשון הרע בדרך נעימה, ברורה ומרתקת.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="book-row">
+    <div class="book-row__content">
+      <div class="book-row__aside">
+        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <div class="book-row__buy">
+          <p class="book-row__price">65 ש”ח</p>
+          <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
+          <button class="btn btn--ghost" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לרכישת הספר בקובץ PDF</span></button>
+        </div>
+      </div>
+      <div class="book-row__text book-row__text--short">
+        <h2 class="book-row__title"><span class="accent">מתיקות</span>שמירת הלשון</h2>
+        <p class="book-row__desc">ליקוט יומי קצר ומחזק בהלכות שמירת הלשון, מסודר לפי סדר הימים. מתאים ללימוד אישי קבוע או לשיעור משפחתי קצר סביב השולחן.</p>
+      </div>
+    </div>
+    <img class="book-row__cover" src="./public/assets/book-matikut.png" alt="מתיקות שמירת הלשון">
+  </article>
+
+  <article class="book-row">
+    <img class="book-row__cover" src="./public/assets/book-matikut.png" alt="מתיקות המידות">
+    <div class="book-row__content">
+      <div class="book-row__aside">
+        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <div class="book-row__buy">
+          <p class="book-row__price">65 ש”ח</p>
+          <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
+          <button class="btn btn--ghost" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לרכישת הספר בקובץ PDF</span></button>
+        </div>
+      </div>
+      <div class="book-row__text book-row__text--short">
+        <h2 class="book-row__title"><span class="accent">מתיקות</span>עבודת המידות</h2>
+        <p class="book-row__desc">ספר מלווה לעבודה יומיומית על המידות, בשפה בהירה ובקטעים קצרים. משלב הדרכה מעשית עם סיפורים ומקורות מתורתו של החפץ חיים.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="book-row book-row--framed">
+    <div class="book-row__bg"><img src="./public/assets/texture-color.jpg" alt=""><div class="fade"></div></div>
+    <div class="book-row__content">
+      <div class="book-row__aside">
+        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <div class="book-row__buy">
+          <p class="book-row__price">65 ש”ח</p>
+          <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
+          <button class="btn btn--ghost" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">להורדת החוברת בקובץ PDF</span></button>
+        </div>
+      </div>
+      <div class="book-row__text book-row__text--short">
+        <h2 class="book-row__title"><span class="accent">חוברת</span>חשבון נפש</h2>
+        <p class="book-row__desc">חוברת מעשית לחשבון נפש יומי, בנויה כטבלה נוחה למעקב אישי לאורך החודש. כלי פשוט שעוזר להפוך כוונות טובות להרגל קבוע.</p>
+      </div>
+    </div>
+    <img class="book-row__cover" src="./public/assets/book-matikut.png" alt="חוברת חשבון נפש">
+  </article>
+
+</section>
+
+<!-- ============ עלונים להורדה ============ -->
+<section class="section leaflets">
+  <div class="section__head">
+    <button class="btn btn--solid" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד העלונים המלא</span></button>
+    <h2 class="section__title"><span class="accent">עלונים </span>להורדה</h2>
+  </div>
+
+  <div class="tabs">
+    <button type="button" class="is-active">כל העלונים</button>
+    <button type="button">פרשת שבוע</button>
+    <button type="button">מועדים וחגים</button>
+  </div>
+
+  <div class="cards">
+    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.png" alt="עלון פרשת השבוע"></div><p class="card__name">עלון פרשת השבוע</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
+    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.png" alt="עלון שמירת הלשון"></div><p class="card__name">עלון שמירת הלשון</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
+    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.png" alt="חוברת חשבון נפש"></div><p class="card__name">חוברת חשבון נפש</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
+    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.png" alt="עלון לימי בין המצרים"></div><p class="card__name">עלון לימי בין המצרים</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
+    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.png" alt="עלון לחגי תשרי"></div><p class="card__name">עלון לחגי תשרי</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
+  </div>
+
+  <div class="carousel-nav">
+    <button class="prev" type="button" aria-label="הקודם"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="next" type="button" aria-label="הבא"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+
+  <div class="section__cta">
+    <button class="btn btn--solid" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד העלונים המלא</span></button>
+  </div>
+</section>
+
+<!-- ============ אודות ============ -->
+<section class="about" id="about">
+  <h2 class="about__title">אודות עמותת <span class="accent">מתיקות</span></h2>
+  <p class="about__body"><span class="lead">עמותת <b>מתיקות</b> הוקמה מת</span>וך רצון להנגיש לכל בית את אור תורתו של החפץ חיים ואת מתיקות שמירת הלשון. העמותה מרכזת במקום אחד ספרים, חוברות, עלונים ושיעורי תורה מוקלטים, במטרה לחזק את הזהירות בדיבור, עבודת המידות וקירוב הלב לעבודת ה’. מתוך שפה תורנית, בהירה ונגישה, מתיקות מבקשת לאפשר לכל יהודי להתחבר ללימוד מעשי ומחזק, ולהכניס אל היום־יום עוד קדושה, מודעות ומתיקות של תורה.</p>
+  <dl class="about__stats">
+    <div class="about__stat"><dt>120</dt><dd>עלונים שהופצו</dd></div>
+    <div class="about__stat"><dt>2,400</dt><dd>ספרים שנמכרו</dd></div>
+    <div class="about__stat"><dt>85</dt><dd>שיעורים מוקלטים</dd></div>
+    <div class="about__stat"><dt>12</dt><dd>שנות פעילות</dd></div>
+  </dl>
+</section>
+
+<!-- ============ שיעורי תורה להאזנה ============ -->
+<section class="section lessons">
+  <div class="section__head">
+    <button class="btn btn--solid" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד השיעורים המלא</span></button>
+    <h2 class="section__title"><span class="accent">שיעורי תורה </span>להאזנה</h2>
+  </div>
+
+  <div class="lesson-cards" id="lessonCards"></div>
+
+  <div class="carousel-nav">
+    <button class="prev" type="button" aria-label="הקודם"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="next" type="button" aria-label="הבא"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+
+  <div class="section__cta">
+    <button class="btn btn--solid" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד השיעורים המלא</span></button>
+  </div>
+</section>
+
+<!-- ============ פותחן הבקבוקים לשבת ============ -->
+<section class="opener">
+  <div class="opener__bg">
+    <div class="tint"></div>
+    <div class="tex"><img src="./public/assets/texture-color.jpg" alt=""><div class="wash"></div></div>
+  </div>
+
+  <h2 class="opener__title"><span class="accent">פותחן הבקבוקים </span>לשבת קודש</h2>
+
+  <div class="opener__row">
+    <div class="opener__buy">
+      <p class="opener__price">35 ש”ח</p>
+      <button class="btn btn--dark" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים נוספים ורכישת הפותחן</span></button>
+    </div>
+    <div class="opener__text">
+      <p>הדרך הנוחה, הקלה והבטוחה לפתיחת בקבוקים לכבוד שבת. פותחן ייעודי וחדשני המסייע בפתיחת פקקי בקבוקים בצורה מסודרת ופשוטה, ומעניק מענה שימושי לבית היהודי סביב ההכנות לשבת ולסעודות השבת.</p>
+      <p>רוצים להכיר את הפותחן ולרכוש אותו לבית?</p>
+    </div>
+  </div>
+
+  <img class="opener__photo" src="./public/assets/opener-new.png" alt="פותחן הבקבוקים לשבת">
+</section>
+
+<!-- ============ פוטר (כולל "צרו איתנו קשר" כחלק מהתבנית המשותפת) ============ -->
+<div class="footer-shell">
+<section class="contact">
+  <div class="contact__inner">
+    <h2 class="contact__title">צרו איתנו קשר</h2>
+    <form class="contact__form">
+      <button class="contact__send" type="submit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ECDFCD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8L16 16"/><path d="M16 8h-8v8"/></svg>
+        <span>שליחה</span>
+      </button>
+      <input class="contact__field" type="tel" name="phone" placeholder="טלפון" dir="rtl">
+      <input class="contact__field" type="email" name="email" placeholder="אימייל" dir="rtl">
+      <input class="contact__field" type="text" name="name" placeholder="שם" dir="rtl">
+    </form>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer__bg"><img src="./public/assets/Footer-bg.png" alt=""></div>
+
+  <img class="footer__figure" src="./public/assets/chafetz-footer.png" alt="" aria-hidden="true">
+
+  <div class="footer__content">
+    <div class="footer__brand">
+      <img src="./public/assets/logo.svg" alt="מתיקות">
+      <h3>דרכי יצירת קשר</h3>
+      <p>+1-XX-XXX-8800 | +1-XX-XX-6079<br>info@neshamah.com</p>
+    </div>
+
+    <div class="footer__cols" style="flex-direction:row-reverse">
+      <div class="footer__col footer__col--legal">
+        <h3>משפטי</h3>
+        <ul>
+          <li><a href="#">הצהרת נגישות</a></li>
+          <li><a href="#">מדיניות פרטיות</a></li>
+          <li><a href="#">תקנון אתר</a></li>
+        </ul>
+      </div>
+      <div class="footer__col footer__col--nav">
+        <h3>ניווט</h3>
+        <ul>
+          <li><a href="index.html">דף הבית</a></li>
+          <li><a href="#about">אודות</a></li>
+          <li><a href="shop.html">החנות</a></li>
+          <li><a href="leaflets.html">עלונים להורדה</a></li>
+          <li><a href="opener.html">פותחן בקבוקים לשבת</a></li>
+          <li><a href="lessons.html">שיעורי תורה</a></li>
+          <li><a href="contact.html">צרו קשר</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__rules"><span></span><span></span></div>
+</footer>
+
+  <div class="footer__legal">
+    <span>© כל הזכויות שמורות לעמותת מתיקות</span>
+    <span>עיצוב האתר - עדן ג’רמון | פיתוח האתר - שרה וייצמן</span>
+  </div>
+</div><!-- /.footer-shell -->
+
+<script src="./public/data/lessons-data.js"></script>
+<script>
+document.documentElement.classList.add('js');
+
+/* ---- כרטיסי השיעורים (תצוגה מקדימה בעמוד הבית — 5 השיעורים האחרונים, עם נגן אמיתי) ---- */
+(function(){
+  var host = document.getElementById('lessonCards');
+  if(!host) return;
+  var all = window.LESSONS_DATA || [];
+  var data = all.slice(-5).reverse(); /* השיעורים האחרונים, החדש ביותר ראשון */
+  var seed = 11;
+  function rnd(){ seed = (seed*9301+49297) % 233280; return seed/233280; }
+  var dl = '<svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
+
+  host.innerHTML = data.map(function(d){
+    var bars = '';
+    for(var i=0;i<58;i++){
+      bars += '<i style="height:'+(14+Math.round(rnd()*86))+'%"></i>';
+    }
+    return '<article class="lesson">'+
+      '<div class="lesson__head">'+
+        '<div class="lesson__video">'+
+          '<img class="lesson__like" src="./public/assets/icon-heart.svg" alt="הוספה למועדפים">'+
+          '<img src="./public/assets/icon-youtube.svg" alt="נגן וידאו">'+
+        '</div>'+
+        '<p class="lesson__name">'+d.title+'</p>'+
+      '</div>'+
+      '<div class="lesson__player">'+
+        '<audio class="lesson__audio" src="'+d.file+'" preload="metadata"></audio>'+
+        '<img class="lesson__play" src="./public/assets/icon-play.svg" alt="נגן">'+
+        '<span class="lesson__time">--:--</span>'+
+        '<span class="lesson__wave">'+bars+'</span>'+
+      '</div>'+
+      '<a class="lesson__dl" href="'+d.file+'" download>'+dl+'<span>הורדת קובץ MP3</span></a>'+
+    '</article>';
+  }).join('');
+})();
+
+/* ---- חשיפת טקסט האודות בגלילה ---- */
+(function(){
+  var body = document.querySelector('.about__body');
+  if(!body) return;
+
+  Array.prototype.slice.call(body.childNodes).forEach(function(node){
+    if(node.nodeType !== 3) return;
+    var frag = document.createDocumentFragment();
+    node.textContent.split(/(\s+)/).forEach(function(tok){
+      if(!tok) return;
+      if(/^\s+$/.test(tok)){ frag.appendChild(document.createTextNode(tok)); return; }
+      var wd = document.createElement('span');
+      wd.className = 'wd';
+      Array.prototype.forEach.call(tok, function(ch){
+        var l = document.createElement('span');
+        l.className = 'l';
+        l.textContent = ch;
+        wd.appendChild(l);
+      });
+      frag.appendChild(wd);
+    });
+    node.parentNode.replaceChild(frag, node);
+  });
+
+  var letters = body.querySelectorAll('.l');
+  if(!letters.length) return;
+
+  var N = letters.length, RAMP = 22, EASE = 0.075;
+  var target = new Float32Array(N), state = new Float32Array(N), running = false;
+
+  function smooth(x){ return x*x*(3-2*x); }
+
+  function measure(){
+    var r = body.getBoundingClientRect(), vh = window.innerHeight;
+    /* מוגבלים לגובה אפקטיבי (עד 1.2 מגובה המסך) בנוסחה — כדי שהפסקה
+       הארוכה בהרבה שורות במובייל (עטיפת טקסט צרה) לא תנפח את המכנה
+       ותשאיר אותיות תקועות באמצע, גם אחרי שהן כבר בתצוגה. בדסקטופ,
+       שבו הפסקה קצרה יותר מ-1.2 מהמסך ממילא, זה בדיוק אותה נוסחה
+       כמו קודם — אין שינוי בהתנהגות שם */
+    var effH = Math.min(r.height, vh * 1.2);
+    var p = (vh - r.top) / (vh*0.55 + effH*0.5);
+    p = Math.max(0, Math.min(1, p));
+    var head = p * (N + RAMP);
+    for(var i=0;i<N;i++){
+      var t = (head - i) / RAMP;
+      target[i] = t <= 0 ? 0 : t >= 1 ? 1 : smooth(t);
+    }
+    if(!running){ running = true; requestAnimationFrame(tick); }
+  }
+
+  function tick(){
+    var moving = false;
+    for(var i=0;i<N;i++){
+      var d = target[i] - state[i];
+      if(Math.abs(d) < 0.0015){
+        if(state[i] !== target[i]){
+          state[i] = target[i];
+          letters[i].style.setProperty('--t', target[i].toFixed(3));
+        }
+        continue;
+      }
+      moving = true;
+      state[i] += d * (EASE + (i % 5) * 0.006);
+      letters[i].style.setProperty('--t', state[i].toFixed(3));
+    }
+    if(moving){ requestAnimationFrame(tick); } else { running = false; }
+  }
+
+  var queued = false;
+  function onScroll(){
+    if(queued) return;
+    queued = true;
+    requestAnimationFrame(function(){ measure(); queued = false; });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  measure();
+})();
+
+/* ---- ספירת המונים ---- */
+(function(){
+  var stats = document.querySelectorAll('.about__stat dt');
+  if(!stats.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fmt = new Intl.NumberFormat('he-IL');
+
+  stats.forEach(function(el){
+    el.dataset.target = el.textContent.trim();
+    if(!reduce) el.textContent = '0';
+  });
+  if(reduce) return;
+
+  function run(el){
+    var target = parseFloat(el.dataset.target.replace(/[^\d.]/g,'')) || 0;
+    var suffix = el.dataset.target.replace(/[\d.,]/g,'');
+    var dur = 1600, t0 = null;
+    function step(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt.format(Math.round(target * eased)) + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* סף זהה למערכת החשיפה הראשית (.18 + שוליים) —
+     סף 0.6 הקודם היה מחמיר בהרבה מהאנימציית-כניסה של האלמנט המכיל,
+     כך שהמספרים כבר הופיעו גלויים (אחרי ה-fade-in) הרבה לפני שהספירה בכלל התחילה */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      run(e.target);
+      io.unobserve(e.target);
+    });
+  }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+
+  stats.forEach(function(el){ io.observe(el); });
+})();
+
+/* ============================================================
+   שכבת התנועה והאינטראקציות
+   ============================================================ */
+(function(){
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. כניסת ההירו ---------- */
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){ document.documentElement.classList.add('loaded'); });
+  });
+
+  /* ---------- 1ב. פרלקס עדין + ריחוף: דמות החפץ חיים והספרים בהירו ---------- */
+  (function(){
+    var figs = Array.prototype.slice.call(document.querySelectorAll('.hero-figure-in'));
+    var books = Array.prototype.slice.call(document.querySelectorAll('.hb'));
+    if((!figs.length && !books.length) || REDUCED) return;
+
+    var items = [];
+    figs.forEach(function(el){
+      items.push({el:el, amp:0.045, cur:0, target:0, floatAmp:4, floatSpeed:0.00045, phase:0});
+    });
+    books.forEach(function(el, i){
+      items.push({el:el, amp:0.065, cur:0, target:0, floatAmp:3, floatSpeed:0.0006, phase:i*1.1});
+    });
+
+    var heroEl = document.querySelector('.hero');
+    if(!heroEl) return;
+
+    function measure(){
+      var r = heroEl.getBoundingClientRect();
+      return (window.innerHeight/2 - (r.top + r.height/2));
+    }
+
+    /* מתחילים לכתוב transform רק אחרי שאנימציית הכניסה (הספרים "נפרשׂים") הסתיימה,
+       כדי לא להתנגש איתה — לפני זה ה-CSS שולט לבד */
+    var started = false;
+    setTimeout(function(){ started = true; }, 1700);
+
+    function tick(ts){
+      if(started){
+        var raw = measure();
+        items.forEach(function(o){
+          o.target = raw * o.amp;
+          o.cur += (o.target - o.cur) * 0.07;
+          var floatOff = Math.sin((ts||0) * o.floatSpeed + o.phase) * o.floatAmp;
+          o.el.style.transform = 'translateY(' + (o.cur + floatOff).toFixed(2) + 'px)';
+        });
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---------- 2. פיצול כותרות למילים ---------- */
+  var titleSel = '.section__title, .about__title, .book-row__title, .opener__title, .contact__title';
+  document.querySelectorAll(titleSel).forEach(function(el){
+    var i = 0;
+    function walk(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if(n.nodeType === 1){ walk(n); return; }
+        if(n.nodeType !== 3 || !n.textContent.trim()) return;
+        var frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function(tok){
+          if(!tok) return;
+          if(/^\s+$/.test(tok)){ frag.appendChild(document.createTextNode(tok)); return; }
+          var w = document.createElement('span');
+          w.className = 'tw';
+          var inner = document.createElement('i');
+          inner.textContent = tok;
+          inner.style.setProperty('--d', (i++ * 90) + 'ms');
+          w.appendChild(inner);
+          frag.appendChild(w);
+        });
+        n.parentNode.replaceChild(frag, n);
+      });
+    }
+    walk(el);
+  });
+
+  /* ---------- 3. סימון אלמנטים לחשיפה ---------- */
+  function tag(sel, kind, step){
+    document.querySelectorAll(sel).forEach(function(el, i){
+      if(el.hasAttribute('data-reveal')) return;
+      el.setAttribute('data-reveal', kind || '');
+      if(step) el.style.setProperty('--d', (i * step) + 'ms');
+    });
+  }
+  tag('.section__title, .about__title, .opener__title, .contact__title');
+  tag('.section__head .btn, .section__cta');
+  tag('.tabs');
+  tag('.book-row__text');
+  tag('.book-row__buy');
+  tag('.carousel-nav');
+  tag('.about__stat', '', 110);
+  tag('.opener__row');
+  tag('.contact__form');
+  document.querySelectorAll('.cards .card, .lesson-cards .lesson').forEach(function(el,i){
+    el.setAttribute('data-reveal','');
+    el.style.setProperty('--d', (i % 5) * 110 + 'ms');
+  });
+  document.querySelectorAll('.book-row').forEach(function(row, i){
+    var cover = row.querySelector('.book-row__cover');
+    if(cover) cover.setAttribute('data-reveal', i % 2 ? 'left' : 'right');
+  });
+
+  /* ---------- 4. צופה חשיפה ---------- */
+  var revealIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      e.target.classList.toggle('in', e.isIntersecting);
+    });
+  }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ revealIO.observe(el); });
+
+  /* כותרות: מפעיל את גל המילים בכל כניסה ויציאה מהתצוגה */
+  var twIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      e.target.querySelectorAll('.tw').forEach(function(w){ w.classList.toggle('in', e.isIntersecting); });
+    });
+  }, {threshold:.25});
+  document.querySelectorAll(titleSel).forEach(function(el){ twIO.observe(el); });
+
+  /* ---------- 5. פס התקדמות + הדר נדבק ---------- */
+  var bar = document.querySelector('.progress i');
+  var hero = document.querySelector('.hero');
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      if(bar) bar.style.setProperty('--p', (h > 0 ? (window.scrollY / h) * 100 : 0) + '%');
+      document.body.classList.toggle('stuck', window.scrollY > (hero ? hero.offsetHeight * 0.6 : 400));
+      parallax();
+      ticking = false;
+    });
+  }
+
+  /* ---------- 6. פרלקסה עדינה (עם ריכוך/דיליי אלגנטי) ---------- */
+  var pxItems = [];
+  function collectParallax(){
+    pxItems = [
+      {el: document.querySelector('.opener__photo'), amp: 0.065, base: 'rotate(0deg) scale(1.02)', cur:0, target:0, floatAmp:6, floatSpeed:0.0006},
+      {el: document.querySelector('.footer__figure'), amp: 0.03, base: '', cur:0, target:0, floatAmp:0, floatSpeed:0}
+    ].filter(function(o){ return o.el; });
+  }
+  collectParallax();
+  function parallax(){
+    if(REDUCED) return;
+    var vh = window.innerHeight;
+    pxItems.forEach(function(o){
+      var r = o.el.getBoundingClientRect();
+      if(r.bottom < -200 || r.top > vh + 200) return;
+      var center = r.top + r.height / 2;
+      var off = (center - vh / 2) * o.amp;
+      /* כיוון הפוך מהמקובל (לא -off אלא off) לפי בקשה מפורשת */
+      o.target = off;
+    });
+    startPxLoop();
+  }
+  /* לולאת ריכוך: התמונה "רודפת" אחרי היעד בעדינות במקום לקפוץ אליו מיידית —
+     זה מה שיוצר את תחושת הדיליי האלגנטית. חובה לשמר את ה-base (rotate/scale)
+     בכל עדכון, אחרת הוא נדרס. */
+  var pxLoopRunning = false;
+  function startPxLoop(){
+    if(pxLoopRunning) return;
+    pxLoopRunning = true;
+    requestAnimationFrame(pxTick);
+  }
+  function pxTick(ts){
+    var stillMoving = false;
+    var hasFloat = false;
+    pxItems.forEach(function(o){
+      var d = o.target - o.cur;
+      if(Math.abs(d) > 0.05){
+        o.cur += d * 0.06;
+        stillMoving = true;
+      } else {
+        o.cur = o.target;
+      }
+      /* ריחוף עדין מתמיד — לא תלוי בגלילה, רק בזמן, כדי שהתמונה תרגיש חיה גם במנוחה */
+      var floatOff = 0;
+      if(o.floatAmp){ hasFloat = true; floatOff = Math.sin((ts || 0) * o.floatSpeed) * o.floatAmp; }
+      o.el.style.transform = 'translateY(' + (o.cur + floatOff).toFixed(1) + 'px) ' + o.base;
+    });
+    if(stillMoving || (hasFloat && !REDUCED)){ requestAnimationFrame(pxTick); } else { pxLoopRunning = false; }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---------- 7. כפתורים מגנטיים ---------- */
+  if(!REDUCED && window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.btn').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+        var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        btn.style.transform = 'translate(' + (dx * 4).toFixed(1) + 'px,' + (dy * 3).toFixed(1) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.transform = ''; });
+    });
+  }
+
+  /* ---------- 7.5 אישור לחיצה על כפתורים: החץ מסתובב והופך לרגע ל-וי ---------- */
+  document.querySelectorAll('.btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(btn.classList.contains('is-sent')) return;
+      btn.classList.add('is-sent');
+      setTimeout(function(){ btn.classList.remove('is-sent'); }, 900);
+    });
+  });
+
+  /* ---------- 8. מועדפים ---------- */
+  document.querySelectorAll('.book-row__like, .lesson__like').forEach(function(el){
+    el.addEventListener('click', function(){
+      el.classList.toggle('is-fav');
+      el.classList.remove('pop');
+      void el.offsetWidth;
+      el.classList.add('pop');
+    });
+  });
+
+  /* ---------- 9. טאבים עם גלולה נעה ---------- */
+  document.querySelectorAll('.tabs').forEach(function(tabs){
+    var pill = document.createElement('span');
+    pill.className = 'tabs__pill';
+    tabs.insertBefore(pill, tabs.firstChild);
+    var btns = tabs.querySelectorAll('button');
+    function move(btn){
+      pill.style.width = btn.offsetWidth + 'px';
+      pill.style.transform = 'translateX(' + (btn.offsetLeft - tabs.clientLeft) + 'px)';
+      pill.style.height = btn.offsetHeight + 'px';
+      pill.style.top = btn.offsetTop + 'px';
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        btns.forEach(function(x){ x.classList.remove('is-active'); });
+        b.classList.add('is-active');
+        move(b);
+      });
+    });
+    var active = tabs.querySelector('.is-active') || btns[0];
+    if(active){ requestAnimationFrame(function(){ move(active); }); }
+    window.addEventListener('resize', function(){
+      var a = tabs.querySelector('.is-active');
+      if(a) move(a);
+    });
+  });
+
+  /* ---------- 10. קרוסלות ---------- */
+  document.querySelectorAll('.leaflets, .lessons').forEach(function(sec){
+    var track = sec.querySelector('.cards, .lesson-cards');
+    var prev = sec.querySelector('.carousel-nav .prev');
+    var next = sec.querySelector('.carousel-nav .next');
+    if(!track || !prev || !next) return;
+
+    function step(){
+      var first = track.firstElementChild;
+      return first ? first.offsetWidth + 15 : 300;
+    }
+    function sync(){
+      var max = track.scrollWidth - track.clientWidth - 2;
+      var canScroll = max > 4;
+      prev.disabled = !canScroll || track.scrollLeft <= 2;
+      next.disabled = !canScroll || track.scrollLeft >= max;
+    }
+    /* ב-RTL הגלילה שלילית — החץ הימני מקדם אחורה */
+    prev.addEventListener('click', function(){ track.scrollLeft += step(); });
+    next.addEventListener('click', function(){ track.scrollLeft -= step(); });
+    track.addEventListener('scroll', sync, {passive:true});
+    window.addEventListener('resize', sync);
+    sync();
+  });
+
+  /* ---------- 11. נגן האודיו ---------- */
+  /* נגן שיעורים אמיתי — מבוסס על אלמנט <audio> אמיתי לכל שיעור (לא סימולציה) */
+  function fmtTime(sec){
+    if(!isFinite(sec) || sec < 0) return '--:--';
+    var m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    if(s === 60){ m++; s = 0; }
+    return m + ':' + String(s).padStart(2, '0');
+  }
+  var allLessonAudios = Array.prototype.slice.call(document.querySelectorAll('.lesson__audio'));
+  document.querySelectorAll('.lesson__player').forEach(function(player){
+    var play = player.querySelector('.lesson__play');
+    var bars = player.querySelectorAll('.lesson__wave i');
+    var audio = player.querySelector('.lesson__audio');
+    var timeEl = player.querySelector('.lesson__time');
+    if(!play || !bars.length || !audio) return;
+
+    function paint(){
+      var ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+      var pos = Math.round(ratio * bars.length);
+      bars.forEach(function(b, i){ b.classList.toggle('played', i < pos); });
+    }
+    audio.addEventListener('loadedmetadata', function(){
+      if(!player.classList.contains('is-playing')) timeEl.textContent = fmtTime(audio.duration);
+    });
+    audio.addEventListener('timeupdate', paint);
+    audio.addEventListener('play', function(){
+      player.classList.add('is-playing');
+      play.style.transform = 'scale(.92)';
+    });
+    audio.addEventListener('pause', function(){
+      player.classList.remove('is-playing');
+      play.style.transform = '';
+      timeEl.textContent = fmtTime(audio.duration);
+    });
+    audio.addEventListener('ended', function(){
+      player.classList.remove('is-playing');
+      play.style.transform = '';
+      timeEl.textContent = fmtTime(audio.duration);
+      paint();
+    });
+
+    play.addEventListener('click', function(){
+      if(audio.paused){
+        allLessonAudios.forEach(function(a){ if(a !== audio && !a.paused) a.pause(); });
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+    player.querySelector('.lesson__wave').addEventListener('click', function(e){
+      if(!audio.duration) return;
+      var r = this.getBoundingClientRect();
+      var ratio = 1 - (e.clientX - r.left) / r.width;   /* RTL */
+      audio.currentTime = Math.max(0, Math.min(1, ratio)) * audio.duration;
+      paint();
+    });
+  });
+
+  /* ---------- 12. עגלה מגיבה ---------- */
+  var count = document.querySelector('.hi-cart .count');
+  if(count){
+    document.querySelectorAll('.btn--solid').forEach(function(b){
+      if(!/רכישה|לרכישת/.test(b.textContent)) return;
+      b.addEventListener('click', function(){
+        count.textContent = (parseInt(count.textContent, 10) || 0) + 1;
+        count.classList.remove('pop');
+        void count.offsetWidth;
+        count.classList.add('pop');
+      });
+    });
+  }
+
+  /* ---------- 13. תפריט מובייל ---------- */
+  var burger = document.querySelector('.header__burger');
+  var menu = document.getElementById('menu');
+  if(burger && menu){
+    var links = menu.querySelectorAll('a');
+    function openMenu(v){
+      menu.classList.toggle('open', v);
+      menu.setAttribute('aria-hidden', v ? 'false' : 'true');
+      document.body.style.overflow = v ? 'hidden' : '';
+      links.forEach(function(a, i){
+        a.style.transitionDelay = v ? (120 + i * 60) + 'ms' : '0ms';
+      });
+    }
+    burger.addEventListener('click', function(){ openMenu(true); });
+    menu.querySelector('.menu__close').addEventListener('click', function(){ openMenu(false); });
+    links.forEach(function(a){ a.addEventListener('click', function(){ openMenu(false); }); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') openMenu(false); });
+  }
+
+  /* ---------- 14. חץ התג — גלילה למקטע הבא ---------- */
+  var cta = document.querySelector('.badge__cta');
+  var books = document.querySelector('.books-section');
+  if(cta && books){
+    function go(){ books.scrollIntoView({behavior: REDUCED ? 'auto' : 'smooth', block:'start'}); }
+    cta.addEventListener('click', go);
+    cta.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  }
+})();
+</script>
+
+</body>
+</html>
