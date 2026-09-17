@@ -260,6 +260,9 @@ ul{margin:0;padding:0;list-style:none}
 .hi-heart img{width:calc(22 * var(--u));height:calc(18 * var(--u))}
 .hi-user img,.hi-search img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 
+/* תפריט צף תחתון — מוצג רק במובייל (ראו @media 760px), כולל את כל 4 האייקונים */
+.tabbar{display:none}
+
 .header__nav{
   display:flex;
   align-items:center;
@@ -385,7 +388,7 @@ ul{margin:0;padding:0;list-style:none}
 }
 .book-row--framed .book-row__text{width:calc(660 * var(--u))}
 .book-row--framed .book-row__title{font-size:calc(96 * var(--u))}
-.book-row--framed .book-row__cover{width:calc(300 * var(--u));height:calc(394 * var(--u))}
+.book-row--framed .book-row__cover{width:calc(375 * var(--u));height:calc(492 * var(--u))}
 .book-row--framed .book-row__bg{
   position:absolute;
   inset:0;
@@ -414,8 +417,8 @@ ul{margin:0;padding:0;list-style:none}
 .book-row--framed .book-row__cover{
   position:relative;
   z-index:1;
-  margin-top:calc(-72 * var(--u));
-  margin-bottom:calc(-24 * var(--u));
+  margin-top:calc(-130 * var(--u));
+  margin-bottom:calc(-32 * var(--u));
 }
 
 /* ============ מקטע כללי + עלונים ============ */
@@ -1349,6 +1352,34 @@ body.stuck .site-header{
   .header__logo{order:2}
   .header__burger{order:3}
   .hi-heart,.hi-user,.hi-search{display:none}
+
+  /* ---- תפריט צף תחתון (סל/לב/משתמש/חיפוש) — קבוע בתחתית המסך ---- */
+  .tabbar{
+    display:flex;
+    position:fixed;
+    left:50%;
+    bottom:calc(30 * var(--u));
+    transform:translateX(-50%);
+    z-index:55;
+    align-items:center;
+    justify-content:space-between;
+    gap:calc(28 * var(--u));
+    background:var(--on-brand);
+    border-radius:999px;
+    padding:calc(16 * var(--u)) calc(28 * var(--u));
+    box-shadow:0 calc(8 * var(--u)) calc(24 * var(--u)) rgba(57,56,54,.18);
+  }
+  .tabbar .hi-cart{display:flex;align-items:center;gap:calc(6 * var(--u))}
+  .tabbar .hi-cart img{width:calc(20 * var(--u));height:calc(20 * var(--u))}
+  .tabbar .hi-cart .badge{position:relative;width:calc(24 * var(--u));height:calc(24 * var(--u));flex:none}
+  .tabbar .hi-cart .badge .circle{position:absolute;inset:0;border-radius:50%;background:var(--brand)}
+  .tabbar .hi-cart .badge .count{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:var(--on-brand);font-family:'Poppins','Assistant',system-ui,sans-serif;font-weight:300;
+    font-size:calc(14 * var(--u));
+  }
+  .tabbar .hi-heart img{width:calc(24 * var(--u));height:calc(20 * var(--u))}
+  .tabbar .hi-user img,.tabbar .hi-search img{width:calc(20 * var(--u));height:calc(20 * var(--u))}
   .header__logo{width:calc(100.8 * var(--u));height:calc(34.16 * var(--u))}
   .header__burger{
     display:grid;
@@ -1478,14 +1509,14 @@ body.stuck .site-header{
     margin-bottom:0;
   }
   .book-row--framed .book-row__content{border-bottom:0;padding-bottom:0}
-  .book-row--framed .book-row__cover{margin-top:calc(-72 * var(--u))}
+  .book-row--framed .book-row__cover{margin-top:calc(-130 * var(--u))}
   /* בכרטיס הממוסגר (חוברת חשבון נפש) ל-.book-row__content יש position:relative
      משלו (לצורך ה-z-index מעל הרקע), ולכן הוא — לא .book-row — ההורה הממוקם
      שממנו .book-row__like (top:300.58u) נמדד. כאן זה גורם ללב לנחות הרבה יותר
      נמוך (מעל אזור הכפתורים) במקום על תחתית הכריכה. מתקנים ספציפית לגרסה הזו:
-     top החדש = (מרווח עליון 40 + margin-top שלילי של הכריכה 72-) + 300.58 מהכריכה,
-     פחות הגובה של .book-row__content עד לתחילתו (314.58) = 46- */
-  .book-row--framed .book-row__like{top:calc(-46 * var(--u))}
+     top החדש = (מרווח עליון 40 + margin-top שלילי של הכריכה 130-) + 300.58 מהכריכה,
+     פחות הגובה של .book-row__content עד לתחילתו (314.58) = 104- */
+  .book-row--framed .book-row__like{top:calc(-104 * var(--u))}
 
   /* ---- מקטעים כלליים ---- */
   .section{width:calc(400 * var(--u))}
@@ -1744,6 +1775,16 @@ body.stuck .site-header{
      שכולא בתוכו כל z-index פנימי (כולל של ההדר הנדבק) בהקשר-הערמה שלו.
      כתוצאה מכך, סקשנים שאחרי ה-hero ב-DOM (עם isolation/auto רגיל)
      היו מצוירים מעליו ברגע שהוא הפך ל-fixed בגלילה. -->
+<div class="tabbar">
+  <div class="hi-cart">
+    <img src="./public/assets/icon-cart.svg" alt="סל קניות">
+    <span class="badge"><span class="circle"></span><span class="count">0</span></span>
+  </div>
+  <div class="hi-heart"><img src="./public/assets/icon-heart.svg" alt="מועדפים"></div>
+  <div class="hi-user"><img src="./public/assets/icon-user.svg" alt="אזור אישי"></div>
+  <div class="hi-search"><img src="./public/assets/icon-search.svg" alt="חיפוש"></div>
+</div>
+
 <header class="site-header">
   <div class="header__icons">
     <div class="hi-cart">
@@ -1981,7 +2022,7 @@ body.stuck .site-header{
         <p class="book-row__desc">חוברת מעשית לחשבון נפש יומי, בנויה כטבלה נוחה למעקב אישי לאורך החודש. כלי פשוט שעוזר להפוך כוונות טובות להרגל קבוע.</p>
       </div>
     </div>
-    <img class="book-row__cover" src="./public/assets/book-matikut.webp" alt="חוברת חשבון נפש">
+    <img class="book-row__cover" src="./public/assets/פנקס חשבון נפש הדמיה 2.webp" alt="חוברת חשבון נפש">
   </article>
 
 </section>
@@ -2103,9 +2144,9 @@ body.stuck .site-header{
       <div class="footer__col footer__col--legal">
         <h3>משפטי</h3>
         <ul>
-          <li><a href="#">הצהרת נגישות</a></li>
-          <li><a href="#">מדיניות פרטיות</a></li>
-          <li><a href="#">תקנון אתר</a></li>
+          <li><a href="accessibility.html">הצהרת נגישות</a></li>
+          <li><a href="privacy.html">מדיניות פרטיות</a></li>
+          <li><a href="terms.html">תקנון אתר</a></li>
         </ul>
       </div>
       <div class="footer__col footer__col--nav">
