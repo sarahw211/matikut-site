@@ -116,40 +116,53 @@ ul{margin:0;padding:0;list-style:none}
   left:calc(32 * var(--u));
   bottom:calc(32 * var(--u));
   z-index:80;
-  align-items:center;
-  gap:calc(14 * var(--u));
+  flex-direction:column;
+  gap:calc(12 * var(--u));
+  width:calc(260 * var(--u));
   background:var(--on-brand);
-  border-radius:999px;
-  padding:calc(10 * var(--u)) calc(20 * var(--u)) calc(15 * var(--u)) calc(10 * var(--u));
-  box-shadow:0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(57,56,54,.22);
-  max-width:calc(360 * var(--u));
+  border-radius:calc(22 * var(--u));
+  padding:calc(16 * var(--u)) calc(18 * var(--u)) calc(18 * var(--u));
+  box-shadow:0 calc(14 * var(--u)) calc(36 * var(--u)) rgba(57,56,54,.25);
   direction:rtl;
+  user-select:none;
 }
 .miniplayer.is-visible{display:flex}
-.miniplayer__toggle{
-  flex:none;width:calc(40 * var(--u));height:calc(40 * var(--u));
-  border:0;background:none;padding:0;cursor:pointer;position:relative;
+.miniplayer__head{
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:grab;
+  margin:calc(-4 * var(--u)) calc(-4 * var(--u)) 0;
+  padding:calc(4 * var(--u));
 }
-.miniplayer__toggle img{width:100%;height:100%;display:block;position:absolute;inset:0}
-.miniplayer__toggle .miniplayer__icon-pause{opacity:0}
-.miniplayer.is-playing .miniplayer__toggle .miniplayer__icon-play{opacity:0}
-.miniplayer.is-playing .miniplayer__toggle .miniplayer__icon-pause{opacity:1}
-.miniplayer__info{display:flex;flex-direction:column;gap:calc(2 * var(--u));min-width:0}
-.miniplayer__label{font-size:calc(11 * var(--u));color:var(--brand);font-weight:600}
-.miniplayer__title{
-  font-size:calc(14 * var(--u));color:var(--ink);font-weight:600;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(190 * var(--u));
-}
+.miniplayer__head:active{cursor:grabbing}
+.miniplayer__label{font-size:calc(11 * var(--u));color:var(--brand);font-weight:700;letter-spacing:.02em}
 .miniplayer__close{
   flex:none;width:calc(22 * var(--u));height:calc(22 * var(--u));border:0;background:none;
   cursor:pointer;color:var(--ink);opacity:.5;font-size:calc(20 * var(--u));line-height:1;
 }
 .miniplayer__close:hover{opacity:1}
+.miniplayer__title{
+  font-size:calc(16 * var(--u));color:var(--ink);font-weight:700;line-height:1.35;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
 .miniplayer__progress{
-  position:absolute;left:calc(14 * var(--u));right:calc(14 * var(--u));bottom:calc(6 * var(--u));
-  height:3px;background:rgba(57,56,54,.14);border-radius:999px;overflow:hidden;
+  position:relative;height:5px;background:rgba(57,56,54,.14);border-radius:999px;overflow:hidden;cursor:pointer;
 }
 .miniplayer__progress i{display:block;height:100%;width:0%;background:var(--brand);border-radius:999px}
+.miniplayer__controls{display:flex;align-items:center;justify-content:center;gap:calc(16 * var(--u))}
+.miniplayer__btn{
+  flex:none;border:0;background:none;padding:0;cursor:pointer;color:var(--ink);opacity:.7;
+  width:calc(24 * var(--u));height:calc(24 * var(--u));
+}
+.miniplayer__btn svg{width:100%;height:100%;display:block}
+.miniplayer__btn:hover{opacity:1}
+.miniplayer__btn--toggle{
+  position:relative;width:calc(46 * var(--u));height:calc(46 * var(--u));opacity:1;flex:none;
+  border:0;background:none;padding:0;cursor:pointer;
+}
+.miniplayer__btn--toggle img{width:100%;height:100%;display:block;position:absolute;inset:0}
+.miniplayer__btn--toggle .miniplayer__icon-pause{opacity:0}
+.miniplayer.is-playing .miniplayer__btn--toggle .miniplayer__icon-play{opacity:0}
+.miniplayer.is-playing .miniplayer__btn--toggle .miniplayer__icon-pause{opacity:1}
 
 .header__nav{display:flex;align-items:center;gap:calc(32 * var(--u));direction:rtl}
 .header__nav a{font-size:calc(20 * var(--u));line-height:1;color:var(--ink);white-space:nowrap}
@@ -441,9 +454,8 @@ body.stuck .site-header{
     left:50%;
     transform:translateX(-50%);
     bottom:calc(104 * var(--u));
-    max-width:calc(560 * var(--u));
+    width:calc(300 * var(--u));
   }
-  .miniplayer__title{max-width:calc(150 * var(--u))}
 
   .header__burger{display:grid;place-items:center end;width:calc(48 * var(--u));height:calc(28 * var(--u));border:0;background:none;padding:0;cursor:pointer;color:var(--ink)}
   .header__burger svg{width:calc(23 * var(--u));height:calc(16 * var(--u));display:block}
@@ -535,16 +547,27 @@ body.stuck .site-header{
 </div>
 
 <div class="miniplayer" id="miniplayer" aria-live="polite">
-  <button class="miniplayer__toggle" id="miniplayerToggle" type="button" aria-label="נגן או עצור">
-    <img class="miniplayer__icon-play" src="./public/assets/icon-play.svg" alt="">
-    <img class="miniplayer__icon-pause" src="./public/assets/icon-pause.svg" alt="">
-  </button>
-  <div class="miniplayer__info">
+  <div class="miniplayer__head" id="miniplayerDrag">
     <span class="miniplayer__label">מתנגן עכשיו</span>
-    <span class="miniplayer__title" id="miniplayerTitle"></span>
+    <button class="miniplayer__close" id="miniplayerClose" type="button" aria-label="סגירת הנגן">&times;</button>
   </div>
-  <button class="miniplayer__close" id="miniplayerClose" type="button" aria-label="סגירת הנגן">&times;</button>
-  <span class="miniplayer__progress"><i id="miniplayerBar"></i></span>
+  <div class="miniplayer__title" id="miniplayerTitle"></div>
+  <div class="miniplayer__progress"><i id="miniplayerBar"></i></div>
+  <div class="miniplayer__controls">
+    <button class="miniplayer__btn" id="miniplayerRestart" type="button" aria-label="חזרה להתחלה">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+    </button>
+    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 6V2l-5 5 5 5V8c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8Z"/></svg>
+    </button>
+    <button class="miniplayer__btn--toggle" id="miniplayerToggle" type="button" aria-label="נגן או עצור">
+      <img class="miniplayer__icon-play" src="./public/assets/icon-play.svg" alt="">
+      <img class="miniplayer__icon-pause" src="./public/assets/icon-pause.svg" alt="">
+    </button>
+    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות" style="transform:scaleX(-1)">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 6V2l-5 5 5 5V8c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8Z"/></svg>
+    </button>
+  </div>
 </div>
 
 <header class="site-header">
@@ -711,6 +734,11 @@ document.documentElement.classList.add('js');
   var titleEl = document.getElementById('miniplayerTitle');
   var bar = document.getElementById('miniplayerBar');
   var closeBtn = document.getElementById('miniplayerClose');
+  var progressEl = bar ? bar.parentElement : null;
+  var restartBtn = document.getElementById('miniplayerRestart');
+  var backBtn = document.getElementById('miniplayerBack');
+  var fwdBtn = document.getElementById('miniplayerFwd');
+  var dragHandle = document.getElementById('miniplayerDrag');
   var activeAudio = null;
 
   function fileKey(src){ return (src || '').split('/').pop().split('?')[0]; }
@@ -760,6 +788,59 @@ document.documentElement.classList.add('js');
     if(activeAudio) activeAudio.pause();
     hide(); clearSaved(); activeAudio = null;
   });
+  if(restartBtn) restartBtn.addEventListener('click', function(){
+    if(!activeAudio) return;
+    activeAudio.currentTime = 0;
+    paint(); save();
+  });
+  if(backBtn) backBtn.addEventListener('click', function(){
+    if(!activeAudio) return;
+    activeAudio.currentTime = Math.max(0, activeAudio.currentTime - 10);
+    paint(); save();
+  });
+  if(fwdBtn) fwdBtn.addEventListener('click', function(){
+    if(!activeAudio || !activeAudio.duration) return;
+    activeAudio.currentTime = Math.min(activeAudio.duration, activeAudio.currentTime + 10);
+    paint(); save();
+  });
+  if(progressEl) progressEl.addEventListener('click', function(e){
+    if(!activeAudio || !activeAudio.duration) return;
+    var r = this.getBoundingClientRect();
+    var ratio = 1 - (e.clientX - r.left) / r.width; /* RTL */
+    activeAudio.currentTime = Math.max(0, Math.min(1, ratio)) * activeAudio.duration;
+    paint(); save();
+  });
+
+  /* גרירה חופשית עם העכבר/מגע — כדי שאפשר יהיה להזיז את הנגן אם הוא מפריע לתוכן מתחתיו */
+  if(dragHandle){
+    var dragging = false, startX = 0, startY = 0, startLeft = 0, startTop = 0;
+    function beginDrag(point){
+      var r = mp.getBoundingClientRect();
+      startLeft = r.left; startTop = r.top;
+      startX = point.clientX; startY = point.clientY;
+      mp.style.left = r.left + 'px';
+      mp.style.top = r.top + 'px';
+      mp.style.right = 'auto';
+      mp.style.bottom = 'auto';
+      mp.style.transform = 'none';
+      dragging = true;
+    }
+    function moveDrag(point){
+      if(!dragging) return;
+      var dx = point.clientX - startX, dy = point.clientY - startY;
+      var maxLeft = window.innerWidth - mp.offsetWidth;
+      var maxTop = window.innerHeight - mp.offsetHeight;
+      mp.style.left = Math.min(Math.max(0, startLeft + dx), Math.max(0, maxLeft)) + 'px';
+      mp.style.top = Math.min(Math.max(0, startTop + dy), Math.max(0, maxTop)) + 'px';
+    }
+    function endDrag(){ dragging = false; }
+    dragHandle.addEventListener('mousedown', function(e){ e.preventDefault(); beginDrag(e); });
+    window.addEventListener('mousemove', function(e){ if(dragging) moveDrag(e); });
+    window.addEventListener('mouseup', endDrag);
+    dragHandle.addEventListener('touchstart', function(e){ beginDrag(e.touches[0]); }, {passive:true});
+    window.addEventListener('touchmove', function(e){ if(dragging){ moveDrag(e.touches[0]); } }, {passive:true});
+    window.addEventListener('touchend', endDrag);
+  }
 
   /* שחזור השמעה שהחלה בעמוד קודם — אין כאן כרטיסי שיעורים, אז תמיד נוצר עותק שמע פרטי לנגן הצף */
   try{
