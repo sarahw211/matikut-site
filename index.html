@@ -92,8 +92,8 @@ ul{margin:0;padding:0;list-style:none}
   margin:0;
   font-family:var(--font-display);
   font-weight:400;
-  font-size:calc(32 * var(--u));
-  line-height:1.05;
+  font-size:calc(128 * var(--u));
+  line-height:.77;
   text-align:right;
   color:var(--ink);
   z-index:3;
@@ -1582,7 +1582,11 @@ body.stuck .site-header{
     margin-bottom:0;
   }
   .book-row--framed .book-row__content{border-bottom:0;padding-bottom:0}
-  .book-row--framed .book-row__cover{margin-top:calc(-130 * var(--u))}
+  .book-row--framed .book-row__cover{
+    width:calc(66 * var(--u));
+    height:calc(86.5 * var(--u));
+    margin-top:calc(-32 * var(--u));
+  }
   /* בכרטיס הממוסגר (חוברת חשבון נפש) ל-.book-row__content יש position:relative
      משלו (לצורך ה-z-index מעל הרקע), ולכן הוא — לא .book-row — ההורה הממוקם
      שממנו .book-row__like (top:300.58u) נמדד. כאן זה גורם ללב לנחות הרבה יותר
