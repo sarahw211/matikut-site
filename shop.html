@@ -1910,11 +1910,13 @@ body.stuck .site-header{
   <a href="index.html" class="header__logo"><img src="./public/assets/logo.svg" alt="מתיקות" style="width:100%;height:100%"></a>
 </header>
 
-<!-- ============ החנות — עמוד זמני, התוכן ייקבע בהמשך ============ -->
-<section class="placeholder">
-  <h1 class="placeholder__title">החנות</h1>
-  <p class="placeholder__text">העמוד בבנייה — התוכן יתווסף בקרוב.</p>
+<!-- ============ החנות — ארכיון מוצרים, נבנה דינמית מתוך public/data/products-data.js ============ -->
+<section class="section" style="margin-top:calc(190 * var(--u));padding-bottom:calc(20 * var(--u))">
+  <div class="section__head">
+    <h1 class="section__title"><span class="accent">כל</span> המוצרים</h1>
+  </div>
 </section>
+<div class="books-section" id="shopProducts"></div>
 
 <!-- ============ פוטר (כולל "צרו איתנו קשר" כחלק מהתבנית המשותפת) ============ -->
 <div class="footer-shell">
@@ -1977,8 +1979,45 @@ body.stuck .site-header{
   </div>
 </div><!-- /.footer-shell -->
 
+<script src="./public/data/products-data.js"></script>
 <script>
 document.documentElement.classList.add('js');
+
+/* ---- ארכיון המוצרים — נבנה מ-window.PRODUCTS_DATA (public/data/products-data.js) ---- */
+(function(){
+  var host = document.getElementById('shopProducts');
+  if(!host || !window.PRODUCTS_DATA) return;
+  var arrow = '<svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  host.innerHTML = window.PRODUCTS_DATA.map(function(p, i){
+    var textWidthClass = '';
+    var pdfLabel = p.pdfBuy ? 'להורדת החוברת בקובץ PDF' : 'לרכישת הספר בקובץ PDF';
+    var content =
+      '<div class="book-row__content">'+
+        '<div class="book-row__aside">'+
+          '<span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>'+
+          '<div class="book-row__buy">'+
+            '<p class="book-row__price">'+p.price+' ש”ח</p>'+
+            '<a class="btn btn--solid" href="'+p.link+'"><span class="btn__circle">'+arrow+'</span><span class="btn__label">לפרטים ורכישה</span></a>'+
+            '<button class="btn btn--ghost" type="button"><span class="btn__circle">'+arrow+'</span><span class="btn__label">'+pdfLabel+'</span></button>'+
+          '</div>'+
+        '</div>'+
+        '<div class="book-row__text'+textWidthClass+'">'+
+          '<h2 class="book-row__title"><span class="accent">'+p.titleAccent+'</span>'+p.titleRest+'</h2>'+
+          '<p class="book-row__desc">'+p.desc+'</p>'+
+        '</div>'+
+      '</div>';
+    var cover = '<img class="book-row__cover" src="'+p.cover+'" alt="'+p.coverAlt+'">';
+
+    if(p.framed){
+      return '<article class="book-row book-row--framed">'+
+        '<div class="book-row__bg"><img src="./public/assets/texture-color.webp" alt=""><div class="fade"></div></div>'+
+        content + cover +
+      '</article>';
+    }
+    return '<article class="book-row">'+ (i % 2 ? content + cover : cover + content) +'</article>';
+  }).join('');
+})();
 
 /* ---- כרטיסי השיעורים ---- */
 (function(){
