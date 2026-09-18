@@ -475,6 +475,125 @@ ul{margin:0;padding:0;list-style:none}
   margin-bottom:calc(-24 * var(--u));
 }
 
+/* ============ עמוד החנות — רשת כרטיסים, שניים בשורה ============ */
+.shop-grid{
+  width:calc(1667 * var(--u));
+  margin:calc(30 * var(--u)) auto calc(160 * var(--u));
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:calc(64 * var(--u)) calc(56 * var(--u));
+}
+.product-card{
+  display:flex;
+  flex-direction:column;
+  gap:calc(28 * var(--u));
+}
+.product-card__frame{
+  position:relative;
+  isolation:isolate;
+  border-radius:calc(28 * var(--u));
+  overflow:hidden;
+  background:#ECDFCD;
+  aspect-ratio:775/480;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+.product-card__tex{position:absolute;inset:0;z-index:0}
+.product-card__tex img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  mix-blend-mode:plus-darker;
+  opacity:.42;
+}
+.product-card__tex .fade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(236,223,205,.1) 0%, #ECDFCD 100%);
+}
+.product-card__like{
+  position:absolute;
+  z-index:2;
+  top:calc(20 * var(--u));
+  left:calc(20 * var(--u));
+  width:calc(44 * var(--u));
+  height:calc(44 * var(--u));
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(6px);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.product-card__like img{width:calc(18 * var(--u));height:calc(15 * var(--u))}
+.product-card__cover{
+  position:relative;
+  z-index:1;
+  height:90%;
+  width:auto;
+  max-width:78%;
+  object-fit:contain;
+  filter:drop-shadow(0 calc(18 * var(--u)) calc(30 * var(--u)) rgba(57,56,54,.22));
+  transition:transform .5s var(--ease-soft);
+}
+.product-card:hover .product-card__cover{transform:translateY(calc(-6 * var(--u))) scale(1.02)}
+.product-card__text{
+  display:flex;
+  flex-direction:column;
+  gap:calc(10 * var(--u));
+  text-align:right;
+  direction:rtl;
+}
+.product-card__title{
+  font-family:var(--font-display);
+  font-size:calc(40 * var(--u));
+  line-height:.85;
+  color:var(--ink);
+  margin:0;
+}
+.product-card__title .accent{color:var(--brand);display:block}
+.product-card__desc{
+  font-size:calc(17 * var(--u));
+  line-height:1.35;
+  color:rgba(57,56,54,.72);
+  margin:0;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.product-card__row{
+  direction:ltr;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:calc(16 * var(--u));
+}
+.product-card__price{
+  font-family:var(--font-display);
+  font-size:calc(32 * var(--u));
+  line-height:.92;
+  color:var(--ink);
+  margin:0;
+  direction:rtl;
+  flex:none;
+}
+.product-card__cta{display:flex;align-items:center;gap:calc(10 * var(--u));flex:none}
+.product-card__pdf{
+  width:calc(44 * var(--u));
+  height:calc(44 * var(--u));
+  border-radius:50%;
+  border:1px solid var(--ink);
+  background:none;
+  color:var(--ink);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  flex:none;
+  transition:background .35s var(--ease-soft), color .35s var(--ease-soft);
+}
+.product-card__pdf svg{width:calc(18 * var(--u));height:calc(18 * var(--u));transition:transform .35s var(--ease-out)}
+.product-card__pdf:hover{background:var(--ink);color:var(--on-brand)}
+.product-card__pdf:hover svg{transform:translateY(2px)}
+
 /* ============ מקטע כללי + עלונים ============ */
 .section{
   width:calc(1667 * var(--u));
@@ -1223,9 +1342,9 @@ body.stuck .site-header{
 .btn--ghost:hover svg path{stroke:var(--on-brand)}
 
 /* ---- לב מועדפים ---- */
-.book-row__like,.lesson__like{cursor:pointer;transition:transform .35s var(--ease-out), background .35s var(--ease-soft)}
-.book-row__like:hover{transform:scale(1.08);background:#EDE5D6}
-.book-row__like img,.lesson__like{transition:filter .35s var(--ease-soft), transform .35s var(--ease-out)}
+.book-row__like,.lesson__like,.product-card__like{cursor:pointer;transition:transform .35s var(--ease-out), background .35s var(--ease-soft)}
+.book-row__like:hover,.product-card__like:hover{transform:scale(1.08);background:#EDE5D6}
+.book-row__like img,.lesson__like,.product-card__like img{transition:filter .35s var(--ease-soft), transform .35s var(--ease-out)}
 .is-fav img,.lesson__like.is-fav{
   filter:invert(43%) sepia(88%) saturate(1600%) hue-rotate(6deg) brightness(88%);
 }
@@ -1572,6 +1691,34 @@ body.stuck .site-header{
   .book-row--framed .book-row__content{border-bottom:0;padding-bottom:0}
   .book-row--framed .book-row__cover{margin-top:calc(-72 * var(--u))}
 
+  /* ---- רשת המוצרים בחנות — נשארת שניים בשורה גם במובייל ---- */
+  .shop-grid{
+    width:calc(400 * var(--u));
+    margin:calc(24 * var(--u)) auto calc(80 * var(--u));
+    gap:calc(24 * var(--u)) calc(16 * var(--u));
+  }
+  .product-card{gap:calc(12 * var(--u))}
+  .product-card__frame{border-radius:calc(16 * var(--u))}
+  .product-card__like{
+    top:calc(10 * var(--u));
+    left:calc(10 * var(--u));
+    width:calc(28 * var(--u));
+    height:calc(28 * var(--u));
+  }
+  .product-card__like img{width:calc(12 * var(--u));height:calc(10 * var(--u))}
+  .product-card__cover{filter:drop-shadow(0 calc(8 * var(--u)) calc(14 * var(--u)) rgba(57,56,54,.22))}
+  .product-card__text{gap:calc(4 * var(--u))}
+  .product-card__title{font-size:calc(20 * var(--u))}
+  .product-card__desc{display:none}
+  .product-card__row{flex-wrap:wrap;gap:calc(8 * var(--u))}
+  .product-card__price{font-size:calc(16 * var(--u))}
+  .product-card__cta{gap:calc(6 * var(--u));width:100%}
+  .product-card__pdf{width:calc(28 * var(--u));height:calc(28 * var(--u))}
+  .product-card__pdf svg{width:calc(12 * var(--u));height:calc(12 * var(--u))}
+  .product-card__buy{flex:1 0 0;min-width:0}
+  .product-card__buy .btn__label{padding:0 calc(10 * var(--u));font-size:calc(12 * var(--u))}
+  .product-card__buy .btn__circle svg{width:calc(6 * var(--u));height:calc(5.6 * var(--u))}
+
   /* ---- מקטעים כלליים ---- */
   .section{width:calc(400 * var(--u))}
   .section__head{
@@ -1916,7 +2063,7 @@ body.stuck .site-header{
     <h1 class="section__title"><span class="accent">כל</span> המוצרים</h1>
   </div>
 </section>
-<div class="books-section" id="shopProducts"></div>
+<div class="shop-grid" id="shopProducts"></div>
 
 <!-- ============ פוטר (כולל "צרו איתנו קשר" כחלק מהתבנית המשותפת) ============ -->
 <div class="footer-shell">
@@ -1983,39 +2130,34 @@ body.stuck .site-header{
 <script>
 document.documentElement.classList.add('js');
 
-/* ---- ארכיון המוצרים — נבנה מ-window.PRODUCTS_DATA (public/data/products-data.js) ---- */
+/* ---- ארכיון המוצרים — רשת כרטיסים, נבנית מ-window.PRODUCTS_DATA (public/data/products-data.js) ---- */
 (function(){
   var host = document.getElementById('shopProducts');
   if(!host || !window.PRODUCTS_DATA) return;
   var arrow = '<svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
 
   host.innerHTML = window.PRODUCTS_DATA.map(function(p, i){
-    var textWidthClass = '';
     var pdfLabel = p.pdfBuy ? 'להורדת החוברת בקובץ PDF' : 'לרכישת הספר בקובץ PDF';
-    var content =
-      '<div class="book-row__content">'+
-        '<div class="book-row__aside">'+
-          '<span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>'+
-          '<div class="book-row__buy">'+
-            '<p class="book-row__price">'+p.price+' ש”ח</p>'+
-            '<a class="btn btn--solid" href="'+p.link+'"><span class="btn__circle">'+arrow+'</span><span class="btn__label">לפרטים ורכישה</span></a>'+
-            '<button class="btn btn--ghost" type="button"><span class="btn__circle">'+arrow+'</span><span class="btn__label">'+pdfLabel+'</span></button>'+
-          '</div>'+
+    var tex = p.framed ? '<div class="product-card__tex"><img src="./public/assets/texture-color.webp" alt=""><div class="fade"></div></div>' : '';
+    return '<article class="product-card'+(p.framed ? ' product-card--framed' : '')+'" data-reveal="zoom" style="--d:'+((i % 4) * 90)+'ms">'+
+      '<div class="product-card__frame">'+
+        tex+
+        '<span class="product-card__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>'+
+        '<img class="product-card__cover" src="'+p.cover+'" alt="'+p.coverAlt+'">'+
+      '</div>'+
+      '<div class="product-card__text">'+
+        '<h2 class="product-card__title"><span class="accent">'+p.titleAccent+'</span>'+p.titleRest+'</h2>'+
+        '<p class="product-card__desc">'+p.desc+'</p>'+
+      '</div>'+
+      '<div class="product-card__row">'+
+        '<p class="product-card__price">'+p.price+' ש”ח</p>'+
+        '<div class="product-card__cta">'+
+          '<button class="product-card__pdf" type="button" aria-label="'+pdfLabel+'" title="'+pdfLabel+'">'+dlIcon+'</button>'+
+          '<a class="btn btn--solid product-card__buy" href="'+p.link+'"><span class="btn__circle">'+arrow+'</span><span class="btn__label">לפרטים ורכישה</span></a>'+
         '</div>'+
-        '<div class="book-row__text'+textWidthClass+'">'+
-          '<h2 class="book-row__title"><span class="accent">'+p.titleAccent+'</span>'+p.titleRest+'</h2>'+
-          '<p class="book-row__desc">'+p.desc+'</p>'+
-        '</div>'+
-      '</div>';
-    var cover = '<img class="book-row__cover" src="'+p.cover+'" alt="'+p.coverAlt+'">';
-
-    if(p.framed){
-      return '<article class="book-row book-row--framed">'+
-        '<div class="book-row__bg"><img src="./public/assets/texture-color.webp" alt=""><div class="fade"></div></div>'+
-        content + cover +
-      '</article>';
-    }
-    return '<article class="book-row">'+ (i % 2 ? content + cover : cover + content) +'</article>';
+      '</div>'+
+    '</article>';
   }).join('');
 })();
 
@@ -2482,7 +2624,7 @@ document.documentElement.classList.add('js');
   });
 
   /* ---------- 8. מועדפים ---------- */
-  document.querySelectorAll('.book-row__like, .lesson__like').forEach(function(el){
+  document.querySelectorAll('.book-row__like, .lesson__like, .product-card__like').forEach(function(el){
     el.addEventListener('click', function(){
       el.classList.toggle('is-fav');
       el.classList.remove('pop');
