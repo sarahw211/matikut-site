@@ -4,6 +4,37 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>מתיקות — פותחן בקבוקים לשבת</title>
+<meta name="description" content="פותחן בקבוקים ייחודי לשולחן השבת מעמותת מתיקות — מתנה נאה שמשלבת עיצוב ותוכן של חיזוק ותורה.">
+<link rel="canonical" href="https://matikut-site.vercel.app/opener.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="עמותת מתיקות">
+<meta property="og:title" content="מתיקות — פותחן בקבוקים לשבת">
+<meta property="og:description" content="פותחן בקבוקים ייחודי לשולחן השבת מעמותת מתיקות — מתנה נאה שמשלבת עיצוב ותוכן של חיזוק ותורה.">
+<meta property="og:url" content="https://matikut-site.vercel.app/opener.html">
+<meta property="og:image" content="https://matikut-site.vercel.app/public/assets/book-matikut.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "דף הבית",
+      "item": "https://matikut-site.vercel.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "פותחן בקבוקים לשבת",
+      "item": "https://matikut-site.vercel.app/opener.html"
+    }
+  ]
+}
+</script>
+
 <style>
 /* ============ FONTS ============ */
 @font-face{
@@ -257,6 +288,7 @@ ul{margin:0;padding:0;list-style:none}
   font-weight:300;
   font-size:calc(14 * var(--u));
 }
+.hi-cart.is-empty .badge{opacity:.35}
 .hi-heart img{width:calc(22 * var(--u));height:calc(18 * var(--u))}
 .hi-user img,.hi-search img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 
@@ -1175,11 +1207,11 @@ body.stuck .site-header{
 }
 
 /* ---- ניווט: קו נמשך מימין ---- */
-.header__nav a{position:relative;transition:color .3s var(--ease-soft)}
+.header__nav a{position:relative;transition:color .4s var(--ease-out)}
 .header__nav a::after{
   content:"";
   position:absolute;
-  inset-inline-end:0;
+  inset-inline-start:0;
   bottom:calc(-8 * var(--u));
   height:1.5px;
   width:0;
@@ -2751,15 +2783,15 @@ body.stuck .site-header{
     <button class="miniplayer__btn" id="miniplayerRestart" type="button" aria-label="חזרה להתחלה">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
     </button>
-    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
     </button>
     <button class="miniplayer__btn--toggle" id="miniplayerToggle" type="button" aria-label="נגן או עצור">
       <img class="miniplayer__icon-play" src="./public/assets/icon-play.svg" alt="">
       <img class="miniplayer__icon-pause" src="./public/assets/icon-pause.svg" alt="">
     </button>
-    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
     </button>
   </div>
 </div>
@@ -2859,9 +2891,9 @@ body.stuck .site-header{
       <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="btn__label">איך זה עובד?</span>
     </button>
-    <button class="btn btn--solid" type="button">
+    <button class="btn btn--solid" type="button" data-cart-id="opener-shabbat" data-cart-title="פותחן הבקבוקים לשבת קודש" data-cart-price="35">
       <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="btn__label">לרכישת הפותחן</span>
+      <span class="btn__label">הוספה לסל</span>
     </button>
   </div>
 
@@ -2904,9 +2936,9 @@ body.stuck .site-header{
   <div class="op__who-wrap">
   <h2 class="op__h-who">למי זה מתאים?</h2>
   <p class="op__who">מתאים לבתים פרטיים, משפחות, מוסדות, מתנות סוף שנה, מתנות לחגים, מורים ומורות, הורים וחותנים. מוצר קטן, שימושי ומכובד שכל בית יכול ליהנות ממנו.</p>
-  <button class="btn btn--solid btn--sm op__buy-1" type="button">
+  <button class="btn btn--solid btn--sm op__buy-1" type="button" data-cart-id="opener-shabbat" data-cart-title="פותחן הבקבוקים לשבת קודש" data-cart-price="35">
     <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    <span class="btn__label">לרכישת הפותחן</span>
+    <span class="btn__label">הוספה לסל</span>
   </button>
   </div><!-- /.op__who-wrap -->
 
@@ -2943,9 +2975,9 @@ body.stuck .site-header{
       </div>
     </div>
   </div>
-  <button class="btn btn--solid btn--sm op__buy-2" type="button">
+  <button class="btn btn--solid btn--sm op__buy-2" type="button" data-cart-id="opener-shabbat" data-cart-title="פותחן הבקבוקים לשבת קודש" data-cart-price="35">
     <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    <span class="btn__label">לרכישת הפותחן</span>
+    <span class="btn__label">הוספה לסל</span>
   </button>
 
   <!-- ---------- הערת שימוש חשובה ---------- -->
@@ -2985,9 +3017,9 @@ body.stuck .site-header{
   <div class="op__safety">
     <div class="op__safety-buy">
       <p class="op__safety-price">35 ש”ח</p>
-      <button class="btn btn--solid btn--sm" type="button">
+      <button class="btn btn--solid btn--sm" type="button" data-cart-id="opener-shabbat" data-cart-title="פותחן הבקבוקים לשבת קודש" data-cart-price="35">
         <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="btn__label">לרכישת הפותחן</span>
+        <span class="btn__label">הוספה לסל</span>
       </button>
     </div>
     <div class="op__warns">
@@ -3010,9 +3042,9 @@ body.stuck .site-header{
     <p class="op__cta-sub">הזמינו עכשיו את פותחן הבקבוקים לשבת קודש.</p>
     <div class="op__cta-buy">
       <p class="op__safety-price">35 ש”ח</p>
-      <button class="btn btn--solid btn--sm" type="button">
+      <button class="btn btn--solid btn--sm" type="button" data-cart-id="opener-shabbat" data-cart-title="פותחן הבקבוקים לשבת קודש" data-cart-price="35">
         <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="btn__label">לרכישת הפותחן</span>
+        <span class="btn__label">הוספה לסל</span>
       </button>
     </div>
   </div>
@@ -3854,6 +3886,11 @@ document.documentElement.classList.add('js');
   }
 })();
 </script>
+
+<script src="./public/js/site-auth.js"></script>
+<script src="./public/js/site-cart.js"></script>
+<script src="./public/js/site-contact.js"></script>
+<script src="./public/js/site-search.js"></script>
 
 </body>
 </html>

@@ -4,6 +4,37 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>מתיקות — מדיניות פרטיות</title>
+<meta name="description" content="מדיניות הפרטיות של אתר עמותת מתיקות.">
+<link rel="canonical" href="https://matikut-site.vercel.app/privacy.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="עמותת מתיקות">
+<meta property="og:title" content="מתיקות — מדיניות פרטיות">
+<meta property="og:description" content="מדיניות הפרטיות של אתר עמותת מתיקות.">
+<meta property="og:url" content="https://matikut-site.vercel.app/privacy.html">
+<meta property="og:image" content="https://matikut-site.vercel.app/public/assets/book-matikut.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "דף הבית",
+      "item": "https://matikut-site.vercel.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "מדיניות פרטיות",
+      "item": "https://matikut-site.vercel.app/privacy.html"
+    }
+  ]
+}
+</script>
+
 <style>
 /* ============ FONTS ============ */
 @font-face{
@@ -103,6 +134,7 @@ ul{margin:0;padding:0;list-style:none}
   font-weight:300;
   font-size:calc(14 * var(--u));
 }
+.hi-cart.is-empty .badge{opacity:.35}
 .hi-heart img{width:calc(22 * var(--u));height:calc(18 * var(--u))}
 .hi-user img,.hi-search img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 
@@ -243,7 +275,7 @@ ul{margin:0;padding:0;list-style:none}
   z-index:3;
   width:calc(1691 * var(--u));
   height:calc(312 * var(--u));
-  margin:calc(-207.61 * var(--u)) auto 0;
+  margin:calc(180 * var(--u)) auto 0;   /* בעמוד הזה אין בקבוק מעליו — המרווח שומר מרחק מהתוכן, והחפיפה על הפוטר מגיעה מהפוטר עצמו (margin שלילי שם) */
   background:#FAF8F4;
   border-radius:calc(32 * var(--u));
 }
@@ -345,8 +377,8 @@ body.stuck .site-header{
   -webkit-backdrop-filter:saturate(140%) blur(16px);
   box-shadow:0 1px 0 rgba(57,56,54,.09), 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(57,56,54,.06);
 }
-.header__nav a{position:relative;transition:color .3s cubic-bezier(.22,.61,.36,1)}
-.header__nav a::after{content:"";position:absolute;inset-inline-end:0;bottom:calc(-8 * var(--u));height:1.5px;width:0;background:var(--brand);transition:width .4s cubic-bezier(.16,1,.3,1)}
+.header__nav a{position:relative;transition:color .4s cubic-bezier(.16,1,.3,1)}
+.header__nav a::after{content:"";position:absolute;inset-inline-start:0;bottom:calc(-8 * var(--u));height:1.5px;width:0;background:var(--brand);transition:width .4s cubic-bezier(.16,1,.3,1)}
 .header__nav a:hover{color:var(--brand)}
 .header__nav a:hover::after,.header__nav a.is-active::after{width:100%}
 .footer__col a{position:relative;transition:color .3s cubic-bezier(.22,.61,.36,1), padding .35s cubic-bezier(.16,1,.3,1)}
@@ -460,7 +492,7 @@ body.stuck .site-header{
   .header__burger{display:grid;place-items:center end;width:calc(48 * var(--u));height:calc(28 * var(--u));border:0;background:none;padding:0;cursor:pointer;color:var(--ink)}
   .header__burger svg{width:calc(23 * var(--u));height:calc(16 * var(--u));display:block}
 
-  .contact{width:calc(341 * var(--u));height:calc(432 * var(--u));margin-top:calc(-114.19 * var(--u))}
+  .contact{width:calc(341 * var(--u));height:calc(432 * var(--u));margin-top:calc(180 * var(--u))}
   .contact__title{top:calc(40 * var(--u));font-size:calc(64 * var(--u))}
   .contact__form{left:calc(40 * var(--u));top:calc(120 * var(--u));width:calc(261 * var(--u));height:auto;flex-direction:column;gap:calc(12 * var(--u))}
   .contact__form > *{flex:none;height:calc(64 * var(--u))}
@@ -557,15 +589,15 @@ body.stuck .site-header{
     <button class="miniplayer__btn" id="miniplayerRestart" type="button" aria-label="חזרה להתחלה">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
     </button>
-    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
     </button>
     <button class="miniplayer__btn--toggle" id="miniplayerToggle" type="button" aria-label="נגן או עצור">
       <img class="miniplayer__icon-play" src="./public/assets/icon-play.svg" alt="">
       <img class="miniplayer__icon-pause" src="./public/assets/icon-pause.svg" alt="">
     </button>
-    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
     </button>
   </div>
 </div>
@@ -878,6 +910,11 @@ document.documentElement.classList.add('js');
     .catch(function(err){ console.warn('לא ניתן היה לטעון את הפוטר המשותף מ-index.html (ייתכן שהעמוד נפתח כקובץ מקומי ולא דרך שרת):', err); });
 })();
 </script>
+
+<script src="./public/js/site-auth.js"></script>
+<script src="./public/js/site-cart.js"></script>
+<script src="./public/js/site-contact.js"></script>
+<script src="./public/js/site-search.js"></script>
 
 </body>
 </html>

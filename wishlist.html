@@ -3,37 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>מתיקות — שיעורי תורה</title>
-<meta name="description" content="שיעורי תורה מוקלטים להאזנה ולהורדה מעמותת מתיקות, בנושאי הלכה, פרשת שבוע ושמירת הלשון.">
-<link rel="canonical" href="https://matikut-site.vercel.app/lessons.html">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="he_IL">
-<meta property="og:site_name" content="עמותת מתיקות">
-<meta property="og:title" content="מתיקות — שיעורי תורה">
-<meta property="og:description" content="שיעורי תורה מוקלטים להאזנה ולהורדה מעמותת מתיקות, בנושאי הלכה, פרשת שבוע ושמירת הלשון.">
-<meta property="og:url" content="https://matikut-site.vercel.app/lessons.html">
-<meta property="og:image" content="https://matikut-site.vercel.app/public/assets/book-matikut.webp">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "דף הבית",
-      "item": "https://matikut-site.vercel.app/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "שיעורי תורה",
-      "item": "https://matikut-site.vercel.app/lessons.html"
-    }
-  ]
-}
-</script>
+<title>מתיקות — המועדפים שלי</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="עמוד המועדפים האישי שלך באתר עמותת מתיקות.">
 
 <style>
 /* ============ FONTS ============ */
@@ -507,6 +479,136 @@ ul{margin:0;padding:0;list-style:none}
   margin-bottom:calc(-24 * var(--u));
 }
 
+/* ============ עמוד החנות — רשת כרטיסים, שניים בשורה ============ */
+.shop-grid{
+  width:calc(1667 * var(--u));
+  margin:calc(30 * var(--u)) auto calc(160 * var(--u));
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:calc(64 * var(--u)) calc(56 * var(--u));
+}
+.wishlist-empty{
+  width:calc(700 * var(--u));
+  margin:calc(20 * var(--u)) auto calc(200 * var(--u));
+  text-align:center;
+  font-size:calc(22 * var(--u));
+  line-height:1.5;
+  color:rgba(57,56,54,.55);
+}
+@media(max-width:760px){
+  .wishlist-empty{width:calc(320 * var(--u));font-size:calc(18 * var(--u))}
+}
+.product-card{
+  display:flex;
+  flex-direction:column;
+  gap:calc(28 * var(--u));
+}
+.product-card__frame{
+  position:relative;
+  isolation:isolate;
+  border-radius:calc(28 * var(--u));
+  overflow:hidden;
+  background:var(--cream-1);
+  aspect-ratio:775/480;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+.product-card__tex{position:absolute;inset:0;z-index:0}
+.product-card__tex img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  mix-blend-mode:plus-darker;
+  opacity:.24;
+}
+.product-card__tex .fade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(251,246,239,.1) 0%, var(--cream-1) 100%);
+}
+.product-card__like{
+  position:absolute;
+  z-index:2;
+  top:calc(20 * var(--u));
+  left:calc(20 * var(--u));
+  width:calc(44 * var(--u));
+  height:calc(44 * var(--u));
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(6px);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.product-card__like img{width:calc(18 * var(--u));height:calc(15 * var(--u))}
+.product-card__cover{
+  position:relative;
+  z-index:1;
+  height:90%;
+  width:auto;
+  max-width:78%;
+  object-fit:contain;
+  filter:drop-shadow(0 calc(18 * var(--u)) calc(30 * var(--u)) rgba(57,56,54,.22));
+  transition:transform .5s var(--ease-soft);
+}
+.product-card:hover .product-card__cover{transform:translateY(calc(-6 * var(--u))) scale(1.02)}
+.product-card__text{
+  display:flex;
+  flex-direction:column;
+  gap:calc(10 * var(--u));
+  text-align:right;
+  direction:rtl;
+}
+.product-card__title{
+  font-family:var(--font-display);
+  font-size:calc(40 * var(--u));
+  line-height:.85;
+  color:var(--ink);
+  margin:0;
+}
+.product-card__title .accent{color:var(--brand);display:block}
+.product-card__desc{
+  font-size:calc(17 * var(--u));
+  line-height:1.35;
+  color:rgba(57,56,54,.72);
+  margin:0;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.product-card__row{
+  direction:ltr;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:calc(16 * var(--u));
+}
+.product-card__price{
+  font-family:var(--font-display);
+  font-size:calc(32 * var(--u));
+  line-height:.92;
+  color:var(--ink);
+  margin:0;
+  direction:rtl;
+  flex:none;
+}
+.product-card__cta{display:flex;align-items:center;gap:calc(10 * var(--u));flex:none}
+.product-card__pdf{
+  width:calc(44 * var(--u));
+  height:calc(44 * var(--u));
+  border-radius:50%;
+  border:1px solid var(--ink);
+  background:none;
+  color:var(--ink);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  flex:none;
+  transition:background .35s var(--ease-soft), color .35s var(--ease-soft);
+}
+.product-card__pdf svg{width:calc(18 * var(--u));height:calc(18 * var(--u));transition:transform .35s var(--ease-out)}
+.product-card__pdf:hover{background:var(--ink);color:var(--on-brand)}
+.product-card__pdf:hover svg{transform:translateY(2px)}
+
 /* ============ מקטע כללי + עלונים ============ */
 .section{
   width:calc(1667 * var(--u));
@@ -516,9 +618,10 @@ ul{margin:0;padding:0;list-style:none}
   direction:ltr;
   display:flex;
   align-items:flex-end;
-  justify-content:space-between;
+  justify-content:center;
   padding-bottom:calc(20 * var(--u));
   width:calc(1663 * var(--u));
+  margin:0 auto;
 }
 .section__title{
   font-family:var(--font-display);
@@ -526,7 +629,7 @@ ul{margin:0;padding:0;list-style:none}
   line-height:.73;
   color:var(--ink);
   margin:0;
-  text-align:right;
+  text-align:center;
   direction:rtl;
   white-space:nowrap;
 }
@@ -596,8 +699,33 @@ ul{margin:0;padding:0;list-style:none}
   border-radius:calc(8 * var(--u));
   background:#fff;
   overflow:hidden;
+  position:relative;
 }
 .card__thumb img{width:100%;height:100%;object-fit:contain}
+.card__thumb .card__like{
+  position:absolute;
+  z-index:1;
+  top:calc(14 * var(--u));
+  left:calc(14 * var(--u));
+  width:calc(28 * var(--u));
+  height:calc(24 * var(--u));
+  cursor:pointer;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));
+  transition:filter .35s var(--ease-soft), transform .35s var(--ease-out);
+}
+.card__thumb .card__like.is-fav{
+  filter:invert(43%) sepia(88%) saturate(1600%) hue-rotate(6deg) brightness(88%);
+}
+.cards--wrap{
+  flex-wrap:wrap;
+  height:auto;
+  align-items:stretch;
+  margin-top:calc(20 * var(--u));
+}
+.cards--wrap .card{flex:0 1 calc(300 * var(--u));height:calc(400 * var(--u))}
+@media(max-width:760px){
+  .cards--wrap .card{flex:0 1 calc(150 * var(--u));height:calc(260 * var(--u))}
+}
 .card__name{
   font-weight:700;
   font-size:calc(20 * var(--u));
@@ -722,48 +850,6 @@ ul{margin:0;padding:0;list-style:none}
   gap:calc(15 * var(--u));
   align-items:stretch;
   width:100%;
-}
-/* גרסת רשת לעמוד המלא (כל השיעורים, לא רק תצוגה מקדימה בשורה אחת) */
-.lessons-page{width:calc(1667 * var(--u));margin:calc(180 * var(--u)) auto 0}
-.lessons-page .section__head{justify-content:center;padding-bottom:calc(64 * var(--u))}
-.lesson-filters{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  gap:calc(20 * var(--u));
-  margin-bottom:calc(40 * var(--u));
-}
-.lesson-filter__chips{display:flex;flex-wrap:wrap;gap:calc(10 * var(--u))}
-.lesson-filter__chip{
-  border:1px solid var(--ink);
-  background:none;
-  border-radius:999px;
-  padding:calc(10 * var(--u)) calc(22 * var(--u));
-  font-family:var(--font-body);
-  font-weight:300;
-  font-size:calc(18 * var(--u));
-  color:var(--ink);
-  cursor:pointer;
-  transition:background .3s var(--ease-soft), color .3s var(--ease-soft);
-}
-.lesson-filter__chip.is-active{background:var(--ink);color:var(--on-brand)}
-.lesson-filter__chip:hover{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
-.lesson-filter__sort{
-  border:1px solid var(--ink);
-  border-radius:999px;
-  padding:calc(10 * var(--u)) calc(22 * var(--u));
-  font-family:var(--font-body);
-  font-weight:300;
-  font-size:calc(18 * var(--u));
-  color:var(--ink);
-  background:#fff;
-  cursor:pointer;
-}
-@media (max-width:760px){
-  .lesson-filters{flex-direction:column;align-items:stretch;gap:calc(16 * var(--u))}
-  .lesson-filter__chip{font-size:calc(14 * var(--u));padding:calc(10 * var(--u)) calc(18 * var(--u))}
-  .lesson-filter__sort{font-size:calc(14 * var(--u));width:100%}
 }
 .lesson-cards--grid{
   display:grid;
@@ -1303,9 +1389,9 @@ body.stuck .site-header{
 .btn--ghost:hover svg path{stroke:var(--on-brand)}
 
 /* ---- לב מועדפים ---- */
-.book-row__like,.lesson__like{cursor:pointer;transition:transform .35s var(--ease-out), background .35s var(--ease-soft)}
-.book-row__like:hover{transform:scale(1.08);background:#EDE5D6}
-.book-row__like img,.lesson__like{transition:filter .35s var(--ease-soft), transform .35s var(--ease-out)}
+.book-row__like,.lesson__like,.product-card__like{cursor:pointer;transition:transform .35s var(--ease-out), background .35s var(--ease-soft)}
+.book-row__like:hover,.product-card__like:hover{transform:scale(1.08);background:#EDE5D6}
+.book-row__like img,.lesson__like,.product-card__like img{transition:filter .35s var(--ease-soft), transform .35s var(--ease-out)}
 .is-fav img,.lesson__like.is-fav{
   filter:invert(43%) sepia(88%) saturate(1600%) hue-rotate(6deg) brightness(88%);
 }
@@ -1652,6 +1738,34 @@ body.stuck .site-header{
   .book-row--framed .book-row__content{border-bottom:0;padding-bottom:0}
   .book-row--framed .book-row__cover{margin-top:calc(-72 * var(--u))}
 
+  /* ---- רשת המוצרים בחנות — נשארת שניים בשורה גם במובייל ---- */
+  .shop-grid{
+    width:calc(400 * var(--u));
+    margin:calc(24 * var(--u)) auto calc(80 * var(--u));
+    gap:calc(24 * var(--u)) calc(16 * var(--u));
+  }
+  .product-card{gap:calc(12 * var(--u))}
+  .product-card__frame{border-radius:calc(16 * var(--u))}
+  .product-card__like{
+    top:calc(10 * var(--u));
+    left:calc(10 * var(--u));
+    width:calc(28 * var(--u));
+    height:calc(28 * var(--u));
+  }
+  .product-card__like img{width:calc(12 * var(--u));height:calc(10 * var(--u))}
+  .product-card__cover{filter:drop-shadow(0 calc(8 * var(--u)) calc(14 * var(--u)) rgba(57,56,54,.22))}
+  .product-card__text{gap:calc(4 * var(--u))}
+  .product-card__title{font-size:calc(20 * var(--u))}
+  .product-card__desc{display:none}
+  .product-card__row{flex-wrap:wrap;gap:calc(8 * var(--u))}
+  .product-card__price{font-size:calc(16 * var(--u))}
+  .product-card__cta{gap:calc(6 * var(--u));width:100%}
+  .product-card__pdf{width:calc(28 * var(--u));height:calc(28 * var(--u))}
+  .product-card__pdf svg{width:calc(12 * var(--u));height:calc(12 * var(--u))}
+  .product-card__buy{flex:1 0 0;min-width:0}
+  .product-card__buy .btn__label{padding:0 calc(10 * var(--u));font-size:calc(12 * var(--u))}
+  .product-card__buy .btn__circle svg{width:calc(6 * var(--u));height:calc(5.6 * var(--u))}
+
   /* ---- מקטעים כלליים ---- */
   .section{width:calc(400 * var(--u))}
   .section__head{
@@ -1880,21 +1994,6 @@ body.stuck .site-header{
 @media (max-width:760px){
   .contact{margin-top:calc(180 * var(--u))}
 }
-/* ---- פירורי לחם (breadcrumbs) ---- */
-.breadcrumbs{
-  direction:rtl;
-  display:flex;
-  align-items:center;
-  gap:calc(8 * var(--u));
-  font-size:calc(16 * var(--u));
-  color:rgba(57,56,54,.55);
-}
-.breadcrumbs a{color:rgba(57,56,54,.55);transition:color .25s var(--ease-soft)}
-.breadcrumbs a:hover{color:var(--brand)}
-.breadcrumbs .current{color:var(--ink);font-weight:700}
-@media(max-width:760px){
-  .breadcrumbs{width:calc(400 * var(--u)) !important;margin:calc(150 * var(--u)) auto 0 !important;font-size:calc(14 * var(--u))}
-}
 </style>
 </head>
 <body>
@@ -1923,7 +2022,7 @@ body.stuck .site-header{
     <a href="shop.html">החנות</a>
     <a href="opener.html">פותחן בקבוקים לשבת</a>
     <a href="leaflets.html">עלונים להורדה</a>
-    <a href="lessons.html" class="is-active">שיעורי תורה</a>
+    <a href="lessons.html">שיעורי תורה</a>
     <a href="contact.html">צרו קשר</a>
   </div>
   <div class="menu__icons">
@@ -1992,7 +2091,7 @@ body.stuck .site-header{
     <a href="shop.html">החנות</a>
     <a href="opener.html">פותחן בקבוקים לשבת</a>
     <a href="leaflets.html">עלונים להורדה</a>
-    <a href="lessons.html" class="is-active">שיעורי תורה</a>
+    <a href="lessons.html">שיעורי תורה</a>
     <a href="contact.html">צרו קשר</a>
   </nav>
 
@@ -2005,22 +2104,25 @@ body.stuck .site-header{
   <a href="index.html" class="header__logo"><img src="./public/assets/logo.svg" alt="מתיקות" style="width:100%;height:100%"></a>
 </header>
 
-<!-- ============ שיעורי תורה — כל השיעורים המוקלטים להאזנה ולהורדה ============ -->
-<nav class="breadcrumbs" style="width:calc(1663 * var(--u));margin:calc(180 * var(--u)) auto 0"><a href="index.html">דף הבית</a><span> / </span><span class="current">שיעורי תורה</span></nav>
-<section class="section lessons-page" style="margin-top:calc(24 * var(--u))">
+<!-- ============ המועדפים שלי — נבנה דינמית מתוך localStorage + public/data ============ -->
+<section class="section" style="margin-top:calc(190 * var(--u));padding-bottom:calc(20 * var(--u))">
   <div class="section__head">
-    <h2 class="section__title"><span class="accent">שיעורי תורה </span>להאזנה ולהורדה</h2>
+    <h1 class="section__title"><span class="accent">המועדפים</span> שלי</h1>
   </div>
-  <div class="lesson-filters" id="lessonFilters">
-    <div class="lesson-filter__chips"></div>
-    <select class="lesson-filter__sort" aria-label="מיון שיעורים">
-      <option value="default">מיון: החדש ביותר</option>
-      <option value="newest">תאריך: חדש לישן</option>
-      <option value="oldest">תאריך: ישן לחדש</option>
-    </select>
+  <div class="tabs" id="wishlistTabs" style="margin-top:calc(48 * var(--u))">
+    <button type="button" class="is-active" data-panel="products">מוצרים</button>
+    <button type="button" data-panel="lessons">שיעורי תורה</button>
+    <button type="button" data-panel="leaflets">עלונים</button>
   </div>
-  <div class="lesson-cards lesson-cards--grid" id="lessonCards"></div>
 </section>
+
+<div class="shop-grid" id="wishlistProducts" data-wishlist-panel="products"></div>
+
+<div class="lesson-cards lesson-cards--grid" id="wishlistLessons" data-wishlist-panel="lessons" style="width:calc(1667 * var(--u));margin:calc(30 * var(--u)) auto calc(160 * var(--u));display:none"></div>
+
+<div class="cards cards--wrap" id="wishlistLeaflets" data-wishlist-panel="leaflets" style="width:calc(1667 * var(--u));margin:calc(30 * var(--u)) auto calc(160 * var(--u));display:none"></div>
+
+<p class="wishlist-empty" id="wishlistEmpty" style="display:none">עדיין לא הוספת כלום למועדפים — לחצו על הלב בכרטיס של מוצר, שיעור או עלון כדי לשמור אותו כאן.</p>
 
 <!-- ============ פוטר (כולל "צרו איתנו קשר" כחלק מהתבנית המשותפת) ============ -->
 <div class="footer-shell">
@@ -2083,7 +2185,9 @@ body.stuck .site-header{
   </div>
 </div><!-- /.footer-shell -->
 
+<script src="./public/js/site-data-products.js"></script>
 <script src="./public/js/site-data-lessons.js"></script>
+<script src="./public/js/site-data-leaflets.js"></script>
 <script src="./public/js/site-auth.js"></script>
 <script src="./public/js/site-cart.js"></script>
 <script src="./public/js/site-contact.js"></script>
@@ -2091,36 +2195,136 @@ body.stuck .site-header{
 <script>
 document.documentElement.classList.add('js');
 
-/* ---- כרטיסי השיעורים: סינון לפי נושא, מיון לפי תאריך, ונגן אמיתי ----
-   בעמוד הזה כרטיסי השיעורים נבנים ומחווטים (לייק + נגן) על ידי בלוק זה
-   בלבד, כולל אחרי כל שינוי סינון/מיון — ראו את ה-guard-ים על #lessonCards
-   בבלוקים הכלליים "מועדפים" ו"נגן האודיו" בהמשך הקובץ, שמונעים חיווט כפול. */
+/* ---- ניהול לשוניות המועדפים (מוצרים / שיעורי תורה / עלונים) ---- */
 (function(){
-  var host = document.getElementById('lessonCards');
-  var filterBar = document.getElementById('lessonFilters');
-  if(!host || !filterBar) return;
+  var tabsEl = document.getElementById('wishlistTabs');
+  var panels = document.querySelectorAll('[data-wishlist-panel]');
+  var active = 'products';
+  function apply(){
+    panels.forEach(function(p){
+      p.style.display = (p.getAttribute('data-wishlist-panel') === active) ? '' : 'none';
+    });
+  }
+  window.matikutSetActivePanel = function(name){ active = name; apply(); };
+  window.matikutRefreshActivePanel = apply;
+  if(tabsEl){
+    tabsEl.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){ window.matikutSetActivePanel(btn.getAttribute('data-panel')); });
+    });
+  }
+  apply();
+})();
 
-  var allLessons = (window.LESSONS_DATA || []).slice();
-  var topics = [];
-  allLessons.forEach(function(d){
-    if(d.topic && topics.indexOf(d.topic) === -1) topics.push(d.topic);
-  });
+/* ---- עמוד המועדפים — מציג רק את המוצרים שנשמרו ב-localStorage (window.MatikutWishlist) ---- */
+(function(){
+  var host = document.getElementById('wishlistProducts');
+  var empty = document.getElementById('wishlistEmpty');
+  var tabsEl = document.getElementById('wishlistTabs');
+  if(!host || !window.PRODUCTS_DATA) return;
+  var arrow = '<svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
 
-  var state = { topic: 'all', sort: 'default' };
+  window.matikutWishlistCounts = window.matikutWishlistCounts || {products:0, lessons:0, leaflets:0};
+
+  function wishedIds(){
+    try{ return (JSON.parse(localStorage.getItem('matikut_wishlist')) || []).map(function(w){ return w.id; }); }
+    catch(e){ return []; }
+  }
+  window.matikutWishedIds = wishedIds; /* משותף עם רינדור השיעורים/העלונים למטה */
+  window.matikutCheckWishlistEmpty = function(){
+    var c = window.matikutWishlistCounts;
+    var total = (c.products||0) + (c.lessons||0) + (c.leaflets||0);
+    if(total === 0){
+      if(tabsEl) tabsEl.style.display = 'none';
+      document.querySelectorAll('[data-wishlist-panel]').forEach(function(p){ p.style.display = 'none'; });
+      empty.style.display = 'block';
+    } else {
+      if(tabsEl) tabsEl.style.display = '';
+      empty.style.display = 'none';
+      if(window.matikutRefreshActivePanel) window.matikutRefreshActivePanel();
+    }
+  };
+
+  var emptyMsg = '<p style="grid-column:1/-1;width:100%;text-align:center;color:rgba(57,56,54,.5);font-size:calc(20 * var(--u));padding:calc(60 * var(--u)) 0">עדיין לא הוספת מוצרים למועדפים.</p>';
+
+  function render(){
+    var ids = wishedIds();
+    var items = window.PRODUCTS_DATA.filter(function(p){ return ids.indexOf(p.id) > -1; });
+    window.matikutWishlistCounts.products = items.length;
+    if(!items.length){
+      host.innerHTML = emptyMsg;
+      window.matikutCheckWishlistEmpty();
+      return;
+    }
+    host.innerHTML = items.map(function(p, i){
+      var pdfLabel = p.pdfBuy ? 'להורדת החוברת בקובץ PDF' : 'לרכישת הספר בקובץ PDF';
+      var tex = '<div class="product-card__tex"><img src="./public/assets/texture-color.webp" alt=""><div class="fade"></div></div>';
+      return '<article class="product-card'+(p.framed ? ' product-card--framed' : '')+'" data-id="'+p.id+'" data-reveal="zoom" style="--d:'+((i % 4) * 90)+'ms">'+
+        '<div class="product-card__frame">'+
+          tex+
+          '<span class="product-card__like is-fav" title="הסרה מהמועדפים"><img src="./public/assets/icon-heart.svg" alt="הסרה מהמועדפים"></span>'+
+          '<img class="product-card__cover" src="'+p.cover+'" alt="'+p.coverAlt+'">'+
+        '</div>'+
+        '<div class="product-card__text">'+
+          '<h2 class="product-card__title"><span class="accent">'+p.titleAccent+'</span>'+p.titleRest+'</h2>'+
+          '<p class="product-card__desc">'+p.desc+'</p>'+
+        '</div>'+
+        '<div class="product-card__row">'+
+          '<p class="product-card__price">'+p.price+' ש”ח</p>'+
+          '<div class="product-card__cta">'+
+            '<button class="product-card__pdf" type="button" aria-label="'+pdfLabel+'" title="'+pdfLabel+'">'+dlIcon+'</button>'+
+            '<a class="btn btn--solid product-card__buy" href="'+p.link+'"><span class="btn__circle">'+arrow+'</span><span class="btn__label">לפרטים ורכישה</span></a>'+
+          '</div>'+
+        '</div>'+
+      '</article>';
+    }).join('');
+
+    /* לחיצה על הלב כאן = הסרה מהמועדפים, והכרטיס נעלם */
+    host.querySelectorAll('.product-card__like').forEach(function(el){
+      el.addEventListener('click', function(){
+        var card = el.closest('.product-card');
+        var id = card.getAttribute('data-id');
+        if(window.MatikutWishlist) window.MatikutWishlist.toggle(id);
+        card.style.transition = 'opacity .3s, transform .3s';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(.96)';
+        setTimeout(function(){
+          card.remove();
+          window.matikutWishlistCounts.products = host.querySelectorAll('.product-card').length;
+          if(!window.matikutWishlistCounts.products){ host.innerHTML = emptyMsg; }
+          window.matikutCheckWishlistEmpty();
+        }, 260);
+      });
+    });
+    window.matikutCheckWishlistEmpty();
+  }
+  render();
+})();
+
+/* ---- שיעורים שמורים — מציג רק שיעורים שנשמרו ב-localStorage, עם נגן אמיתי ---- */
+(function(){
+  var host = document.getElementById('wishlistLessons');
+  if(!host || !window.LESSONS_DATA) return;
+  var dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
+  var emptyMsg = '<p style="grid-column:1/-1;width:100%;text-align:center;color:rgba(57,56,54,.5);font-size:calc(20 * var(--u));padding:calc(60 * var(--u)) 0">עדיין לא הוספת שיעורים למועדפים.</p>';
   var seed = 11;
   function rnd(){ seed = (seed*9301+49297) % 233280; return seed/233280; }
-  var dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
+
+  function fmtTime(sec){
+    if(!isFinite(sec) || sec < 0) return '--:--';
+    var m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    if(s === 60){ m++; s = 0; }
+    return m + ':' + String(s).padStart(2, '0');
+  }
 
   function cardHtml(d){
-    var bars = '';
-    for(var i=0;i<58;i++){
-      bars += '<i style="height:'+(14+Math.round(rnd()*86))+'%"></i>';
-    }
     var wishId = 'lesson-' + d.file;
-    return '<article class="lesson">'+
+    var bars = '';
+    for(var i=0;i<58;i++){ bars += '<i style="height:'+(14+Math.round(rnd()*86))+'%"></i>'; }
+    return '<article class="lesson" data-id="'+wishId.replace(/"/g,'')+'">'+
       '<div class="lesson__head">'+
         '<div class="lesson__video">'+
-          '<img class="lesson__like" data-wish-id="'+wishId.replace(/"/g,'')+'" data-wish-type="lesson" data-wish-title="'+d.title.replace(/"/g,'')+'" src="./public/assets/icon-heart.svg" alt="הוספה למועדפים">'+
+          '<img class="lesson__like is-fav" title="הסרה מהמועדפים" src="./public/assets/icon-heart.svg" alt="הסרה מהמועדפים">'+
           '<img src="./public/assets/icon-youtube.svg" alt="נגן וידאו">'+
         '</div>'+
         '<p class="lesson__name">'+d.title+'</p>'+
@@ -2135,22 +2339,24 @@ document.documentElement.classList.add('js');
     '</article>';
   }
 
-  function fmtTime(sec){
-    if(!isFinite(sec) || sec < 0) return '--:--';
-    var m = Math.floor(sec / 60), s = Math.round(sec % 60);
-    if(s === 60){ m++; s = 0; }
-    return m + ':' + String(s).padStart(2, '0');
-  }
+  function render(){
+    var ids = window.matikutWishedIds ? window.matikutWishedIds() : [];
+    var items = window.LESSONS_DATA.filter(function(d){ return ids.indexOf('lesson-' + d.file) > -1; });
+    if(window.matikutWishlistCounts) window.matikutWishlistCounts.lessons = items.length;
+    if(!items.length){
+      host.innerHTML = emptyMsg;
+      if(window.matikutCheckWishlistEmpty) window.matikutCheckWishlistEmpty();
+      return;
+    }
+    host.innerHTML = items.map(cardHtml).join('');
+    if(window.matikutCheckWishlistEmpty) window.matikutCheckWishlistEmpty();
 
-  function wirePlayers(){
-    var allAudios = Array.prototype.slice.call(host.querySelectorAll('.lesson__audio'));
     host.querySelectorAll('.lesson__player').forEach(function(player){
       var play = player.querySelector('.lesson__play');
       var bars = player.querySelectorAll('.lesson__wave i');
       var audio = player.querySelector('.lesson__audio');
       var timeEl = player.querySelector('.lesson__time');
-      if(!play || !bars.length || !audio) return;
-
+      if(!play || !audio) return;
       function paint(){
         var ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
         var pos = Math.round(ratio * bars.length);
@@ -2162,7 +2368,6 @@ document.documentElement.classList.add('js');
       audio.addEventListener('timeupdate', paint);
       audio.addEventListener('play', function(){
         player.classList.add('is-playing');
-        play.style.transform = 'scale(.92)';
         play.src = './public/assets/icon-pause.svg';
         if(window.MatikutPlayer){
           var nameEl = player.closest('.lesson') && player.closest('.lesson').querySelector('.lesson__name');
@@ -2171,26 +2376,22 @@ document.documentElement.classList.add('js');
       });
       audio.addEventListener('pause', function(){
         player.classList.remove('is-playing');
-        play.style.transform = '';
         play.src = './public/assets/icon-play.svg';
-        timeEl.textContent = fmtTime(audio.duration);
       });
       audio.addEventListener('ended', function(){
         player.classList.remove('is-playing');
-        play.style.transform = '';
         play.src = './public/assets/icon-play.svg';
-        timeEl.textContent = fmtTime(audio.duration);
-        paint();
       });
       play.addEventListener('click', function(){
         if(audio.paused){
-          allAudios.forEach(function(a){ if(a !== audio && !a.paused) a.pause(); });
+          host.querySelectorAll('.lesson__audio').forEach(function(a){ if(a !== audio && !a.paused) a.pause(); });
           audio.play();
         } else {
           audio.pause();
         }
       });
-      player.querySelector('.lesson__wave').addEventListener('click', function(e){
+      var waveEl = player.querySelector('.lesson__wave');
+      if(waveEl) waveEl.addEventListener('click', function(e){
         if(!audio.duration) return;
         var r = this.getBoundingClientRect();
         var ratio = 1 - (e.clientX - r.left) / r.width;   /* RTL */
@@ -2198,67 +2399,83 @@ document.documentElement.classList.add('js');
         paint();
       });
     });
-  }
 
-  function wireFavorites(){
+    /* לחיצה על הלב = הסרה מהמועדפים, השיעור נעלם */
     host.querySelectorAll('.lesson__like').forEach(function(el){
-      el.setAttribute('data-wish-bound', '1'); /* חיווט ידני כאן — מונע חיווט כפול ע"י site-search.js */
-      var wishId = el.getAttribute('data-wish-id');
-      if(window.MatikutWishlist && wishId && window.MatikutWishlist.isWished(wishId)){
-        el.classList.add('is-fav');
-      }
       el.addEventListener('click', function(){
-        if(window.MatikutWishlist && wishId){
-          var added = window.MatikutWishlist.toggle(wishId, 'lesson', el.getAttribute('data-wish-title') || '');
-          el.classList.toggle('is-fav', added);
-        } else {
-          el.classList.toggle('is-fav');
-        }
-        el.classList.remove('pop');
-        void el.offsetWidth;
-        el.classList.add('pop');
+        var card = el.closest('.lesson');
+        var wishId = card.getAttribute('data-id');
+        if(window.MatikutWishlist) window.MatikutWishlist.toggle(wishId);
+        card.style.transition = 'opacity .3s, transform .3s';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(.96)';
+        setTimeout(function(){
+          card.remove();
+          if(window.matikutWishlistCounts){
+            window.matikutWishlistCounts.lessons = host.querySelectorAll('.lesson').length;
+            if(!window.matikutWishlistCounts.lessons){ host.innerHTML = emptyMsg; }
+          }
+          if(window.matikutCheckWishlistEmpty) window.matikutCheckWishlistEmpty();
+        }, 260);
       });
     });
   }
+  render();
+})();
 
-  function render(){
-    var list = allLessons.filter(function(d){
-      return state.topic === 'all' || d.topic === state.topic;
-    });
-    if(state.sort === 'newest'){
-      list = list.slice().sort(function(a,b){ return (b.date || '').localeCompare(a.date || ''); });
-    } else if(state.sort === 'oldest'){
-      list = list.slice().sort(function(a,b){ return (a.date || '').localeCompare(b.date || ''); });
-    } else {
-      list = list.slice().reverse(); /* ברירת מחדל: לפי סדר הרשימה, החדש ביותר ראשון */
-    }
-    host.innerHTML = list.map(cardHtml).join('');
-    wireFavorites();
-    wirePlayers();
+/* ---- עלונים שמורים — מציג רק עלונים שנשמרו ב-localStorage ---- */
+(function(){
+  var host = document.getElementById('wishlistLeaflets');
+  if(!host || !window.LEAFLETS_DATA) return;
+  var dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
+  var emptyMsg = '<p style="width:100%;text-align:center;color:rgba(57,56,54,.5);font-size:calc(20 * var(--u));padding:calc(60 * var(--u)) 0">עדיין לא הוספת עלונים למועדפים.</p>';
+
+  function cardHtml(l){
+    var wishId = ('leaflet-' + l.file).replace(/"/g,'');
+    return '<article class="card" data-id="'+wishId+'">'+
+      '<div class="card__body">'+
+        '<div class="card__thumb">'+
+          '<img src="'+(l.cover || './public/assets/leaflet.webp')+'" alt="'+l.title+'">'+
+          '<img class="card__like is-fav" title="הסרה מהמועדפים" src="./public/assets/icon-heart.svg" alt="הסרה מהמועדפים">'+
+        '</div>'+
+        '<p class="card__name">'+l.title+'</p>'+
+      '</div>'+
+      '<a class="card__dl" href="'+l.file+'" download>'+dlIcon+'<span>הורדת הקובץ PDF</span></a>'+
+    '</article>';
   }
 
-  /* שבבי סינון לפי נושא */
-  var chipsHost = filterBar.querySelector('.lesson-filter__chips');
-  var chipsHtml = '<button type="button" class="lesson-filter__chip is-active" data-topic="all">הכול</button>';
-  topics.forEach(function(t){
-    chipsHtml += '<button type="button" class="lesson-filter__chip" data-topic="'+t+'">'+t+'</button>';
-  });
-  chipsHost.innerHTML = chipsHtml;
-  chipsHost.querySelectorAll('.lesson-filter__chip').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      chipsHost.querySelectorAll('.lesson-filter__chip').forEach(function(b){ b.classList.remove('is-active'); });
-      btn.classList.add('is-active');
-      state.topic = btn.getAttribute('data-topic');
-      render();
+  function render(){
+    var ids = window.matikutWishedIds ? window.matikutWishedIds() : [];
+    var items = window.LEAFLETS_DATA.filter(function(l){ return ids.indexOf('leaflet-' + l.file) > -1; });
+    if(window.matikutWishlistCounts) window.matikutWishlistCounts.leaflets = items.length;
+    if(!items.length){
+      host.innerHTML = emptyMsg;
+      if(window.matikutCheckWishlistEmpty) window.matikutCheckWishlistEmpty();
+      return;
+    }
+    host.innerHTML = items.map(cardHtml).join('');
+    if(window.matikutCheckWishlistEmpty) window.matikutCheckWishlistEmpty();
+
+    /* לחיצה על הלב = הסרה מהמועדפים, העלון נעלם */
+    host.querySelectorAll('.card__like').forEach(function(el){
+      el.addEventListener('click', function(){
+        var card = el.closest('.card');
+        var wishId = card.getAttribute('data-id');
+        if(window.MatikutWishlist) window.MatikutWishlist.toggle(wishId);
+        card.style.transition = 'opacity .3s, transform .3s';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(.96)';
+        setTimeout(function(){
+          card.remove();
+          if(window.matikutWishlistCounts){
+            window.matikutWishlistCounts.leaflets = host.querySelectorAll('.card').length;
+            if(!window.matikutWishlistCounts.leaflets){ host.innerHTML = emptyMsg; }
+          }
+          if(window.matikutCheckWishlistEmpty) window.matikutCheckWishlistEmpty();
+        }, 260);
+      });
     });
-  });
-
-  var sortSelect = filterBar.querySelector('.lesson-filter__sort');
-  sortSelect.addEventListener('change', function(){
-    state.sort = sortSelect.value;
-    render();
-  });
-
+  }
   render();
 })();
 
@@ -2484,8 +2701,8 @@ document.documentElement.classList.add('js');
     var toggle = document.getElementById('miniplayerToggle');
     var titleEl = document.getElementById('miniplayerTitle');
     var bar = document.getElementById('miniplayerBar');
-    var closeBtn = document.getElementById('miniplayerClose');
     var progressEl = bar ? bar.parentElement : null;
+    var closeBtn = document.getElementById('miniplayerClose');
     var restartBtn = document.getElementById('miniplayerRestart');
     var backBtn = document.getElementById('miniplayerBack');
     var fwdBtn = document.getElementById('miniplayerFwd');
@@ -2594,37 +2811,34 @@ document.documentElement.classList.add('js');
     }
 
     /* שחזור השמעה שהחלה בעמוד קודם — אם יש כרטיס תואם בעמוד הנוכחי מתחברים אליו,
-       אחרת יוצרים עותק שמע פרטי לנגן הצף בלבד.
-       מבוצע ב-setTimeout כדי לרוץ אחרי שרשימת השיעורים הדינמית כבר עלתה ל-DOM */
-    setTimeout(function(){
-      try{
-        var raw = localStorage.getItem(LS_KEY);
-        if(raw){
-          var st = JSON.parse(raw);
-          if(st && st.src && st.playing && (Date.now() - st.ts) < 1000 * 60 * 60 * 6){
-            var matchEl = null;
-            document.querySelectorAll('.lesson__audio').forEach(function(a){
-              if(matchEl) return;
-              var s = a.getAttribute('src') || '';
-              if(fileKey(s) === fileKey(st.src)) matchEl = a;
-            });
-            var target = matchEl;
-            if(!target){
-              target = new Audio(st.src);
-              target.preload = 'metadata';
-            }
-            target.addEventListener('loadedmetadata', function once(){
-              target.currentTime = st.time || 0;
-              target.removeEventListener('loadedmetadata', once);
-            });
-            if(target.readyState >= 1) target.currentTime = st.time || 0;
-            bindActive(target, st.title);
-            var p = target.play();
-            if(p && p.catch) p.catch(function(){ show(); paint(); });
+       אחרת יוצרים עותק שמע פרטי לנגן הצף בלבד */
+    try{
+      var raw = localStorage.getItem(LS_KEY);
+      if(raw){
+        var st = JSON.parse(raw);
+        if(st && st.src && st.playing && (Date.now() - st.ts) < 1000 * 60 * 60 * 6){
+          var matchEl = null;
+          document.querySelectorAll('.lesson__audio').forEach(function(a){
+            if(matchEl) return;
+            var s = a.getAttribute('src') || '';
+            if(fileKey(s) === fileKey(st.src)) matchEl = a;
+          });
+          var target = matchEl;
+          if(!target){
+            target = new Audio(st.src);
+            target.preload = 'metadata';
           }
+          target.addEventListener('loadedmetadata', function once(){
+            target.currentTime = st.time || 0;
+            target.removeEventListener('loadedmetadata', once);
+          });
+          if(target.readyState >= 1) target.currentTime = st.time || 0;
+          bindActive(target, st.title);
+          var p = target.play();
+          if(p && p.catch) p.catch(function(){ show(); paint(); });
         }
-      }catch(e){}
-    }, 0);
+      }
+    }catch(e){}
   })();
 
   /* ---------- 5. פס התקדמות + הדר נדבק ---------- */
@@ -2690,8 +2904,7 @@ document.documentElement.classList.add('js');
   });
 
   /* ---------- 8. מועדפים ---------- */
-  document.querySelectorAll('.book-row__like, .lesson__like').forEach(function(el){
-    if(el.closest('#lessonCards')) return; /* מחווט בנפרד ע"י בלוק הסינון/מיון, כדי לשרוד רינדור מחדש */
+  document.querySelectorAll('.book-row__like, .lesson__like, .product-card__like').forEach(function(el){
     el.addEventListener('click', function(){
       el.classList.toggle('is-fav');
       el.classList.remove('pop');
@@ -2752,63 +2965,8 @@ document.documentElement.classList.add('js');
     sync();
   });
 
-  /* ---------- 11. נגן האודיו — אמיתי, מבוסס <audio> לכל שיעור ---------- */
-  function fmtTime(sec){
-    if(!isFinite(sec) || sec < 0) return '--:--';
-    var m = Math.floor(sec / 60), s = Math.round(sec % 60);
-    if(s === 60){ m++; s = 0; }
-    return m + ':' + String(s).padStart(2, '0');
-  }
-  var allLessonAudios = Array.prototype.slice.call(document.querySelectorAll('.lesson__audio')).filter(function(a){ return !a.closest('#lessonCards'); });
-  document.querySelectorAll('.lesson__player').forEach(function(player){
-    if(player.closest('#lessonCards')) return; /* מחווט בנפרד ע"י בלוק הסינון/מיון, כדי לשרוד רינדור מחדש */
-    var play = player.querySelector('.lesson__play');
-    var bars = player.querySelectorAll('.lesson__wave i');
-    var audio = player.querySelector('.lesson__audio');
-    var timeEl = player.querySelector('.lesson__time');
-    if(!play || !bars.length || !audio) return;
-
-    function paint(){
-      var ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
-      var pos = Math.round(ratio * bars.length);
-      bars.forEach(function(b, i){ b.classList.toggle('played', i < pos); });
-    }
-    audio.addEventListener('loadedmetadata', function(){
-      if(!player.classList.contains('is-playing')) timeEl.textContent = fmtTime(audio.duration);
-    });
-    audio.addEventListener('timeupdate', paint);
-    audio.addEventListener('play', function(){
-      player.classList.add('is-playing');
-      play.style.transform = 'scale(.92)';
-    });
-    audio.addEventListener('pause', function(){
-      player.classList.remove('is-playing');
-      play.style.transform = '';
-      timeEl.textContent = fmtTime(audio.duration);
-    });
-    audio.addEventListener('ended', function(){
-      player.classList.remove('is-playing');
-      play.style.transform = '';
-      timeEl.textContent = fmtTime(audio.duration);
-      paint();
-    });
-
-    play.addEventListener('click', function(){
-      if(audio.paused){
-        allLessonAudios.forEach(function(a){ if(a !== audio && !a.paused) a.pause(); });
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    });
-    player.querySelector('.lesson__wave').addEventListener('click', function(e){
-      if(!audio.duration) return;
-      var r = this.getBoundingClientRect();
-      var ratio = 1 - (e.clientX - r.left) / r.width;   /* RTL */
-      audio.currentTime = Math.max(0, Math.min(1, ratio)) * audio.duration;
-      paint();
-    });
-  });
+  /* הערה: נגן האודיו האמיתי (עם seek אמיתי) מחווט בתוך IIFE הרינדור של השיעורים
+     השמורים למעלה — אין כאן עוד קוד נגן כפול שיתנגש איתו. */
 
   /* ---------- 12. עגלה מגיבה ---------- */
   var count = document.querySelector('.hi-cart .count');
@@ -2868,7 +3026,6 @@ document.documentElement.classList.add('js');
     .catch(function(err){ console.warn('לא ניתן היה לטעון את הפוטר המשותף מ-index.html (ייתכן שהעמוד נפתח כקובץ מקומי ולא דרך שרת):', err); });
 })();
 </script>
-
 
 </body>
 </html>
