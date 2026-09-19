@@ -3,37 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>מתיקות — עלונים להורדה</title>
-<meta name="description" content="עלונים להורדה מעמותת מתיקות — גיליונות מתיקות הניסים ומתיקות החפץ חיים להדפסה ולשיתוף, מסודרים לפי פרשות השבוע.">
-<link rel="canonical" href="https://matikut-site.vercel.app/leaflets.html">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="he_IL">
-<meta property="og:site_name" content="עמותת מתיקות">
-<meta property="og:title" content="מתיקות — עלונים להורדה">
-<meta property="og:description" content="עלונים להורדה מעמותת מתיקות — גיליונות מתיקות הניסים ומתיקות החפץ חיים להדפסה ולשיתוף, מסודרים לפי פרשות השבוע.">
-<meta property="og:url" content="https://matikut-site.vercel.app/leaflets.html">
-<meta property="og:image" content="https://matikut-site.vercel.app/public/assets/book-matikut.webp">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "דף הבית",
-      "item": "https://matikut-site.vercel.app/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "עלונים להורדה",
-      "item": "https://matikut-site.vercel.app/leaflets.html"
-    }
-  ]
-}
-</script>
+<title>מתיקות — הסל שלי</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="הסל שלך באתר עמותת מתיקות.">
 
 <style>
 /* ============ FONTS ============ */
@@ -507,6 +479,216 @@ ul{margin:0;padding:0;list-style:none}
   margin-bottom:calc(-24 * var(--u));
 }
 
+/* ============ עמוד החנות — רשת כרטיסים, שניים בשורה ============ */
+.shop-grid{
+  width:calc(1667 * var(--u));
+  margin:calc(30 * var(--u)) auto calc(160 * var(--u));
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:calc(64 * var(--u)) calc(56 * var(--u));
+}
+.wishlist-empty{
+  width:calc(700 * var(--u));
+  margin:calc(20 * var(--u)) auto calc(200 * var(--u));
+  text-align:center;
+  font-size:calc(22 * var(--u));
+  line-height:1.5;
+  color:rgba(57,56,54,.55);
+}
+@media(max-width:760px){
+  .wishlist-empty{width:calc(320 * var(--u));font-size:calc(18 * var(--u))}
+}
+
+/* ============ עמוד הסל ============ */
+.cart-wrap{
+  width:calc(1000 * var(--u));
+  margin:0 auto calc(160 * var(--u));
+  direction:rtl;
+}
+.cart-items{display:flex;flex-direction:column;gap:calc(20 * var(--u))}
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:calc(24 * var(--u));
+  background:var(--cream-1);
+  border-radius:calc(20 * var(--u));
+  padding:calc(20 * var(--u)) calc(28 * var(--u));
+}
+.cart-item__text{flex:1 0 0;min-width:0}
+.cart-item__title{margin:0;font-weight:700;font-size:calc(22 * var(--u));color:var(--ink)}
+.cart-item__price{margin:calc(6 * var(--u)) 0 0;font-size:calc(17 * var(--u));color:rgba(57,56,54,.6)}
+.cart-item__qty{
+  display:flex;align-items:center;gap:calc(12 * var(--u));
+  flex:none;
+}
+.cart-item__qty button{
+  width:calc(32 * var(--u));height:calc(32 * var(--u));
+  border-radius:50%;border:1px solid var(--ink);background:none;
+  font-size:calc(20 * var(--u));line-height:1;cursor:pointer;color:var(--ink);
+  display:grid;place-items:center;
+}
+.cart-item__qty button:hover{background:var(--ink);color:var(--on-brand)}
+.cart-item__qty span{min-width:calc(28 * var(--u));text-align:center;font-size:calc(18 * var(--u))}
+.cart-item__line{flex:none;width:calc(110 * var(--u));text-align:left;font-weight:700;font-size:calc(20 * var(--u));color:var(--ink)}
+.cart-item__remove{
+  flex:none;border:0;background:none;cursor:pointer;color:rgba(57,56,54,.45);
+  font-size:calc(26 * var(--u));line-height:1;padding:0 calc(4 * var(--u));
+}
+.cart-item__remove:hover{color:var(--brand)}
+
+.cart-summary{
+  margin-top:calc(32 * var(--u));
+  padding-top:calc(24 * var(--u));
+  border-top:1px solid rgba(57,56,54,.15);
+}
+.cart-summary__row{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:calc(24 * var(--u));color:var(--ink);
+}
+.cart-summary__row strong{font-family:var(--font-display);font-size:calc(36 * var(--u))}
+
+.cart-form{margin-top:calc(56 * var(--u))}
+.cart-form__title{font-family:var(--font-display);font-size:calc(40 * var(--u));font-weight:400;color:var(--ink);margin:0 0 calc(10 * var(--u))}
+.cart-form__note{font-size:calc(16 * var(--u));line-height:1.6;color:rgba(57,56,54,.6);margin:0 0 calc(28 * var(--u))}
+.cart-form__grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:calc(16 * var(--u));
+}
+.cart-form__field{
+  height:calc(56 * var(--u));
+  border-radius:calc(12 * var(--u));
+  border-inline-start:.5px solid var(--ink) !important;
+}
+.cart-form__notes{
+  width:100%;margin-top:calc(16 * var(--u));padding:calc(16 * var(--u)) calc(20 * var(--u));
+  border-radius:calc(12 * var(--u));resize:vertical;font-family:var(--font-body);font-size:calc(17 * var(--u));
+  border-inline-start:.5px solid var(--ink) !important;
+}
+.cart-form__error{color:#B3261E;font-size:calc(16 * var(--u));margin:calc(16 * var(--u)) 0 0}
+.cart-form__submit{margin-top:calc(28 * var(--u))}
+
+.cart-thanks{
+  text-align:center;padding:calc(60 * var(--u)) 0;
+}
+.cart-thanks h2{font-family:var(--font-display);font-size:calc(48 * var(--u));font-weight:400;color:var(--ink);margin:0 0 calc(16 * var(--u))}
+.cart-thanks p{font-size:calc(20 * var(--u));color:rgba(57,56,54,.65);margin:0 0 calc(32 * var(--u))}
+@media(max-width:760px){
+  .cart-wrap{width:calc(320 * var(--u))}
+  .cart-item{flex-wrap:wrap;padding:calc(16 * var(--u)) calc(18 * var(--u))}
+  .cart-item__title{font-size:calc(17 * var(--u))}
+  .cart-item__line{width:auto}
+  .cart-form__grid{grid-template-columns:1fr}
+}
+.product-card{
+  display:flex;
+  flex-direction:column;
+  gap:calc(28 * var(--u));
+}
+.product-card__frame{
+  position:relative;
+  isolation:isolate;
+  border-radius:calc(28 * var(--u));
+  overflow:hidden;
+  background:var(--cream-1);
+  aspect-ratio:775/480;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+.product-card__tex{position:absolute;inset:0;z-index:0}
+.product-card__tex img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  mix-blend-mode:plus-darker;
+  opacity:.24;
+}
+.product-card__tex .fade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(251,246,239,.1) 0%, var(--cream-1) 100%);
+}
+.product-card__like{
+  position:absolute;
+  z-index:2;
+  top:calc(20 * var(--u));
+  left:calc(20 * var(--u));
+  width:calc(44 * var(--u));
+  height:calc(44 * var(--u));
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(6px);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.product-card__like img{width:calc(18 * var(--u));height:calc(15 * var(--u))}
+.product-card__cover{
+  position:relative;
+  z-index:1;
+  height:90%;
+  width:auto;
+  max-width:78%;
+  object-fit:contain;
+  filter:drop-shadow(0 calc(18 * var(--u)) calc(30 * var(--u)) rgba(57,56,54,.22));
+  transition:transform .5s var(--ease-soft);
+}
+.product-card:hover .product-card__cover{transform:translateY(calc(-6 * var(--u))) scale(1.02)}
+.product-card__text{
+  display:flex;
+  flex-direction:column;
+  gap:calc(10 * var(--u));
+  text-align:right;
+  direction:rtl;
+}
+.product-card__title{
+  font-family:var(--font-display);
+  font-size:calc(40 * var(--u));
+  line-height:.85;
+  color:var(--ink);
+  margin:0;
+}
+.product-card__title .accent{color:var(--brand);display:block}
+.product-card__desc{
+  font-size:calc(17 * var(--u));
+  line-height:1.35;
+  color:rgba(57,56,54,.72);
+  margin:0;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.product-card__row{
+  direction:ltr;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:calc(16 * var(--u));
+}
+.product-card__price{
+  font-family:var(--font-display);
+  font-size:calc(32 * var(--u));
+  line-height:.92;
+  color:var(--ink);
+  margin:0;
+  direction:rtl;
+  flex:none;
+}
+.product-card__cta{display:flex;align-items:center;gap:calc(10 * var(--u));flex:none}
+.product-card__pdf{
+  width:calc(44 * var(--u));
+  height:calc(44 * var(--u));
+  border-radius:50%;
+  border:1px solid var(--ink);
+  background:none;
+  color:var(--ink);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  flex:none;
+  transition:background .35s var(--ease-soft), color .35s var(--ease-soft);
+}
+.product-card__pdf svg{width:calc(18 * var(--u));height:calc(18 * var(--u));transition:transform .35s var(--ease-out)}
+.product-card__pdf:hover{background:var(--ink);color:var(--on-brand)}
+.product-card__pdf:hover svg{transform:translateY(2px)}
+
 /* ============ מקטע כללי + עלונים ============ */
 .section{
   width:calc(1667 * var(--u));
@@ -517,7 +699,7 @@ ul{margin:0;padding:0;list-style:none}
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  padding-bottom:calc(48 * var(--u));
+  padding-bottom:calc(20 * var(--u));
   width:calc(1663 * var(--u));
   margin:0 auto;
 }
@@ -569,44 +751,6 @@ ul{margin:0;padding:0;list-style:none}
   align-items:center;
   width:100%;
 }
-/* גרסת ארכיון מלא (עמוד העלונים עצמו, לא הקרוסלה בעמוד הבית) — עוטף שורות
-   במקום לגלול אופקית, כדי שכל העלונים יוצגו בבת אחת */
-.cards--wrap{
-  flex-wrap:wrap;
-  height:auto;
-  align-items:stretch;
-  margin-top:calc(20 * var(--u));
-}
-.cards--wrap .card{flex:0 1 calc(300 * var(--u));height:calc(400 * var(--u))}
-@media(max-width:760px){
-  .cards--wrap .card{flex:0 1 calc(150 * var(--u));height:calc(260 * var(--u))}
-}
-
-/* ---- טאבים + מיון בעמוד העלונים המלא ---- */
-.leaflet-filters{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:calc(20 * var(--u));
-}
-.leaflet-filters .tabs{flex:1 0 auto;min-width:calc(400 * var(--u))}
-.leaflet-filter__sort{
-  border:1px solid var(--ink);
-  border-radius:999px;
-  padding:calc(10 * var(--u)) calc(22 * var(--u));
-  font-family:var(--font-body);
-  font-weight:300;
-  font-size:calc(18 * var(--u));
-  color:var(--ink);
-  background:#fff;
-  cursor:pointer;
-  flex:none;
-}
-@media(max-width:760px){
-  .leaflet-filters{flex-direction:column;align-items:stretch;gap:calc(16 * var(--u))}
-  .leaflet-filters .tabs{min-width:0}
-  .leaflet-filter__sort{width:100%;font-size:calc(14 * var(--u))}
-}
 .card{
   flex:1 0 0;
   min-width:0;
@@ -629,13 +773,13 @@ ul{margin:0;padding:0;list-style:none}
   border-radius:calc(12 * var(--u));
 }
 .card__thumb{
-  position:relative;
   flex:1 0 0;
   min-height:0;
   width:100%;
   border-radius:calc(8 * var(--u));
   background:#fff;
   overflow:hidden;
+  position:relative;
 }
 .card__thumb img{width:100%;height:100%;object-fit:contain}
 .card__thumb .card__like{
@@ -651,6 +795,16 @@ ul{margin:0;padding:0;list-style:none}
 }
 .card__thumb .card__like.is-fav{
   filter:invert(43%) sepia(88%) saturate(1600%) hue-rotate(6deg) brightness(88%);
+}
+.cards--wrap{
+  flex-wrap:wrap;
+  height:auto;
+  align-items:stretch;
+  margin-top:calc(20 * var(--u));
+}
+.cards--wrap .card{flex:0 1 calc(300 * var(--u));height:calc(400 * var(--u))}
+@media(max-width:760px){
+  .cards--wrap .card{flex:0 1 calc(150 * var(--u));height:calc(260 * var(--u))}
 }
 .card__name{
   font-weight:700;
@@ -777,6 +931,12 @@ ul{margin:0;padding:0;list-style:none}
   align-items:stretch;
   width:100%;
 }
+.lesson-cards--grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(calc(280 * var(--u)), 1fr));
+  gap:calc(56 * var(--u)) calc(28 * var(--u));
+}
+.lesson-cards--grid .lesson{flex:none}
 .lesson{
   flex:1 0 0;
   min-width:0;
@@ -1309,9 +1469,9 @@ body.stuck .site-header{
 .btn--ghost:hover svg path{stroke:var(--on-brand)}
 
 /* ---- לב מועדפים ---- */
-.book-row__like,.lesson__like{cursor:pointer;transition:transform .35s var(--ease-out), background .35s var(--ease-soft)}
-.book-row__like:hover{transform:scale(1.08);background:#EDE5D6}
-.book-row__like img,.lesson__like{transition:filter .35s var(--ease-soft), transform .35s var(--ease-out)}
+.book-row__like,.lesson__like,.product-card__like{cursor:pointer;transition:transform .35s var(--ease-out), background .35s var(--ease-soft)}
+.book-row__like:hover,.product-card__like:hover{transform:scale(1.08);background:#EDE5D6}
+.book-row__like img,.lesson__like,.product-card__like img{transition:filter .35s var(--ease-soft), transform .35s var(--ease-out)}
 .is-fav img,.lesson__like.is-fav{
   filter:invert(43%) sepia(88%) saturate(1600%) hue-rotate(6deg) brightness(88%);
 }
@@ -1658,6 +1818,34 @@ body.stuck .site-header{
   .book-row--framed .book-row__content{border-bottom:0;padding-bottom:0}
   .book-row--framed .book-row__cover{margin-top:calc(-72 * var(--u))}
 
+  /* ---- רשת המוצרים בחנות — נשארת שניים בשורה גם במובייל ---- */
+  .shop-grid{
+    width:calc(400 * var(--u));
+    margin:calc(24 * var(--u)) auto calc(80 * var(--u));
+    gap:calc(24 * var(--u)) calc(16 * var(--u));
+  }
+  .product-card{gap:calc(12 * var(--u))}
+  .product-card__frame{border-radius:calc(16 * var(--u))}
+  .product-card__like{
+    top:calc(10 * var(--u));
+    left:calc(10 * var(--u));
+    width:calc(28 * var(--u));
+    height:calc(28 * var(--u));
+  }
+  .product-card__like img{width:calc(12 * var(--u));height:calc(10 * var(--u))}
+  .product-card__cover{filter:drop-shadow(0 calc(8 * var(--u)) calc(14 * var(--u)) rgba(57,56,54,.22))}
+  .product-card__text{gap:calc(4 * var(--u))}
+  .product-card__title{font-size:calc(20 * var(--u))}
+  .product-card__desc{display:none}
+  .product-card__row{flex-wrap:wrap;gap:calc(8 * var(--u))}
+  .product-card__price{font-size:calc(16 * var(--u))}
+  .product-card__cta{gap:calc(6 * var(--u));width:100%}
+  .product-card__pdf{width:calc(28 * var(--u));height:calc(28 * var(--u))}
+  .product-card__pdf svg{width:calc(12 * var(--u));height:calc(12 * var(--u))}
+  .product-card__buy{flex:1 0 0;min-width:0}
+  .product-card__buy .btn__label{padding:0 calc(10 * var(--u));font-size:calc(12 * var(--u))}
+  .product-card__buy .btn__circle svg{width:calc(6 * var(--u));height:calc(5.6 * var(--u))}
+
   /* ---- מקטעים כלליים ---- */
   .section{width:calc(400 * var(--u))}
   .section__head{
@@ -1886,21 +2074,6 @@ body.stuck .site-header{
 @media (max-width:760px){
   .contact{margin-top:calc(180 * var(--u))}
 }
-/* ---- פירורי לחם (breadcrumbs) ---- */
-.breadcrumbs{
-  direction:rtl;
-  display:flex;
-  align-items:center;
-  gap:calc(8 * var(--u));
-  font-size:calc(16 * var(--u));
-  color:rgba(57,56,54,.55);
-}
-.breadcrumbs a{color:rgba(57,56,54,.55);transition:color .25s var(--ease-soft)}
-.breadcrumbs a:hover{color:var(--brand)}
-.breadcrumbs .current{color:var(--ink);font-weight:700}
-@media(max-width:760px){
-  .breadcrumbs{width:calc(400 * var(--u)) !important;margin:calc(150 * var(--u)) auto 0 !important;font-size:calc(14 * var(--u))}
-}
 </style>
 </head>
 <body>
@@ -1928,7 +2101,7 @@ body.stuck .site-header{
     <a href="index.html#about">אודות</a>
     <a href="shop.html">החנות</a>
     <a href="opener.html">פותחן בקבוקים לשבת</a>
-    <a href="leaflets.html" class="is-active">עלונים להורדה</a>
+    <a href="leaflets.html">עלונים להורדה</a>
     <a href="lessons.html">שיעורי תורה</a>
     <a href="contact.html">צרו קשר</a>
   </div>
@@ -1997,7 +2170,7 @@ body.stuck .site-header{
     <a href="index.html#about">אודות</a>
     <a href="shop.html">החנות</a>
     <a href="opener.html">פותחן בקבוקים לשבת</a>
-    <a href="leaflets.html" class="is-active">עלונים להורדה</a>
+    <a href="leaflets.html">עלונים להורדה</a>
     <a href="lessons.html">שיעורי תורה</a>
     <a href="contact.html">צרו קשר</a>
   </nav>
@@ -2011,25 +2184,50 @@ body.stuck .site-header{
   <a href="index.html" class="header__logo"><img src="./public/assets/logo.svg" alt="מתיקות" style="width:100%;height:100%"></a>
 </header>
 
-<!-- ============ עלונים להורדה — ארכיון מלא, נבנה דינמית מתוך Supabase (public.leaflets) דרך public/js/site-data-leaflets.js ============ -->
-<nav class="breadcrumbs" style="width:calc(1663 * var(--u));margin:calc(190 * var(--u)) auto 0"><a href="index.html">דף הבית</a><span> / </span><span class="current">עלונים להורדה</span></nav>
-<section class="section" style="margin-top:calc(24 * var(--u));padding-bottom:calc(20 * var(--u))">
+<!-- ============ הסל שלי — נבנה דינמית מתוך localStorage, שליחת הזמנה ל-Supabase ============ -->
+<section class="section" style="margin-top:calc(190 * var(--u));padding-bottom:calc(20 * var(--u))">
   <div class="section__head">
-    <h1 class="section__title"><span class="accent">עלונים</span> להורדה</h1>
+    <h1 class="section__title"><span class="accent">הסל</span> שלי</h1>
   </div>
-  <div class="leaflet-filters" id="leafletFilters">
-    <div class="tabs" id="leafletTabs"></div>
-    <select class="leaflet-filter__sort" id="leafletParasha" aria-label="סינון לפי פרשה">
-      <option value="all">כל הפרשות</option>
-    </select>
-    <select class="leaflet-filter__sort" id="leafletSort" aria-label="מיון עלונים">
-      <option value="default">מיון: החדש ביותר</option>
-      <option value="newest">גיליון: חדש לישן</option>
-      <option value="oldest">גיליון: ישן לחדש</option>
-    </select>
-  </div>
-  <div class="cards cards--wrap" id="leafletCards"></div>
 </section>
+
+<div class="cart-wrap" id="cartWrap">
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <p class="wishlist-empty" id="cartEmpty" style="display:none">הסל שלך ריק כרגע — <a href="shop.html" style="color:var(--brand);text-decoration:underline">עברו לחנות</a> כדי להוסיף מוצרים.</p>
+
+  <div class="cart-summary" id="cartSummary" style="display:none">
+    <div class="cart-summary__row">
+      <span>סה”כ לתשלום</span>
+      <strong id="cartTotal">0 ש”ח</strong>
+    </div>
+  </div>
+
+  <form class="cart-form" id="cartForm" style="display:none">
+    <h2 class="cart-form__title">פרטי ההזמנה</h2>
+    <p class="cart-form__note">משלימים את הפרטים ושולחים — ניצור איתכם קשר בהקדם לתיאום התשלום ואופן המסירה. עדיין לא מתבצע חיוב באתר.</p>
+    <div class="cart-form__grid">
+      <input class="contact__field cart-form__field" type="text" name="name" placeholder="שם מלא *" required>
+      <input class="contact__field cart-form__field" type="tel" name="phone" placeholder="טלפון *" required>
+      <input class="contact__field cart-form__field" type="email" name="email" placeholder="אימייל">
+      <input class="contact__field cart-form__field" type="text" name="address" placeholder="כתובת למשלוח (אופציונלי)">
+    </div>
+    <textarea class="contact__field cart-form__field cart-form__notes" name="notes" placeholder="הערות להזמנה (אופציונלי)" rows="3"></textarea>
+    <p class="cart-form__error" id="cartFormError" style="display:none">אירעה שגיאה בשליחת ההזמנה. נסו שוב, ואם זה חוזר — אפשר ליצור איתנו קשר ישירות.</p>
+    <button class="btn btn--solid cart-form__submit" type="submit">
+      <span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="btn__label">שליחת ההזמנה</span>
+    </button>
+  </form>
+
+  <div class="cart-thanks" id="cartThanks" style="display:none">
+    <h2>ההזמנה נשלחה, תודה!</h2>
+    <p>קיבלנו את פרטי ההזמנה שלכם ונחזור אליכם בהקדם לתיאום התשלום והמסירה.</p>
+    <a class="btn btn--dark" href="shop.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">המשך קניות</span></a>
+  </div>
+
+</div>
 
 <!-- ============ פוטר (כולל "צרו איתנו קשר" כחלק מהתבנית המשותפת) ============ -->
 <div class="footer-shell">
@@ -2092,6 +2290,8 @@ body.stuck .site-header{
   </div>
 </div><!-- /.footer-shell -->
 
+<script src="./public/js/site-data-products.js"></script>
+<script src="./public/js/site-data-lessons.js"></script>
 <script src="./public/js/site-data-leaflets.js"></script>
 <script src="./public/js/site-auth.js"></script>
 <script src="./public/js/site-cart.js"></script>
@@ -2100,137 +2300,126 @@ body.stuck .site-header{
 <script>
 document.documentElement.classList.add('js');
 
-/* ---- ארכיון העלונים — נבנה מ-window.LEAFLETS_DATA, עם טאבים לפי סדרה, סינון לפי פרשה ומיון לפי גיליון ---- */
+/* ---- עמוד הסל — רינדור פריטי הסל, סיכום, ושליחת הזמנה ל-Supabase (ללא סליקה בפועל) ---- */
 (function(){
-  var host = document.getElementById('leafletCards');
-  var tabsHost = document.getElementById('leafletTabs');
-  var sortSelect = document.getElementById('leafletSort');
-  var parashaSelect = document.getElementById('leafletParasha');
-  if(!host || !tabsHost) return;
-  var all = window.LEAFLETS_DATA || [];
-  /* רשימת הסדרות: מ-window.LEAFLET_SERIES אם קיים (כולל סדרות שטרם הועלו להן קבצים),
-     אחרת נגזר מהעלונים הקיימים בפועל */
-  var series = window.LEAFLET_SERIES && window.LEAFLET_SERIES.length ? window.LEAFLET_SERIES.slice() : [];
-  all.forEach(function(l){ if(l.series && series.indexOf(l.series) === -1) series.push(l.series); });
-  /* רשימת הפרשות: מפוצלת משדה topic (מופרד ב-"·"), לכל הסדרות יחד */
-  var parashot = [];
-  all.forEach(function(l){
-    (l.topic || '').split('·').forEach(function(p){
-      p = p.trim();
-      if(p && parashot.indexOf(p) === -1) parashot.push(p);
-    });
-  });
-  var dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
+  var SUPABASE_URL = 'https://garazmdqwdpxrpzkcneg.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_SFMWTzHxPebh1xTp_zv5tA_zh1x_Xaj';
 
-  var state = { series: 'all', parasha: 'all', sort: 'default' };
+  var itemsHost = document.getElementById('cartItems');
+  var emptyEl = document.getElementById('cartEmpty');
+  var summaryEl = document.getElementById('cartSummary');
+  var totalEl = document.getElementById('cartTotal');
+  var formEl = document.getElementById('cartForm');
+  var thanksEl = document.getElementById('cartThanks');
+  var errorEl = document.getElementById('cartFormError');
+  if(!itemsHost || !window.MatikutCart) return;
 
-  function cardHtml(l){
-    var wishId = ('leaflet-' + l.file).replace(/"/g,'');
-    return '<article class="card">'+
-      '<div class="card__body">'+
-        '<div class="card__thumb">'+
-          '<img src="'+(l.cover || './public/assets/leaflet.webp')+'" alt="'+l.title+'">'+
-          '<img class="card__like" data-wish-id="'+wishId+'" data-wish-type="leaflet" data-wish-title="'+l.title.replace(/"/g,'')+'" src="./public/assets/icon-heart.svg" alt="הוספה למועדפים">'+
-        '</div>'+
-        '<p class="card__name">'+l.title+'</p>'+
-      '</div>'+
-      '<a class="card__dl" href="'+l.file+'" download>'+dlIcon+'<span>הורדת הקובץ PDF</span></a>'+
-    '</article>';
-  }
+  function fmt(n){ return Number(n).toLocaleString('he-IL') + ' ש”ח'; }
 
   function render(){
-    var items = state.series === 'all' ? all.slice() : all.filter(function(l){ return l.series === state.series; });
-    if(state.parasha !== 'all'){
-      items = items.filter(function(l){ return (l.topic || '').indexOf(state.parasha) > -1; });
+    var list = MatikutCart.get();
+    if(!list.length){
+      itemsHost.innerHTML = '';
+      emptyEl.style.display = 'block';
+      summaryEl.style.display = 'none';
+      formEl.style.display = 'none';
+      return;
     }
-    if(state.sort === 'newest'){
-      items.sort(function(a,b){ return (b.date || '').localeCompare(a.date || ''); });
-    } else if(state.sort === 'oldest'){
-      items.sort(function(a,b){ return (a.date || '').localeCompare(b.date || ''); });
-    }
-    host.innerHTML = items.length ? items.map(cardHtml).join('') :
-      '<p style="width:100%;text-align:center;color:rgba(57,56,54,.5);font-size:calc(20 * var(--u))">בקרוב יתווספו כאן עלונים</p>';
-    wireHearts();
-  }
+    emptyEl.style.display = 'none';
+    summaryEl.style.display = 'block';
+    formEl.style.display = 'block';
 
-  function wireHearts(){
-    host.querySelectorAll('.card__like').forEach(function(el){
-      el.setAttribute('data-wish-bound', '1');
-      var wishId = el.getAttribute('data-wish-id');
-      if(window.MatikutWishlist && wishId && window.MatikutWishlist.isWished(wishId)){ el.classList.add('is-fav'); }
-      el.addEventListener('click', function(){
-        if(window.MatikutWishlist && wishId){
-          var added = window.MatikutWishlist.toggle(wishId, 'leaflet', el.getAttribute('data-wish-title') || '');
-          el.classList.toggle('is-fav', added);
-        } else { el.classList.toggle('is-fav'); }
-      });
-    });
-  }
-
-  if(!series.length){
-    tabsHost.style.display = 'none';
-  } else {
-    tabsHost.innerHTML = '<button type="button" class="is-active" data-series="all">כל העלונים</button>'+
-      series.map(function(s){ return '<button type="button" data-series="'+s+'">'+s+'</button>'; }).join('');
-    tabsHost.querySelectorAll('button').forEach(function(btn){
-      btn.addEventListener('click', function(){ state.series = btn.getAttribute('data-series'); render(); });
-    });
-  }
-  if(parashaSelect){
-    if(!parashot.length){
-      parashaSelect.style.display = 'none';
-    } else {
-      parashot.forEach(function(p){
-        var opt = document.createElement('option');
-        opt.value = p;
-        opt.textContent = p;
-        parashaSelect.appendChild(opt);
-      });
-      parashaSelect.addEventListener('change', function(){ state.parasha = parashaSelect.value; render(); });
-    }
-  }
-  if(sortSelect){
-    sortSelect.addEventListener('change', function(){ state.sort = sortSelect.value; render(); });
-  }
-  render();
-})();
-
-/* ---- כרטיסי השיעורים ---- */
-(function(){
-  var host = document.getElementById('lessonCards');
-  if(!host) return;
-  var data = [
-    ["שמירת הלשון — שיעור פתיחה","18:35"],
-    ["הלכות רכילות למעשה","24:10"],
-    ["אבק לשון הרע","15:48"],
-    ["תשובה על פגיעה בדיבור","31:02"],
-    ["שלום בית ושמירת הפה","22:19"]
-  ];
-  var seed = 11;
-  function rnd(){ seed = (seed*9301+49297) % 233280; return seed/233280; }
-  var dl = '<svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
-
-  host.innerHTML = data.map(function(d){
-    var bars = '';
-    for(var i=0;i<58;i++){
-      bars += '<i'+(i<7?' class="played"':'')+' style="height:'+(14+Math.round(rnd()*86))+'%"></i>';
-    }
-    return '<article class="lesson">'+
-      '<div class="lesson__head">'+
-        '<div class="lesson__video">'+
-          '<img class="lesson__like" src="./public/assets/icon-heart.svg" alt="הוספה למועדפים">'+
-          '<img src="./public/assets/icon-youtube.svg" alt="נגן וידאו">'+
+    itemsHost.innerHTML = list.map(function(r){
+      return '<div class="cart-item" data-id="'+r.id.replace(/"/g,'')+'">'+
+        '<div class="cart-item__text">'+
+          '<p class="cart-item__title">'+r.title+'</p>'+
+          '<p class="cart-item__price">'+fmt(r.price)+' ליחידה</p>'+
         '</div>'+
-        '<p class="lesson__name">'+d[0]+'</p>'+
-      '</div>'+
-      '<div class="lesson__player">'+
-        '<img class="lesson__play" src="./public/assets/icon-play.svg" alt="נגן">'+
-        '<span class="lesson__time">'+d[1]+'</span>'+
-        '<span class="lesson__wave">'+bars+'</span>'+
-      '</div>'+
-      '<button class="lesson__dl" type="button">'+dl+'<span>הורדת קובץ MP3</span></button>'+
-    '</article>';
-  }).join('');
+        '<div class="cart-item__qty">'+
+          '<button type="button" class="cart-item__dec" aria-label="הפחתת כמות">−</button>'+
+          '<span>'+r.qty+'</span>'+
+          '<button type="button" class="cart-item__inc" aria-label="הוספת כמות">+</button>'+
+        '</div>'+
+        '<p class="cart-item__line">'+fmt(r.price * r.qty)+'</p>'+
+        '<button type="button" class="cart-item__remove" aria-label="הסרה מהסל">&times;</button>'+
+      '</div>';
+    }).join('');
+
+    totalEl.textContent = fmt(MatikutCart.total());
+
+    itemsHost.querySelectorAll('.cart-item').forEach(function(row){
+      var id = row.getAttribute('data-id');
+      var qtyEl = row.querySelector('.cart-item__qty span');
+      row.querySelector('.cart-item__inc').addEventListener('click', function(){
+        MatikutCart.setQty(id, parseInt(qtyEl.textContent, 10) + 1);
+        render();
+      });
+      row.querySelector('.cart-item__dec').addEventListener('click', function(){
+        MatikutCart.setQty(id, parseInt(qtyEl.textContent, 10) - 1);
+        render();
+      });
+      row.querySelector('.cart-item__remove').addEventListener('click', function(){
+        MatikutCart.remove(id);
+        render();
+      });
+    });
+  }
+
+  render();
+
+  if(formEl) formEl.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorEl.style.display = 'none';
+    var list = MatikutCart.get();
+    if(!list.length) return;
+    var fd = new FormData(formEl);
+    var name = (fd.get('name') || '').toString().trim();
+    var phone = (fd.get('phone') || '').toString().trim();
+    if(!name || !phone){
+      errorEl.textContent = 'נא למלא שם וטלפון.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    var submitBtn = formEl.querySelector('.cart-form__submit');
+    submitBtn.setAttribute('disabled', 'disabled');
+    submitBtn.style.opacity = '.6';
+
+    /* אם הלקוח מחוברת לאזור האישי — משייכים את ההזמנה לחשבון שלה (user_id),
+       ושולחים עם ה-access_token שלה ולא עם מפתח ה-anon, כנדרש ע"י ה-RLS. */
+    var customerSession = (window.MatikutAuth && window.MatikutAuth.getSession()) || null;
+
+    var payload = {
+      customer_name: name,
+      phone: phone,
+      email: (fd.get('email') || '').toString().trim() || null,
+      address: (fd.get('address') || '').toString().trim() || null,
+      notes: (fd.get('notes') || '').toString().trim() || null,
+      items: list.map(function(r){ return {id:r.id, title:r.title, price:r.price, qty:r.qty}; }),
+      total: MatikutCart.total(),
+      user_id: customerSession ? customerSession.id : null
+    };
+
+    fetch(SUPABASE_URL + '/rest/v1/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + (customerSession ? customerSession.access_token : SUPABASE_KEY),
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error('bad status ' + res.status);
+      MatikutCart.clear();
+      document.querySelectorAll('.cart-items, .cart-summary, .cart-form').forEach(function(el){ el.style.display = 'none'; });
+      thanksEl.style.display = 'block';
+    }).catch(function(){
+      errorEl.style.display = 'block';
+      submitBtn.removeAttribute('disabled');
+      submitBtn.style.opacity = '';
+    });
+  });
 })();
 
 /* ---- חשיפת טקסט האודות בגלילה ---- */
@@ -2658,7 +2847,7 @@ document.documentElement.classList.add('js');
   });
 
   /* ---------- 8. מועדפים ---------- */
-  document.querySelectorAll('.book-row__like, .lesson__like').forEach(function(el){
+  document.querySelectorAll('.book-row__like, .lesson__like, .product-card__like').forEach(function(el){
     el.addEventListener('click', function(){
       el.classList.toggle('is-fav');
       el.classList.remove('pop');
@@ -2719,35 +2908,8 @@ document.documentElement.classList.add('js');
     sync();
   });
 
-  /* ---------- 11. נגן האודיו ---------- */
-  document.querySelectorAll('.lesson__player').forEach(function(player){
-    var play = player.querySelector('.lesson__play');
-    var bars = player.querySelectorAll('.lesson__wave i');
-    var timer = null, pos = 7;
-    if(!play || !bars.length) return;
-
-    function paint(){
-      bars.forEach(function(b, i){ b.classList.toggle('played', i < pos); });
-    }
-    play.addEventListener('click', function(){
-      var on = player.classList.toggle('is-playing');
-      play.style.transform = on ? 'scale(.92)' : '';
-      if(on){
-        timer = setInterval(function(){
-          pos = pos >= bars.length ? 0 : pos + 1;
-          paint();
-        }, 260);
-      } else {
-        clearInterval(timer);
-      }
-    });
-    player.querySelector('.lesson__wave').addEventListener('click', function(e){
-      var r = this.getBoundingClientRect();
-      var ratio = 1 - (e.clientX - r.left) / r.width;   /* RTL */
-      pos = Math.round(ratio * bars.length);
-      paint();
-    });
-  });
+  /* הערה: נגן האודיו האמיתי (עם seek אמיתי) מחווט בתוך IIFE הרינדור של השיעורים
+     השמורים למעלה — אין כאן עוד קוד נגן כפול שיתנגש איתו. */
 
   /* ---------- 12. עגלה מגיבה ---------- */
   var count = document.querySelector('.hi-cart .count');
@@ -2807,7 +2969,6 @@ document.documentElement.classList.add('js');
     .catch(function(err){ console.warn('לא ניתן היה לטעון את הפוטר המשותף מ-index.html (ייתכן שהעמוד נפתח כקובץ מקומי ולא דרך שרת):', err); });
 })();
 </script>
-
 
 </body>
 </html>

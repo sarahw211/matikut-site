@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>מתיקות — דף הבית</title>
+<meta name="description" content="עמותת מתיקות מנגישה לכל בית את תורתו של החפץ חיים: ספרים, חוברות, עלונים ושיעורי תורה מוקלטים, לחיזוק שמירת הלשון ועבודת המידות בשפה ברורה ונעימה.">
+<link rel="canonical" href="https://matikut-site.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="עמותת מתיקות">
+<meta property="og:title" content="מתיקות — דף הבית">
+<meta property="og:description" content="עמותת מתיקות מנגישה לכל בית את תורתו של החפץ חיים: ספרים, חוברות, עלונים ושיעורי תורה מוקלטים, לחיזוק שמירת הלשון ועבודת המידות בשפה ברורה ונעימה.">
+<meta property="og:url" content="https://matikut-site.vercel.app/">
+<meta property="og:image" content="https://matikut-site.vercel.app/public/assets/book-matikut.webp">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
 /* ============ FONTS ============ */
 @font-face{
@@ -257,6 +268,7 @@ ul{margin:0;padding:0;list-style:none}
   font-weight:300;
   font-size:calc(14 * var(--u));
 }
+.hi-cart.is-empty .badge{opacity:.35}
 .hi-heart img{width:calc(22 * var(--u));height:calc(18 * var(--u))}
 .hi-user img,.hi-search img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 
@@ -565,8 +577,23 @@ ul{margin:0;padding:0;list-style:none}
   border-radius:calc(8 * var(--u));
   background:#fff;
   overflow:hidden;
+  position:relative;
 }
 .card__thumb img{width:100%;height:100%;object-fit:contain}
+.card__thumb .card__like{
+  position:absolute;
+  z-index:1;
+  top:calc(14 * var(--u));
+  left:calc(14 * var(--u));
+  width:calc(28 * var(--u));
+  height:calc(24 * var(--u));
+  cursor:pointer;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));
+  transition:filter .35s var(--ease-soft), transform .35s var(--ease-out);
+}
+.card__thumb .card__like.is-fav{
+  filter:invert(43%) sepia(88%) saturate(1600%) hue-rotate(6deg) brightness(88%);
+}
 .card__name{
   font-weight:700;
   font-size:calc(20 * var(--u));
@@ -1184,11 +1211,11 @@ body.stuck .site-header{
 }
 
 /* ---- ניווט: קו נמשך מימין ---- */
-.header__nav a{position:relative;transition:color .3s var(--ease-soft)}
+.header__nav a{position:relative;transition:color .4s var(--ease-out)}
 .header__nav a::after{
   content:"";
   position:absolute;
-  inset-inline-end:0;
+  inset-inline-start:0;
   bottom:calc(-8 * var(--u));
   height:1.5px;
   width:0;
@@ -1872,15 +1899,15 @@ body.stuck .site-header{
     <button class="miniplayer__btn" id="miniplayerRestart" type="button" aria-label="חזרה להתחלה">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
     </button>
-    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
     </button>
     <button class="miniplayer__btn--toggle" id="miniplayerToggle" type="button" aria-label="נגן או עצור">
       <img class="miniplayer__icon-play" src="./public/assets/icon-play.svg" alt="">
       <img class="miniplayer__icon-pause" src="./public/assets/icon-pause.svg" alt="">
     </button>
-    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
     </button>
   </div>
 </div>
@@ -2037,7 +2064,7 @@ body.stuck .site-header{
   <article class="book-row">
     <div class="book-row__content">
       <div class="book-row__aside">
-        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <span class="book-row__like" data-wish-id="matikut-hafetz-haim" data-wish-type="product" data-wish-title="מתיקות החפץ חיים"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
         <div class="book-row__buy">
           <p class="book-row__price">65 ש”ח</p>
           <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
@@ -2056,7 +2083,7 @@ body.stuck .site-header{
     <img class="book-row__cover" src="./public/assets/book-noar.webp" alt="מתיקות לבני נוער">
     <div class="book-row__content">
       <div class="book-row__aside">
-        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <span class="book-row__like" data-wish-id="matikut-noar" data-wish-type="product" data-wish-title="מתיקות לבני נוער"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
         <div class="book-row__buy">
           <p class="book-row__price">65 ש”ח</p>
           <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
@@ -2073,7 +2100,7 @@ body.stuck .site-header{
   <article class="book-row">
     <div class="book-row__content">
       <div class="book-row__aside">
-        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <span class="book-row__like" data-wish-id="matikut-shmirat-halashon" data-wish-type="product" data-wish-title="מתיקות שמירת הלשון"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
         <div class="book-row__buy">
           <p class="book-row__price">65 ש”ח</p>
           <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
@@ -2092,7 +2119,7 @@ body.stuck .site-header{
     <img class="book-row__cover" src="./public/assets/book-matikut.webp" alt="מתיקות המידות">
     <div class="book-row__content">
       <div class="book-row__aside">
-        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <span class="book-row__like" data-wish-id="matikut-avodat-hamidot" data-wish-type="product" data-wish-title="מתיקות עבודת המידות"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
         <div class="book-row__buy">
           <p class="book-row__price">65 ש”ח</p>
           <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
@@ -2110,7 +2137,7 @@ body.stuck .site-header{
     <div class="book-row__bg"><img src="./public/assets/texture-color.webp" alt=""><div class="fade"></div></div>
     <div class="book-row__content">
       <div class="book-row__aside">
-        <span class="book-row__like"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
+        <span class="book-row__like" data-wish-id="heshbon-nefesh" data-wish-type="product" data-wish-title="חוברת חשבון נפש"><img src="./public/assets/icon-heart.svg" alt="הוספה למועדפים"></span>
         <div class="book-row__buy">
           <p class="book-row__price">65 ש”ח</p>
           <a class="btn btn--solid" href="book-alt.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לפרטים ורכישה</span></a>
@@ -2130,23 +2157,13 @@ body.stuck .site-header{
 <!-- ============ עלונים להורדה ============ -->
 <section class="section leaflets">
   <div class="section__head">
-    <button class="btn btn--solid" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד העלונים המלא</span></button>
+    <a class="btn btn--solid" href="leaflets.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד העלונים המלא</span></a>
     <h2 class="section__title"><span class="accent">עלונים </span>להורדה</h2>
   </div>
 
-  <div class="tabs">
-    <button type="button" class="is-active">כל העלונים</button>
-    <button type="button">פרשת שבוע</button>
-    <button type="button">מועדים וחגים</button>
-  </div>
+  <div class="tabs" id="leafletTabs"></div>
 
-  <div class="cards">
-    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.webp" alt="עלון פרשת השבוע"></div><p class="card__name">עלון פרשת השבוע</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
-    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.webp" alt="עלון שמירת הלשון"></div><p class="card__name">עלון שמירת הלשון</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
-    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.webp" alt="חוברת חשבון נפש"></div><p class="card__name">חוברת חשבון נפש</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
-    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.webp" alt="עלון לימי בין המצרים"></div><p class="card__name">עלון לימי בין המצרים</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
-    <article class="card"><div class="card__body"><div class="card__thumb"><img src="./public/assets/leaflet.webp" alt="עלון לחגי תשרי"></div><p class="card__name">עלון לחגי תשרי</p></div><button class="card__dl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg><span>הורדת הקובץ PDF</span></button></article>
-  </div>
+  <div class="cards" id="leafletCards"></div>
 
   <div class="carousel-nav">
     <button class="prev" type="button" aria-label="הקודם"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -2154,7 +2171,7 @@ body.stuck .site-header{
   </div>
 
   <div class="section__cta">
-    <button class="btn btn--solid" type="button"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד העלונים המלא</span></button>
+    <a class="btn btn--solid" href="leaflets.html"><span class="btn__circle"><svg viewBox="0 0 10 10" fill="none" overflow="visible"><path class="btn__arrow" d="M5.55934 0.5C5.55934 0.969 5.09578 1.67 4.62652 2.258C4.0232 3.017 3.30224 3.679 2.47567 4.184C1.8559 4.563 1.10459 4.927 0.5 4.927M0.5 4.927C1.10459 4.927 1.85653 5.291 2.47567 5.669C3.30224 6.175 4.0232 6.837 4.62652 7.595C5.09578 8.184 5.55934 8.886 5.55934 9.354M0.5 4.927L8.72144 4.927" stroke-linecap="round" stroke-linejoin="round"/><path class="btn__check" d="M1.8 5.1L4 7.3L8.4 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn__label">לעמוד העלונים המלא</span></a>
   </div>
 </section>
 
@@ -2273,7 +2290,12 @@ body.stuck .site-header{
   </div>
 </div><!-- /.footer-shell -->
 
-<script src="./public/data/lessons-data.js"></script>
+<script src="./public/js/site-data-lessons.js"></script>
+<script src="./public/js/site-data-leaflets.js"></script>
+<script src="./public/js/site-auth.js"></script>
+<script src="./public/js/site-cart.js"></script>
+<script src="./public/js/site-contact.js"></script>
+<script src="./public/js/site-search.js"></script>
 <script>
 document.documentElement.classList.add('js');
 
@@ -2292,10 +2314,11 @@ document.documentElement.classList.add('js');
     for(var i=0;i<58;i++){
       bars += '<i style="height:'+(14+Math.round(rnd()*86))+'%"></i>';
     }
+    var wishId = ('lesson-' + d.file).replace(/"/g,'');
     return '<article class="lesson">'+
       '<div class="lesson__head">'+
         '<div class="lesson__video">'+
-          '<img class="lesson__like" src="./public/assets/icon-heart.svg" alt="הוספה למועדפים">'+
+          '<img class="lesson__like" data-wish-id="'+wishId+'" data-wish-type="lesson" data-wish-title="'+d.title.replace(/"/g,'')+'" src="./public/assets/icon-heart.svg" alt="הוספה למועדפים">'+
           '<img src="./public/assets/icon-youtube.svg" alt="נגן וידאו">'+
         '</div>'+
         '<p class="lesson__name">'+d.title+'</p>'+
@@ -2309,6 +2332,65 @@ document.documentElement.classList.add('js');
       '<a class="lesson__dl" href="'+d.file+'" download>'+dl+'<span>הורדת קובץ MP3</span></a>'+
     '</article>';
   }).join('');
+})();
+
+/* ---- כרטיסי העלונים (תצוגה מקדימה בעמוד הבית) — נבנה מ-window.LEAFLETS_DATA,
+   עם טאבים לסינון לפי סדרה (למשל "מתיקות הניסים"). כשעוד סדרות עלונים יתווספו
+   לקובץ הנתונים, טאב חדש יופיע כאן אוטומטית. ---- */
+(function(){
+  var host = document.getElementById('leafletCards');
+  var tabsHost = document.getElementById('leafletTabs');
+  if(!host || !tabsHost) return;
+  var all = window.LEAFLETS_DATA || [];
+  var series = window.LEAFLET_SERIES && window.LEAFLET_SERIES.length ? window.LEAFLET_SERIES.slice() : [];
+  all.forEach(function(l){ if(l.series && series.indexOf(l.series) === -1) series.push(l.series); });
+  var dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#393836" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
+
+  function cardHtml(l){
+    var wishId = ('leaflet-' + l.file).replace(/"/g,'');
+    return '<article class="card">'+
+      '<div class="card__body">'+
+        '<div class="card__thumb">'+
+          '<img src="'+(l.cover || './public/assets/leaflet.webp')+'" alt="'+l.title+'">'+
+          '<img class="card__like" data-wish-id="'+wishId+'" data-wish-type="leaflet" data-wish-title="'+l.title.replace(/"/g,'')+'" src="./public/assets/icon-heart.svg" alt="הוספה למועדפים">'+
+        '</div>'+
+        '<p class="card__name">'+l.title+'</p>'+
+      '</div>'+
+      '<a class="card__dl" href="'+l.file+'" download>'+dlIcon+'<span>הורדת הקובץ PDF</span></a>'+
+    '</article>';
+  }
+
+  function wireHearts(){
+    host.querySelectorAll('.card__like').forEach(function(el){
+      el.setAttribute('data-wish-bound', '1');
+      var wishId = el.getAttribute('data-wish-id');
+      if(window.MatikutWishlist && wishId && window.MatikutWishlist.isWished(wishId)){ el.classList.add('is-fav'); }
+      el.addEventListener('click', function(){
+        if(window.MatikutWishlist && wishId){
+          var added = window.MatikutWishlist.toggle(wishId, 'leaflet', el.getAttribute('data-wish-title') || '');
+          el.classList.toggle('is-fav', added);
+        } else { el.classList.toggle('is-fav'); }
+      });
+    });
+  }
+
+  function render(activeSeries){
+    var items = (!activeSeries || activeSeries === 'all') ? all : all.filter(function(l){ return l.series === activeSeries; });
+    host.innerHTML = items.length ? items.map(cardHtml).join('') :
+      '<p style="width:100%;text-align:center;color:rgba(57,56,54,.5);font-size:calc(20 * var(--u))">בקרוב יתווספו כאן עלונים</p>';
+    wireHearts();
+  }
+
+  if(!series.length){
+    tabsHost.style.display = 'none';
+  } else {
+    tabsHost.innerHTML = '<button type="button" class="is-active" data-series="all">כל העלונים</button>'+
+      series.map(function(s){ return '<button type="button" data-series="'+s+'">'+s+'</button>'; }).join('');
+    tabsHost.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){ render(btn.getAttribute('data-series')); });
+    });
+  }
+  render('all');
 })();
 
 /* ---- חשיפת טקסט האודות בגלילה ---- */
@@ -2812,10 +2894,10 @@ document.documentElement.classList.add('js');
     });
   });
 
-  /* ---------- 8. מועדפים ---------- */
+  /* ---------- 8. מועדפים (הוספה/הסרה בפועל מטופלת ע"י site-search.js דרך data-wish-id;
+     כאן רק מוסיפים את אנימציית ה-pop בלחיצה) ---------- */
   document.querySelectorAll('.book-row__like, .lesson__like').forEach(function(el){
     el.addEventListener('click', function(){
-      el.classList.toggle('is-fav');
       el.classList.remove('pop');
       void el.offsetWidth;
       el.classList.add('pop');
@@ -2982,6 +3064,7 @@ document.documentElement.classList.add('js');
   }
 })();
 </script>
+
 
 </body>
 </html>

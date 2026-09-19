@@ -92,6 +92,7 @@ ul{margin:0;padding:0;list-style:none}
   font-weight:300;
   font-size:calc(14 * var(--u));
 }
+.hi-cart.is-empty .badge{opacity:.35}
 .hi-heart img{width:calc(22 * var(--u));height:calc(18 * var(--u))}
 .hi-user img,.hi-search img{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 
@@ -1033,11 +1034,11 @@ body.stuck .site-header{
 }
 
 /* ---- ניווט: קו נמשך מימין ---- */
-.header__nav a{position:relative;transition:color .3s var(--ease-soft)}
+.header__nav a{position:relative;transition:color .4s var(--ease-out)}
 .header__nav a::after{
   content:"";
   position:absolute;
-  inset-inline-end:0;
+  inset-inline-start:0;
   bottom:calc(-8 * var(--u));
   height:1.5px;
   width:0;
@@ -1526,15 +1527,15 @@ body.stuck .site-header{
     <button class="miniplayer__btn" id="miniplayerRestart" type="button" aria-label="חזרה להתחלה">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
     </button>
-    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
     </button>
     <button class="miniplayer__btn--toggle" id="miniplayerToggle" type="button" aria-label="נגן או עצור">
       <img class="miniplayer__icon-play" src="./public/assets/icon-play.svg" alt="">
       <img class="miniplayer__icon-pause" src="./public/assets/icon-pause.svg" alt="">
     </button>
-    <button class="miniplayer__btn" id="miniplayerBack" type="button" aria-label="הרצה אחורה 10 שניות">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+    <button class="miniplayer__btn" id="miniplayerFwd" type="button" aria-label="הרצה קדימה 10 שניות">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/></svg>
     </button>
   </div>
 </div>
@@ -2218,6 +2219,11 @@ document.documentElement.classList.add('js');
     .catch(function(err){ console.warn('לא ניתן היה לטעון את הפוטר המשותף מ-index.html (ייתכן שהעמוד נפתח כקובץ מקומי ולא דרך שרת):', err); });
 })();
 </script>
+
+<script src="./public/js/site-auth.js"></script>
+<script src="./public/js/site-cart.js"></script>
+<script src="./public/js/site-contact.js"></script>
+<script src="./public/js/site-search.js"></script>
 
 </body>
 </html>
